@@ -11,6 +11,38 @@
 1988 年に Werner, Kaiser, Arif, Clothier により追試、まとめられたところによると、
 
 
+## ファイル構造
+
+## 定数表
+
+### 数学・物理定数
+
+原則SI単位系でコーディングする
+
+- pi 3.14159265359
+- Planck const. 6.62607015e-34
+- neutron mass 1.6749e-27
+- elementary charge 1.60218e-19
+- grav. acc. 9.8
+- Optical pot. Ni 224.e-9 eV
+- Optical pot. Ni -40.e-9 eV
+
+### 装置設計の不可変定数
+
+- DAQ freq. 62.5e+6
+- gap thickness 189e-6
+- wavelength min. 2e-10
+- wavelength max. 9e-10
+- layer thickness of Ni 13.35e-9
+- layer thickness of Ti 9.83e-9
+- bilayer count 8
+
+### 装置設計の可変変数
+
+- angle 1.05º
+- beam time 1 h
+- DAQ downsizing 16
+
 ## ROOT Cernの動かし方
 
 ### TTree の対話型

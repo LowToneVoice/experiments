@@ -5,7 +5,7 @@
 #include<TFile.h>
 #include<TTree.h>
 
-#define MAX_DATA_SIZE 1e8
+#define MAX_DATA_SIZE 1e6
 #define OUTPUT_TREE "tree.root"
 #define OUTPUT_O "outO.dat"
 #define OUTPUT_H "outH.dat"
