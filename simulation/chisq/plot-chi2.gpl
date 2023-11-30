@@ -1,0 +1,20 @@
+set term "pdfcairo"
+set xlabel "initial k"
+set ylabel "chi square"
+set arrow from 1e11, 0 to 1e12, 0 nohead
+set arrow from 6.08364e11, -8e12 to 6.08364e11, 6e12 nohead
+set output "k-value-error.pdf"
+plot "dat/chi2.dat" u 1:($2-6.08364e11) w l
+set xrange [5e11:7e11]
+set output "k-value-error-zoom.pdf"
+plot "dat/chi2.dat" u 1:($2-6.08364e11) w l
+
+
+set arrow from 6.08364e11, 0 to 6.08364e11, 8000 nohead
+set xrange [1e11:1e12]
+set output "chi-sq.pdf"
+plot "dat/chi2.dat" u 1:3 w l
+
+set xrange [5e11:7e11]
+set output "chi-sq-zoom.pdf"
+plot "dat/chi2.dat" u 1:3 w l

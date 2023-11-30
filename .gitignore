@@ -1,6 +1,7 @@
-/papers
 .vscode
 .DS_Store
 .git
+a.out
+/papers
 /trash
 /introduction

@@ -3,10 +3,11 @@
 #include <vector>
 #include <TFile.h>
 #include <TH1F.h>
+#include <TF1.h>
 
 // datafiles
-#define INPUT_FILE_O "./dat/outO_g_mix.dat"
-#define INPUT_FILE_H "./dat/outH_g_mix.dat"
+#define INPUT_FILE_O "./dat/outO.dat"
+#define INPUT_FILE_H "./dat/outH.dat"
 
 // physical constants
 #define pi 3.141592
@@ -92,9 +93,9 @@ void oscillation()
     std::cout << "///// FITTINGS /////" << std::endl;
     TF1 *f_propto = new TF1("f_propto", "cos([0] * x + [1])");
     f_propto->SetParNames("k_{+}", "#theta_{0}");
-    f_propto->SetParameters((2 * pi) * 1e+11, 0);
+    f_propto->SetParameters((2.1*pi)* 1e+11, 0);
     f_propto->SetParLimits(0, 1e+10, 1e+12);
-    f_propto->SetParLimits(1, -pi, pi);
+    // f_propto->SetParLimits(1, -pi, pi);
     // TF1 *f = new TF1("f", "[0] * cos([1] / x + [2] * x + [3]) + [4]");
     // f->SetParNames("A", "k_{-1}", "k_{+1}", "#theta_{0}", "BG");
     // f->SetParameters(1, 0, 2 * pi * 1e+11, 0, 0);

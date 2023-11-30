@@ -7,8 +7,8 @@
 
 #define MAX_DATA_SIZE 1e6
 #define OUTPUT_TREE "tree.root"
-#define OUTPUT_O "outO.dat"
-#define OUTPUT_H "outH.dat"
+#define OUTPUT_O "dat/outO_g_mix.dat"
+#define OUTPUT_H "dat/outH_g_mix.dat"
 
 // ALIGNMENTS CONSTANTS: !!!!! DO NOT CHANGE !!!!!
 #define DAQ_FREQ 62.5e+6
@@ -51,6 +51,7 @@ int sim()
     std::cout << "L_max = " << L_max << std::endl;
     std::cout << "beam_count = " << beam_count << std::endl;
     std::cout << "max datasize = " << MAX_DATA_SIZE << std::endl;
+    std::cout << "Phi_g_main + Phi_g_sub = " << -2 * pi * g * pow(m / h, 2) * 2 * THICKNESS * mirror_distance / tan(2 * theta) + 2 * pi * g * pow(m / h, 2) * theta0 / 2 * pow(THICKNESS / sin(theta), 2) << std::endl;
 
     // open files
     std::ofstream file_O(OUTPUT_O);
@@ -96,7 +97,7 @@ int sim()
             Phi_a_main = 4 * pi * THICKNESS / lmd * theta0;
             Phi_g_sub = 2 * pi * g * pow(m / h, 2) * theta0 / 2 * pow(THICKNESS / sin(theta), 2) * lmd;
             Phi_a_sub = -4 * pi * THICKNESS * rho * bc / 2 / pi / pow(theta, 2) * lmd * theta0;
-            Phase = Phi_g_main + Phi_g_sub + Phi_a_main + Phi_a_sub;
+            Phase = Phi_g_main + Phi_g_sub;
 
             // probability calculation
             r = rand(mt);

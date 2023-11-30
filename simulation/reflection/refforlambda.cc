@@ -102,7 +102,7 @@ int n_hantei(double k0, double rad, double V)
 }
 
 /** 反射率の計算 **/
-double reflect(double k0, double rad, double Vg, double A, double B, double C, double D)
+double reflect(double k0, double rad, double Vg /* always V_SiO2 */, double A, double B, double C, double D)
 {
     double kx_0 = k0 * std::sin(rad);
     double kx_g_square = kx_0 * kx_0 - 2. * m * Vg / (hbar * hbar);
@@ -131,7 +131,7 @@ double reflect(double k0, double rad, double Vg, double A, double B, double C, d
         std::complex<double> ue(-n0 * ng * B - C, ng * A - n0 * D);
         std::complex<double> sita(-n0 * ng * B + C, -ng * A - n0 * D);
         std::complex<double> r = ue / sita;
-        R = std::norm(r);
+        R = std::norm(r);   // 2乗和
     }
 
     return R;
