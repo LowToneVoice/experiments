@@ -6,8 +6,8 @@
 #include <TF1.h>
 
 // datafiles
-#define INPUT_FILE_O "./dat/outO.dat"
-#define INPUT_FILE_H "./dat/outH.dat"
+#define INPUT_FILE_O "./dat/outO_mix_mix.dat"
+#define INPUT_FILE_H "./dat/outH_mix_mix.dat"
 
 // physical constants
 #define pi 3.141592

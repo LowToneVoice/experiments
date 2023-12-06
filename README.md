@@ -43,7 +43,15 @@
 - beam time 1 h
 - DAQ downsizing 16
 
-## ROOT Cernの動かし方
+## コードの動かし方
+
+### Eigen/Denseの動かし方
+
+`g++ -I /usr/local/include/eigen3 test.cpp -o output_executable`
+
+ROOT も同時に動かす場合は
+`g++ -g -o simulation_code sim_copy.cpp -std=c++14 -I /usr/local/include/eigen3 -I /usr/local/include/root -L /usr/local/lib/root -lCore -lImt -lRIO -lNet -lTree -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lThread -pthread`
+のようにする。
 
 ### TTree の対話型
 

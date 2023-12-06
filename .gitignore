@@ -1,7 +1,12 @@
 .vscode
 .DS_Store
 .git
+.xlsx
+.xlsm
+.xls
+.dSYM
 a.out
 /papers
 /trash
 /introduction
+test.cpp
