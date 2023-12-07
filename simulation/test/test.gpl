@@ -1,0 +1,13 @@
+set term pdfcairo
+
+set output "test_complex.pdf"
+set title "complex values"
+plot "test_refl.dat" u 2:3 w l linewidth 3 title "R",\
+"test_trans.dat" u 2:3 w l linewidth 3 title "T"
+
+set output "test_norm.pdf"
+set title "norms"
+set xlabel "lambda [m]"
+set ylabel "norm"
+plot "test_refl.dat" u 1:4 w l linewidth 3 title "R", \
+"test_trans.dat" u 1:4 w l linewidth 3 title "T"

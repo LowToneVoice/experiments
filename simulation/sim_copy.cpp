@@ -10,6 +10,7 @@
 #define OUTPUT_TREE "./dat/RT.root"
 #define OUTPUT_O "./dat/transparent.dat"
 #define OUTPUT_H "./dat/reflection.dat"
+#define DISPLAY_INTERVAL 1000
 
 // PHYS & MATH CONSTANTS: !!!!! DO NOT CHANGE !!!!!
 #define pi M_PI
@@ -75,13 +76,22 @@ double lambda_selection()
     double S = .5 * (y0 - alpha * (L_max - L_min) + y0) * (L_max - L_min);
     return L_min + (y0 - sqrt(y0 * y0 - 2 * alpha * p * S)) / alpha;
 }
+double lambda_selection_constant()
+{
+    // random var.
+    std::mt19937 mt{std::random_device{}()};
+    std::uniform_real_distribution<double> rand(0.0, 1.0);
+    double p = rand(mt);
+    double L_min = 2e-10, L_max = 9e-10;
+    return p * L_min + (1 - p) * L_max;
+}
 
 // matrix M_j of a layer
-Eigen::Matrix<std::complex<double>, 2, 2> mat_layer(double k0_vertical, double thickness, double V)
+Eigen::Matrix2cd mat_layer(double k0_vertical, double thickness, double V)
 {
     double kj_square = pow(k0_vertical, 2) - 2 * m * V / pow(h / 2 / pi, 2);
     double n, zeta;
-    Eigen::Matrix<std::complex<double>, 2, 2> matrix;
+    Eigen::Matrix2cd matrix;
 
     // in case kj in real
     if (kj_square >= 0)
@@ -99,18 +109,33 @@ Eigen::Matrix<std::complex<double>, 2, 2> mat_layer(double k0_vertical, double t
 }
 
 // complex reflection factor
-std::vector<std::complex<double>> refl_trans_factor_complex(double lambda, double theta)
+Eigen::Vector2cd refl_trans_factor_complex(double lambda, double theta, int Si_layer_up)
 {
-    std::vector<std::complex<double>> vector;
-    Eigen::Matrix<std::complex<double>, 2, 2> matrix, mat_SiO2, mat_Ni, mat_Ti;
+    Eigen::Vector2cd vector;
+    Eigen::Matrix2cd matrix, mat_SiO2, mat_Ni, mat_Ti;
     double k0_vertical = 2 * pi / lambda * sin(theta0);
     std::complex<double> R, T;
     double zeta = 0;
 
-    matrix << mat_layer(k0_vertical, D_SiO2, V_sio2);
+    if (Si_layer_up)
+    {
+        matrix << mat_layer(k0_vertical, D_SiO2, V_sio2);
+        zeta += D_SiO2;
+    }
+    else
+    {
+        matrix << std::complex<double>(1, 0), std::complex<double>(0, 0), std::complex<double>(1, 0), std::complex<double>(0, 0);
+    }
+
     mat_Ni << mat_layer(k0_vertical, D_ni, V_ni);
     mat_Ti << mat_layer(k0_vertical, D_ti, V_ti);
     zeta += D_SiO2;
+
+    if (!Si_layer_up)
+    {
+        matrix << mat_layer(k0_vertical, D_SiO2, V_sio2);
+        zeta += D_SiO2;
+    }
 
     for (int j = 0; j < N_bilayer; j++)
     {
@@ -125,8 +150,11 @@ std::vector<std::complex<double>> refl_trans_factor_complex(double lambda, doubl
     std::complex<double> M21 = matrix(1, 0);
     std::complex<double> M22 = matrix(1, 1);
     std::complex<double> ik = i * k0_vertical;
-    R = ((M21 + ik * M22) - ik * (M22 - M11)) / ((pow(k0_vertical, 2) * M12 - M21) + ik * (M22 + M11));
-    T = 2 * (cos(k0_vertical * zeta), sin(k0_vertical * zeta)) * ik * (M11 * M22 - M12 * M21) / ((pow(k0_vertical, 2) * M12 - M21) + ik * (M22 + M11));
+    std::complex<double> k2 = k0_vertical * k0_vertical;
+    double kz = k0_vertical * zeta;
+
+    R = ((M21 + ik * M22) - ik * (M11 + ik * M12)) / (ik * (M11 - ik * M12) - (M21 - ik * M22));
+    T = 2. * ik * std::complex<double>(cos(kz * zeta), -sin(kz * zeta)) * (M11 * M22 - M12 * M21) / ((k2 * M12 - M21) + ik * (M22 + M11));
     vector[0] = R;
     vector[1] = T;
 
@@ -154,6 +182,7 @@ int sim_copy()
     double r;
     std::mt19937 mt{std::random_device{}()};
     std::uniform_real_distribution<double> rand(0.0, 1.0);
+    double maxR = 0, minR = 1, maxT = 0, minT = 1;
 
     // open files
     std::ofstream file_O(OUTPUT_O);
@@ -180,28 +209,36 @@ int sim_copy()
     tree->Branch("lambda", &lambda);
     double probO, probH;
     std::complex<double> R, T;
-    std::vector<std::complex<double>> vec;
+    Eigen::Vector2cd vec;
 
     // loop
     for (j = 0; j < particle_count; j++)
     {
-        lambda = lambda_selection();
-        vec = refl_trans_factor_complex(lambda, theta);
+        lambda = lambda_selection_constant();
+        vec = refl_trans_factor_complex(lambda, theta, 0);
         R = vec[0];
         T = vec[1];
         // alpha = alpha_calc(lambda);
         // gamma = 1 - alpha;
 
         // phase calculation
-        Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance * sin(angle_delta) / tan(2 * theta) * lambda;
-        Phi_a_main = 4 * pi * gap / lambda * theta0;
-        Phi_g_sub = 2 * pi * g * pow(m / h, 2) * theta0 / 2 * pow(gap / sin(theta), 2) * lambda;
-        Phi_a_sub = -4 * pi * gap * rho_Ni * bc_Ni / 2 / pi / pow(theta, 2) * lambda * theta0;
-        Phase = Phi_g_main + Phi_g_sub;
+        // Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance * sin(angle_delta) / tan(2 * theta) * lambda;
+        // Phi_a_main = 4 * pi * gap / lambda * theta0;
+        // Phi_g_sub = 2 * pi * g * pow(m / h, 2) * theta0 / 2 * pow(gap / sin(theta), 2) * lambda;
+        // Phi_a_sub = -4 * pi * gap * rho_Ni * bc_Ni / 2 / pi / pow(theta, 2) * lambda * theta0;
+        // Phase = Phi_g_main + Phi_g_sub;
 
         // probability calculation
         probO = std::norm(T);
         probH = std::norm(R);
+        if (probO > maxT)
+            maxT = probO;
+        if (probO < minT)
+            minT = probO;
+        if (probH > maxR)
+            maxR = probH;
+        if (probH < minR)
+            minR = probH;
         r = rand(mt);
         if (r <= probO)
         {
@@ -218,7 +255,7 @@ int sim_copy()
             count[1]++;
         }
 
-        if (j % 1000 == 999)
+        if (j % DISPLAY_INTERVAL == DISPLAY_INTERVAL - 1)
         {
             std::cout << "loop " << j + 1 << " / " << particle_count << " has ended." << std::endl;
         }
@@ -231,6 +268,8 @@ int sim_copy()
 
     std::cout << "O hit: " << count[0] << std::endl;
     std::cout << "H hit: " << count[1] << std::endl;
+    std::cout << "R is between " << minR << " and " << maxR << std::endl;
+    std::cout << "T is between " << minT << " and " << maxT << std::endl;
 
     // ENDING
     tree->Write();

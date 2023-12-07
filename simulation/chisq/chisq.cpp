@@ -10,6 +10,7 @@
 #define INPUT_FILE_O "../dat/outO_g_mix.dat"
 #define INPUT_FILE_H "../dat/outH_g_mix.dat"
 #define OUTPUT_FILE "../dat/chi2.dat"
+#define OUTPUT_TREE "../dat/chi2_check.root"
 
 // physical constants
 #define pi 3.141592

@@ -6,8 +6,8 @@
 #include <TF1.h>
 
 // datafiles
-#define INPUT_FILE_O "./dat/outO_mix_mix.dat"
-#define INPUT_FILE_H "./dat/outH_mix_mix.dat"
+#define INPUT_FILE_O "./dat/outO_g_mix.dat"
+#define INPUT_FILE_H "./dat/outH_g_mix.dat"
 
 // physical constants
 #define pi 3.141592
@@ -22,7 +22,7 @@
 #define TOTAL_LENGTH 1
 #define DAQ_FREQ 62.5e+6 / 256
 
-void oscillation()
+int oscillation()
 {
     // PREPARATIONS
 
@@ -93,7 +93,7 @@ void oscillation()
     std::cout << "///// FITTINGS /////" << std::endl;
     TF1 *f_propto = new TF1("f_propto", "cos([0] * x + [1])");
     f_propto->SetParNames("k_{+}", "#theta_{0}");
-    f_propto->SetParameters((2.1*pi)* 1e+11, 0);
+    f_propto->SetParameters(5.8e+11, 0);
     f_propto->SetParLimits(0, 1e+10, 1e+12);
     // f_propto->SetParLimits(1, -pi, pi);
     // TF1 *f = new TF1("f", "[0] * cos([1] / x + [2] * x + [3]) + [4]");
@@ -104,7 +104,7 @@ void oscillation()
     // f->SetParLimits(2, 1e+10, 1e+12);
     // f->SetParLimits(3, -pi, pi);
     // f->SetParLimits(4, 0, 0);
-    h1->Fit("f_propto", "", "", 8e-10, Lambda_max);
+    h1->Fit("f_propto", "", "", 7e-10, Lambda_max);
 
     // GRAPH SETTINGS
     h1->Draw();
@@ -117,5 +117,5 @@ void oscillation()
 
     std::cout << "///// COMPLETED /////" << std::endl;
 
-    return;
+    return 0;
 }
