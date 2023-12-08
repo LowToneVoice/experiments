@@ -2,16 +2,42 @@
 
 ## 実験概要
 
-### 背景
+基本的にintroduction下「やりたい実験.pdf」に記載。
 
-物質波の時間発展は Schrödinger eq. に従うが、非相対論的にはハミルトニアンに重力ポテンシャル $mgx$ が加わる。
-重力ポテンシャルが異なる2つの経路を通ると位相差 $-2\pi\lambda m^2gA/h^2$ が生じる。
-この効果は Overhauser と Colella により提唱され、Colella, Overhauser, Werner により実験的に検証された。
+## フォルダ構造
 
-1988 年に Werner, Kaiser, Arif, Clothier により追試、まとめられたところによると、
+ファイルを追加する場合は適切に。
+プルリク跳ね返すかも。
 
-
-## ファイル構造
+``` folder tree
+.
+├── introduction
+│   ├── やりたい実験.pdf：実験ノートみたいな使い方してる
+│   └── presentation.pptx：実験概要プレゼン
+├── papers：参考文献。gitには上げない
+├── phase-calc：位相の概算に使用
+│   ├── 位相概算.xlsm：位相のオーダー評価
+│   └── ...
+├── simulation
+│   ├── BL05：ビームラインの波長-強度関係 (KEKより)
+│   ├── chisq：グラフの振動フィッティングの精度計算
+│   ├── dat：シミュレーションの計算結果生データ
+│   ├── oscil_graph：$(I_H-I_O)/(I_H+I_O)$ シミュレーション結果のグラフ
+│   ├── reflection：ミラー反射率 (2021年P2より)
+│   ├── test：挙動確認用。実験に直接は使わない
+│   │
+│   ├── oscillation.cpp：ファイルから $(I_H-I_O)/(I_H+I_O)$ を計算
+│   ├── read.cpp：シミュレーション dat ファイルから波長-強度関係をヒストグラムにする
+│   ├── sim.cpp：波長-強度関係をモンテカルロシミュレーション
+│   ├── tree_make.cpp：datファイルから TTree を作成
+│   ├── tree_read.cpp：TTree からヒストグラムを作成
+│   └── ...
+├── trash：ゴミ箱
+│
+├── .gitignore：git に追加しないファイルを指定
+├── README.md：これ
+└── ...
+```
 
 ## 定数表
 
@@ -39,7 +65,7 @@
 
 ### 装置設計の可変変数
 
-- angle 1.05º
+- angle 1.05º (あまり変えたくない)
 - beam time 1 h
 - DAQ downsizing 16
 
