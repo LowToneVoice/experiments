@@ -22,7 +22,7 @@
 │   ├── BL05：ビームラインの波長-強度関係 (KEKより)
 │   ├── chisq：グラフの振動フィッティングの精度計算
 │   ├── dat：シミュレーションの計算結果生データ
-│   ├── oscil_graph：$(I_H-I_O)/(I_H+I_O)$ シミュレーション結果のグラフ
+│   ├── oscil_graph：(I_H-I_O)/(I_H+I_O) シミュレーション結果のグラフ
 │   ├── reflection：ミラー反射率 (2021年P2より)
 │   ├── test：挙動確認用。実験に直接は使わない
 │   │
@@ -47,11 +47,17 @@
 
 - pi 3.14159265359
 - Planck const. 6.62607015e-34
+- Avogadro const. 6.02214e23
 - neutron mass 1.6749e-27
 - elementary charge 1.60218e-19
 - grav. acc. 9.8
-- Optical pot. Ni 224.e-9 eV
-- Optical pot. Ni -40.e-9 eV
+- Optical pot. Ni 224.e-9 eV (Seki 2011, Tbl. 4.3)
+- Optical pot. Ti -40.e-9 eV (ibid.)
+- Optical pot. SiO2 90.5e-9 eV (ibid.)
+- atomic mass of Ni 58.6934 g/mol
+- atomic mass of Ti 47.867 g/mol
+- mass density of Ni 8.908 g/cm3
+- mass density of Ti 4.506 g/cm3
 
 ### 装置設計の不可変定数
 
@@ -59,8 +65,8 @@
 - gap thickness 189e-6
 - wavelength min. 2e-10
 - wavelength max. 9e-10
-- layer thickness of Ni 13.35e-9
-- layer thickness of Ti 9.83e-9
+- layer thickness of Ni 13.35e-9 (op. cit. Tbl. 4.2)
+- layer thickness of Ti 9.83e-9 (ibid.)
 - bilayer count 8
 
 ### 装置設計の可変変数
@@ -68,6 +74,7 @@
 - angle 1.05º (あまり変えたくない)
 - beam time 1 h
 - DAQ downsizing 16
+- used wavelength min. 7e-10
 
 ## コードの動かし方
 
@@ -116,6 +123,7 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
 - [A. W. Overhauser and R. Colella, Phys. Rev. Lett. 33, 1237 – Published 11 November 1974](https://doi.org/10.1103/PhysRevLett.33.1237) (COW theory)
 - [多層膜ミラーを用いた中性子干渉計の作成と重力加速度の測定](https://www-he.scphys.kyoto-u.ac.jp/gakubu/P2/P2-21/P2_2021_report_neutron.pdf) (2021 P2 report)
 - [多層膜ミラーを用いた中性子干渉計の作成と重力加速度の測定](https://www-he.scphys.kyoto-u.ac.jp/gakubu/P2/P2-21/P2_2021_slide_neutron.pdf) (2021 P2 slides)
+  - cf. [反射率計算コード](https://drive.google.com/drive/folders/1OXl9TjSrukBzPKXic_n39EXW2YIPZwYu?usp=drive_link)
 - [Werner, Kaiser, Arif, Clothier, Physica B+C, Volume 151, Issues 1–2, 1988.](https://doi.org/10.1016/0378-4363(88)90141-6) (COWの新しい結果)
 - [Y. Seki, 2011](http://hdl.handle.net/2433/142371) (中性子干渉実験周辺、特に屈折率計算)
 

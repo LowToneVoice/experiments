@@ -1,10 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
+#include <complex.h>
 #include <random>
 #include <TFile.h>
 #include <TTree.h>
-#include <Eigen/Dense>
+// #include <Eigen/Dense>
 
 #define MAX_DATA_SIZE 1e6
 #define OUTPUT_TREE "./dat/RT.root"
@@ -18,7 +19,7 @@
 #define g 9.8
 #define h 6.62607015e-34
 #define J_per_eV 1.6022e-19
-constexpr std::complex<double> i = std::complex<double>(0, 1);
+constexpr double hbar = h / 2 / pi;
 constexpr double V_sio2 = 90.9e-09 * J_per_eV;
 constexpr double V_ni = 224.e-09 * J_per_eV;
 constexpr double V_ti = -40.e-9 * J_per_eV;
@@ -36,8 +37,6 @@ constexpr double daq_freq = 62.5e6;
 constexpr double gap = 189e-6;
 constexpr double LMD_MIN = 2e-10;
 constexpr double LMD_MAX = 9e-10;
-constexpr double beam_intensity = 9.4e7; // /s/cm2
-constexpr double beam_size = 5.5 * 4.5;  // cm2
 constexpr double delta_D = 1;
 // constexpr double delta_D = 0.93;
 constexpr double D_SiO2 = 14e-3;
@@ -52,13 +51,11 @@ constexpr double theta0 = 1.e-3 * pi / 180;
 constexpr double angle_delta = pi / 2;
 constexpr double mirror_distance = 150e-3;
 constexpr double total_length = 1;
-constexpr double beam_time = 30 * 60; // sec
 // constexpr int beam_count = beam_time * BEAM_SIZE;
 constexpr int beam_count = 10000;
 constexpr int particle_count = 100000;
 constexpr double dt = 1 / daq_freq * daq_downsizing;
 constexpr double dLMD = h / total_length / m * dt;
-// constexpr int L_max = (int)((LMD_MAX - LMD_MIN) / dLMD);
 constexpr int L_max = 10000;
 
 // select lambda following the given probability
@@ -76,96 +73,131 @@ double lambda_selection()
     double S = .5 * (y0 - alpha * (L_max - L_min) + y0) * (L_max - L_min);
     return L_min + (y0 - sqrt(y0 * y0 - 2 * alpha * p * S)) / alpha;
 }
-double lambda_selection_constant()
+double lambda_selection_constant(double min, double max)
 {
     // random var.
     std::mt19937 mt{std::random_device{}()};
     std::uniform_real_distribution<double> rand(0.0, 1.0);
     double p = rand(mt);
-    double L_min = 2e-10, L_max = 9e-10;
-    return p * L_min + (1 - p) * L_max;
+    return p * min + (1 - p) * max;
 }
 
-// matrix M_j of a layer
-Eigen::Matrix2cd mat_layer(double k0_vertical, double thickness, double V)
+std::vector<std::vector<double>> mat_layer(double k0, double theta, double V, double D)
 {
-    double kj_square = pow(k0_vertical, 2) - 2 * m * V / pow(h / 2 / pi, 2);
-    double n, zeta;
-    Eigen::Matrix2cd matrix;
+    std::vector<std::vector<double>> M(2, std::vector<double>(2, 0.));
 
-    // in case kj in real
-    if (kj_square >= 0)
+    double kx_0 = k0 * std::sin(theta);
+    double kx_in_square = kx_0 * kx_0 - 2. * m * V / (hbar * hbar);
+
+    if (kx_in_square < 0.0) // n in imaginary
     {
-        n = sqrt(kj_square) / k0_vertical;
-        matrix << std::complex<double>(cos(n * thickness), 0), std::complex<double>(sin(n * thickness) / n, 0), std::complex<double>(-sin(n * thickness) * n, 0), std::complex<double>(cos(n * thickness), 0);
+        double kx_in = sqrt(-kx_in_square);
+        double nx = kx_in / kx_0;
+        double delta = kx_0 * D;
+
+        M.at(0).at(0) = std::cosh(nx * delta);
+        M.at(0).at(1) = std::sinh(nx * delta) / nx;
+        M.at(1).at(0) = std::sinh(nx * delta) * nx;
+        M.at(1).at(1) = std::cosh(nx * delta);
+    }
+    else    // n in real
+    {
+        double kx_in = sqrt(kx_in_square);
+        double nx = kx_in / kx_0;
+        double delta = kx_0 * D;
+
+        M.at(0).at(0) = std::cos(nx * delta);
+        M.at(0).at(1) = std::sin(nx * delta) / nx;
+        M.at(1).at(0) = -std::sin(nx * delta) * nx;
+        M.at(1).at(1) = std::cos(nx * delta);
+    }
+
+    return M;
+}
+
+/** 屈折率のRe,Imの判定　使い所がよくわかってないので残す **/
+int n_hantei(double k0, double rad, double V)
+{
+    double kx_0 = k0 * std::sin(rad);
+    double kx_square = kx_0 * kx_0 - 2. * m * V / (hbar * hbar);
+    if (kx_square < 0.0)
+    {
+        return 0;
     }
     else
     {
-        n = sqrt(-kj_square) / k0_vertical;
-        matrix << std::complex<double>(cosh(n * thickness), 0), std::complex<double>(sinh(n * thickness) / n, 0), std::complex<double>(-sinh(n * thickness) * n, 0), std::complex<double>(cosh(n * thickness), 0);
+        return 1;
     }
-
-    return matrix;
 }
 
-// complex reflection factor
-Eigen::Vector2cd refl_trans_factor_complex(double lambda, double theta, int Si_layer_up)
+/** 反射率の計算 **/
+/* 真空から入社して Vg の物質へ抜けるときの反射率 */
+std::complex<double> reflect(double k0, double rad, double Vg /* always V_SiO2 */, double A, double B, double C, double D)
 {
-    Eigen::Vector2cd vector;
-    Eigen::Matrix2cd matrix, mat_SiO2, mat_Ni, mat_Ti;
-    double k0_vertical = 2 * pi / lambda * sin(theta0);
-    std::complex<double> R, T;
-    double zeta = 0;
+    double kx_0 = k0 * std::sin(rad);
+    double kx_g_square = kx_0 * kx_0 - 2. * m * Vg / (hbar * hbar);
 
-    if (Si_layer_up)
+    if (kx_g_square < 0.0)
     {
-        matrix << mat_layer(k0_vertical, D_SiO2, V_sio2);
-        zeta += D_SiO2;
+        // ngが虚数の時
+        double kx_g = sqrt(-kx_g_square);
+        double n0 = 1.;
+        double ng = kx_g / kx_0;
+
+        std::complex<double> ue(-ng * A - C, -n0 * ng * B - n0 * D);
+        std::complex<double> sita(ng * A + C, -n0 * ng * B - n0 * D);
+        return ue / sita;
     }
     else
     {
-        matrix << std::complex<double>(1, 0), std::complex<double>(0, 0), std::complex<double>(1, 0), std::complex<double>(0, 0);
+        // ngが実数の時
+        double kx_g = sqrt(kx_g_square);
+        double n0 = 1.;
+        double ng = kx_g / kx_0;
+
+        std::complex<double> ue(-n0 * ng * B - C, ng * A - n0 * D);
+        std::complex<double> sita(-n0 * ng * B + C, -ng * A - n0 * D);
+        return ue / sita;
     }
-
-    mat_Ni << mat_layer(k0_vertical, D_ni, V_ni);
-    mat_Ti << mat_layer(k0_vertical, D_ti, V_ti);
-    zeta += D_SiO2;
-
-    if (!Si_layer_up)
-    {
-        matrix << mat_layer(k0_vertical, D_SiO2, V_sio2);
-        zeta += D_SiO2;
-    }
-
-    for (int j = 0; j < N_bilayer; j++)
-    {
-        matrix = mat_Ni * matrix;
-        zeta += D_ni;
-        matrix = mat_Ti * matrix;
-        zeta += D_ti;
-    }
-
-    std::complex<double> M11 = matrix(0, 0);
-    std::complex<double> M12 = matrix(0, 1);
-    std::complex<double> M21 = matrix(1, 0);
-    std::complex<double> M22 = matrix(1, 1);
-    std::complex<double> ik = i * k0_vertical;
-    std::complex<double> k2 = k0_vertical * k0_vertical;
-    double kz = k0_vertical * zeta;
-
-    R = ((M21 + ik * M22) - ik * (M11 + ik * M12)) / (ik * (M11 - ik * M12) - (M21 - ik * M22));
-    T = 2. * ik * std::complex<double>(cos(kz * zeta), -sin(kz * zeta)) * (M11 * M22 - M12 * M21) / ((k2 * M12 - M21) + ik * (M22 + M11));
-    vector[0] = R;
-    vector[1] = T;
-
-    return vector;
 }
 
-// TODO: #1 building alpha_calc in sim copy.cpp
-// double alpha_calc(double lambda)
-// {
-//     return 0.5;
-// }
+/* transparent factor */
+std::complex<double> transparent(double k0, double theta, double Vg, double A, double B, double C, double D, double z, std::complex<double> R)
+{
+    double kx_0 = k0 * std::sin(theta);
+    std::complex<double> kx_g, eik0z, eikgz, T;
+    std::complex<double> I(0, 1.);
+    if (kx_0 * kx_0 - 2. * m * Vg / (hbar * hbar) < 0.)
+    {
+        std::cerr << "transparent kx_g is imaginary" << std::endl;
+        return 1;
+    }
+    kx_g = std::sqrt(kx_0 * kx_0 - 2. * m * Vg / (hbar * hbar));
+
+    eik0z = std::exp(I * kx_0 * z);
+    eikgz = std::exp(I * kx_g * z);
+
+    T = (A * (eik0z + R / eik0z) + I * kx_0 * B * (eik0z - R / eik0z)) / eikgz;
+
+    return T;
+}
+
+/** 行列の積の計算　eigenってライブラリ使えばよかった **/
+std::vector<std::vector<double>> DOT(std::vector<std::vector<double>> M, std::vector<std::vector<double>> N)
+{
+    std::vector<std::vector<double>> product(2, std::vector<double>(2, 0.));
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            for (int l = 0; l < 2; l++)
+            {
+                product.at(i).at(j) += M.at(i).at(l) * N.at(l).at(j);
+            }
+        }
+    }
+    return product;
+}
 
 int sim_copy()
 {
@@ -173,10 +205,8 @@ int sim_copy()
     std::cout << "///// PREPARATIONS /////" << std::endl;
 
     // variables
-    double alpha = .5, gamma = .5;
     int count[2] = {};
-    int j;
-    double lmd;
+    int j, k;
     double Phi_g_main, Phi_a_main, Phi_g_sub, Phi_a_sub;
     double Phase;
     double r;
@@ -209,17 +239,38 @@ int sim_copy()
     tree->Branch("lambda", &lambda);
     double probO, probH;
     std::complex<double> R, T;
-    Eigen::Vector2cd vec;
+    // Eigen::Vector2cd vec;
 
     // loop
     for (j = 0; j < particle_count; j++)
     {
-        lambda = lambda_selection_constant();
-        vec = refl_trans_factor_complex(lambda, theta, 0);
-        R = vec[0];
-        T = vec[1];
-        // alpha = alpha_calc(lambda);
-        // gamma = 1 - alpha;
+        lambda = lambda_selection_constant(LMD_MIN, LMD_MAX);
+        double k0 = 2 * pi / lambda;
+
+        // mirror matrix
+        double zeta;
+        std::vector<std::vector<double>> M_ni = mat_layer(k0, theta, V_ni, D_ni); // Niの行列
+        std::vector<std::vector<double>> M_ti = mat_layer(k0, theta, V_ti, D_ti); // Tiの行列
+        std::vector<std::vector<double>> layermatrix_ni_ti(2, std::vector<double>(2, 0.)); // 二個分の行列
+        std::vector<std::vector<double>> refmatrix_ni_ti(2, std::vector<double>(2, 0.));   // 多層膜の行列
+        layermatrix_ni_ti = DOT(M_ti, M_ni);
+        // まずは単位行列
+        refmatrix_ni_ti.at(0).at(0) = 1.;
+        refmatrix_ni_ti.at(0).at(1) = 0.;
+        refmatrix_ni_ti.at(1).at(0) = 0.;
+        refmatrix_ni_ti.at(1).at(1) = 1.;
+        for (int l = 0; l < N_bilayer; l++)
+        {
+            refmatrix_ni_ti = DOT(layermatrix_ni_ti, refmatrix_ni_ti);
+            zeta += D_ni + D_ti;
+        }
+        double E = refmatrix_ni_ti.at(0).at(0);
+        double F = refmatrix_ni_ti.at(0).at(1);
+        double G = refmatrix_ni_ti.at(1).at(0);
+        double H = refmatrix_ni_ti.at(1).at(1);
+
+        R = reflect(k0, theta, V_sio2, E, F, G, H);
+        T = transparent(k0, theta, V_sio2, E, F, G, H, zeta + D_SiO2, R);
 
         // phase calculation
         // Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance * sin(angle_delta) / tan(2 * theta) * lambda;
@@ -247,7 +298,7 @@ int sim_copy()
             tree->Fill();
             count[0]++;
         }
-        else if (r >= 1 - probH)
+        if (r <= probH)
         {
             file_H << lambda << std::endl;
             channel = H_TDC;

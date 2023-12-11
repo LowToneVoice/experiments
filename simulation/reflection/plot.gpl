@@ -1,0 +1,15 @@
+set term "pdfcairo"
+
+set nokey
+
+set output "reflNiTi-sim2.pdf"
+plot "../dat/reflection.dat" u 1:4 w l
+
+set output "trnsNiTi-sim2.pdf"
+plot "../dat/transparency.dat" u 1:4 w l
+
+set output "reflComplex.pdf"
+plot "../dat/reflection.dat" u 2:3 w l
+
+set output "trnsComplex.pdf"
+plot "../dat/transparency.dat" u 2:3 w l

@@ -17,6 +17,7 @@
 #define h 6.62607015e-34
 #define J_per_eV 1.6022e-19
 constexpr std::complex<double> i = std::complex<double>(0, 1);
+constexpr double hbar = h / 2 / pi;
 constexpr double V_sio2 = 90.9e-09 * J_per_eV;
 constexpr double V_ni = 224.e-09 * J_per_eV;
 constexpr double V_ti = -40.e-9 * J_per_eV;
@@ -60,41 +61,70 @@ constexpr double dLMD = h / total_length / m * dt;
 constexpr int L_max = 10000;
 
 // matrix M_j of a layer
-Eigen::Matrix2cd mat_layer(double k0_vertical, double thickness, double V)
+Eigen::Matrix2d mat_layer(double k0_vertical, double thickness, double V)
 {
-    double kj_square = pow(k0_vertical, 2) - 2 * m * V / pow(h / 2 / pi, 2);
+    double kj_square = pow(k0_vertical, 2) - 2 * m * V / (hbar * hbar);
     double n, zeta, nd;
-    Eigen::Matrix2cd matrix;
+    Eigen::Matrix2d matrix;
 
     // in case kj in real
     if (kj_square >= 0)
     {
         n = sqrt(kj_square) / k0_vertical;
         nd = n * thickness;
-        matrix(0, 0) = std::complex<double>(cos(nd), 0);
-        matrix(0, 1) = std::complex<double>(sin(nd) / n, 0);
-        matrix(1, 0) = std::complex<double>(-n * sin(nd), 0);
-        matrix(1, 1) = std::complex<double>(cos(nd), 0);
+        matrix(0, 0) = cos(nd);
+        matrix(0, 1) = sin(nd) / n;
+        matrix(1, 0) = -sin(nd) * n;
+        matrix(1, 1) = cos(nd);
     }
     else
     {
         n = sqrt(-kj_square) / k0_vertical;
         nd = n * thickness;
-        matrix(0, 0) = std::complex<double>(cosh(nd), 0);
-        matrix(0, 1) = std::complex<double>(sinh(nd) / n, 0);
-        matrix(1, 0) = std::complex<double>(-n * sinh(nd), 0);
-        matrix(1, 1) = std::complex<double>(cosh(nd), 0);
+        matrix(0, 0) = cosh(nd);
+        matrix(0, 1) = sinh(nd) / n;
+        matrix(1, 0) = n * sinh(nd);
+        matrix(1, 1) = cosh(nd);
     }
 
     return matrix;
 }
 
+// complex reflection and transparent factor
+std::complex<double> refl_trans_factor_substance_changed(double lambda, double theta, double Vg, double A, double B, double C, double D)
+{
+    double k0_vertical = 2 * pi / lambda * sin(theta);
+    double kg_sq = k0_vertical * k0_vertical - 2. * m * Vg / (hbar * hbar);
+    std::complex<double> R, denom;
+
+    if (kg_sq >= 0.)
+    {
+        double kg = sqrt(kg_sq);
+        double n0 = 1.;
+        double ng = kg / k0_vertical;
+        R = std::complex<double> (n0 * ng * B + C, n0 * D - ng * A);
+        denom = std::complex<double> (n0 * ng * B - C, ng * A + n0 * D);
+        R /= denom;
+    }
+    else
+    {
+        double kg = sqrt(-kg_sq);
+        double n0 = 1.;
+        double ng = kg / k0_vertical;
+        R = std::complex<double> (ng * A + C, n0 * D + n0 * ng * B);
+        denom = std::complex<double> (-ng * A - D, n0 * ng * B + n0 * C);
+        R /= denom;
+    }
+
+    return R;
+}
+
 // complex reflection factor
-Eigen::Vector2cd refl_trans_factor_complex(double lambda, double theta, int Si_layer_up)
+Eigen::Vector2cd refl_trans_factor_complex(double lambda, double theta, bool Si_layer_up, bool Si_layer_down)
 {
     Eigen::Vector2cd vector;
-    Eigen::Matrix2cd matrix, mat_SiO2, mat_Ni, mat_Ti;
-    double k0_vertical = 2 * pi / lambda * sin(theta0);
+    Eigen::Matrix2d matrix, mat_SiO2, mat_Ni, mat_Ti;
+    double k0_vertical = 2. * pi / lambda * sin(theta);
     std::complex<double> R, T;
     double zeta = 0;
 
@@ -106,12 +136,11 @@ Eigen::Vector2cd refl_trans_factor_complex(double lambda, double theta, int Si_l
     }
     else
     {
-        matrix << std::complex<double>(1, 0), std::complex<double>(0, 0), std::complex<double>(1, 0), std::complex<double>(0, 0);
+        matrix = Eigen::Matrix2d::Identity();
     }
 
-    mat_Ni << mat_layer(k0_vertical, D_ni, V_ni);
-    mat_Ti << mat_layer(k0_vertical, D_ti, V_ti);
-    zeta += D_SiO2;
+    mat_Ni = mat_layer(k0_vertical, D_ni, V_ni);
+    mat_Ti = mat_layer(k0_vertical, D_ti, V_ti);
 
     for (int j = 0; j < N_bilayer; j++)
     {
@@ -122,9 +151,9 @@ Eigen::Vector2cd refl_trans_factor_complex(double lambda, double theta, int Si_l
     }
 
     // back SiO2 layer
-    if (!Si_layer_up)
+    if (Si_layer_down)
     {
-        matrix << mat_layer(k0_vertical, D_SiO2, V_sio2);
+        matrix = mat_layer(k0_vertical, D_SiO2, V_sio2) * matrix;
         zeta += D_SiO2;
     }
 
@@ -150,7 +179,6 @@ int main()
 
     int count[2] = {};
     int j;
-    double lmd;
     double r;
     double maxR = 0, minR = 1, maxT = 0, minT = 1;
 
@@ -162,15 +190,29 @@ int main()
         return 1;
     }
 
-    double probR, probT;
     std::complex<double> R, T;
+    Eigen::Matrix2d M, M_ni, M_ti;
     Eigen::Vector2cd vec;
+    double k0_v;
+
     for (lambda = LMD_MIN; lambda < LMD_MAX; lambda += dLMD)
     {
-        vec = refl_trans_factor_complex(lambda, theta0, 0);
-        R = vec[0];
-        T = vec[1];
-        file_reflect << lambda << " " << R.real() << " " << R.imag() <<" "<< std::norm(R) << std::endl;
+        // vec = refl_trans_factor_complex(lambda, theta0, false, true);
+        // R = vec[0];
+        // T = vec[1];
+        M = Eigen::Matrix2d::Identity();
+        k0_v = 2 * pi / lambda * sin(theta);
+        M_ni = mat_layer(k0_v, D_ni, V_ni);
+        M_ti = mat_layer(k0_v, D_ti, V_ti);
+        for ( j = 0; j < N_bilayer; j++)
+        {
+            M = M_ti * M_ni * M;
+        }
+
+        R = refl_trans_factor_substance_changed(lambda, theta, V_sio2, M(0, 0), M(0, 1), M(1, 0), M(1, 1));
+
+        file_reflect
+            << lambda << " " << R.real() << " " << R.imag() << " " << std::norm(R) << std::endl;
         file_transparent << lambda << " " << T.real() << " " << T.imag() << " " << std::norm(T) << std::endl;
     }
 

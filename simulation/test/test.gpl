@@ -5,6 +5,13 @@ set title "complex values"
 plot "test_refl.dat" u 2:3 w l linewidth 3 title "R",\
 "test_trans.dat" u 2:3 w l linewidth 3 title "T"
 
+set output "test_reflect.pdf"
+set title "complex value of R"
+plot "test_refl.dat" u 2:3 w l linewidth 3
+set output "test_trans.pdf"
+set title "complex value of T"
+plot "test_trans.dat" u 2:3 w l linewidth 3
+
 set output "test_norm.pdf"
 set title "norms"
 set xlabel "lambda [m]"
