@@ -3,13 +3,14 @@
 #include <random>
 #include <Eigen/Dense>
 #include <complex>
-#include <TFile.h>
-#include <TTree.h>
+// #include <TFile.h>
+// #include <TTree.h>
 
 // FILES
 #define OUTPUT_O "./dat/O_beam.dat"
 #define OUTPUT_H "./dat/H_beam.dat"
 #define OUTPUT_TREE "./tree.root"
+// #define OUTPUT_PROB "./dat/probability.dat"
 
 // CHANNELS
 #define H_TDC 0
@@ -47,7 +48,7 @@ constexpr double theta = 1.05 * pi / 180;
 constexpr double theta0 = 1e-3 * pi / 180;
 constexpr double mirror_distance = 1.;
 
-constexpr int beam_count = 100;
+constexpr int beam_count = 1000;
 constexpr int N_loop_lambda = (int)((lambda_max - lambda_min) / d_lambda);
 
 // matrix M of one layer
@@ -110,18 +111,19 @@ int sim_copy()
     Eigen::Matrix2d M;
     std::ofstream fileO(OUTPUT_O);
     std::ofstream fileH(OUTPUT_H);
+    // std::ofstream fileP(OUTPUT_PROB);
 
     double Phi_g_main, Phi_a_main, Phi_g_sub, Phi_a_sub;
     double Phase;
     double probability, probO, probH;
     std::mt19937 mt{(std::random_device{}())};
     std::uniform_real_distribution<double> rand(0., 1.);
-    Double_t lmd;
-    Int_t channel;
-    TFile *file = new TFile(OUTPUT_TREE, "recreate");
-    TTree *tree = new TTree("tree", "tree");
-    tree->Branch("channel", &channel);
-    tree->Branch("lambda", &lmd);
+    // Double_t lmd;
+    // Int_t channel;
+    // TFile *file = new TFile(OUTPUT_TREE, "recreate");
+    // TTree *tree = new TTree("tree", "tree");
+    // tree->Branch("channel", &channel);
+    // tree->Branch("lambda", &lmd);
 
     for (int beam = 0; beam < beam_count; beam++)
     {
@@ -160,18 +162,19 @@ int sim_copy()
             probability = rand(mt);
             probO = std::norm(T * R * T * R + R * T * R * T * std::exp(I * Phase));
             probH = std::norm(T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase));
-            lmd = lambda;
+            // fileP << lambda << " " << probO << " " << probH << std::endl;
+            // lmd = lambda;
             if (probability < probO)
             {
                 fileO << lambda << std::endl;
-                channel = O_TDC;
-                tree->Fill();
+                // channel = O_TDC;
+                // tree->Fill();
             }
             else if (1 - probability <= probH)
             {
                 fileH << lambda << std::endl;
-                channel = H_TDC;
-                tree->Fill();
+                // channel = H_TDC;
+                // tree->Fill();
             }
         }
     }
