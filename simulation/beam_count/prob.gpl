@@ -1,8 +1,32 @@
 set term pdfcairo
-set output "probabilities_zoom.pdf"
-set xrange [8e-10:9e-10]
+set output "probabilities.pdf"
+set xrange [2e-10:12e-10]
 set xlabel "lambda"
 set ylabel "probability"
 plot \
 "../dat/probability.dat" u 1:2 w l title "O beam", \
 "../dat/probability.dat" u 1:3 w l title "H beam"
+
+set output "probabilities_zoom.pdf"
+set xrange [8.3e-10:8.5e-10]
+plot \
+"../dat/probability.dat" u 1:2 w l title "O beam", \
+"../dat/probability.dat" u 1:3 w l title "H beam"
+
+set output "../oscil_graph/theoretical.pdf"
+set xrange [2e-10:12e-10]
+set ylabel "(I_O-I_H) / (I_O+I_H)"
+set nokey
+plot "../dat/probability.dat" u 1:(($2-$3)/($2+$3)) w l
+
+set output "../oscil_graph/theoretical.pdf"
+set xrange [2e-10:12e-10]
+set ylabel "(I_O-I_H) / (I_O+I_H)"
+set nokey
+plot "../dat/probability.dat" u 1:(($2-$3)/($2+$3)) w l
+
+set output "../oscil_graph/theoretical_zoom.pdf"
+set xrange [8.3e-10:8.5e-10]
+set ylabel "(I_O-I_H) / (I_O+I_H)"
+set nokey
+plot "../dat/probability.dat" u 1:(($2-$3)/($2+$3)) w l
