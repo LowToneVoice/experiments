@@ -4,8 +4,8 @@
 #include <TFile.h>
 #include <TH1F.h>
 
-#define INPUT_FILE_O "dat/outO_g_mix.dat"
-#define INPUT_FILE_H "dat/outH_g_mix.dat"
+#define INPUT_FILE_O "dat/H_beam.dat"
+#define INPUT_FILE_H "dat/O_beam.dat"
 #define MAX_DATA_SIZE 1e+6
 
 // physical constants
@@ -15,11 +15,11 @@
 
 // alignment constants
 #define Lambda_min 2e-10
-#define Lambda_max 9e-10
+#define Lambda_max 12e-10
 #define TOTAL_LENGTH 1
 #define DAQ_FREQ 62.5e+6 / 256
 
-void read()
+int read()
 {
     // alignment calculations & settings
     double dt = 1 / DAQ_FREQ;
@@ -58,26 +58,26 @@ void read()
     //     lambdas[L] = Lambda_min + (Lambda_max - Lambda_min) * L / L_max;
     // }
 
-    // while (inputFileO >> lambda)
-    // {
-    //     histO->Fill(lambda);
-    //     // values[int((lambda - Lambda_min) / (Lambda_max - Lambda_min) * L_max)] += 1.;
-    // }
+    while (inputFileO >> lambda)
+    {
+        histO->Fill(lambda);
+        // values[int((lambda - Lambda_min) / (Lambda_max - Lambda_min) * L_max)] += 1.;
+    }
     int count = 0;
     while (inputFileH >> lambda)
     {
         histH->Fill(lambda);
-        count++;
-        if (count > MAX_DATA_SIZE)break;
+        // count++;
+        // if (count > MAX_DATA_SIZE)break;
         // values[int((lambda - Lambda_min) / (Lambda_max - Lambda_min) * L_max)] += 1.;
     }
     // TGraph *gr = new TGraph(L_max, lambdas, values);
     // gr->Draw("L");
 
-    TF1 *fHG = new TF1("fH", "[ 0 ] * cos([ 1 ] * x) + [ 2 ]");
-    fHG->SetParameters(1e+3, 5e+11, 1e+3);
-    fHG->SetParNames("A", "k_{2}", "Const");
-    histH->Fit("fH", "", "", Lambda_min, Lambda_max);
+    // TF1 *fHG = new TF1("fH", "[ 0 ] * cos([ 1 ] * x) + [ 2 ]");
+    // fHG->SetParameters(1e+3, 5e+11, 1e+3);
+    // fHG->SetParNames("A", "k_{2}", "Const");
+    // histH->Fit("fH", "", "", Lambda_min, Lambda_max);
     // // TF1 *fOA = new TF1("fA", "5000 * cos([ 0 ] / x) + 5000");
     // // fOA->SetParameter(0, 3e-8);
     // // fOA->SetParName(0, "k_{1}");
@@ -88,9 +88,15 @@ void read()
     // histH->Fit("fA", "", "", Lambda_min, Lambda_max);
 
     // draw histogram
-    // histO->Draw();
-    histH->Draw();
+    // histO->Rebin(10);
+    // histH->Rebin(10);
+    histO->SetTitle("O (blue) & H (red) beam count");
+    histO->Draw();
+    histH->SetLineColor(2);
+    histH->Draw("SAME");
 
     inputFileO.close();
     inputFileH.close();
+
+    return 0;
 }

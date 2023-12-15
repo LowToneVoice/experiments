@@ -76,6 +76,13 @@
 - DAQ downsizing 16
 - used wavelength min. 7e-10
 
+### チャンネル
+
+- TDC H beam: 0
+- TDC O beam: 1
+- ADC H beam: 2
+- ADC O beam: 3
+
 ## コードの動かし方
 
 ### Eigen/Denseの動かし方

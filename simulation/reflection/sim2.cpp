@@ -6,7 +6,7 @@
 // FILES
 #define OUTPUT_R "../dat/reflection.dat"
 #define OUTPUT_T "../dat/transparency.dat"
-#define OUTPUT_D "../dat/determinant.dat"
+#define OUTPUT_D "../dat/norm.dat"
 
 // PHYS & MATH CONSTANTS
 std::complex<double> I(0, 1.);
@@ -68,10 +68,13 @@ std::complex<double> transparent(double k0, double theta, double Vg, double zeta
 {
     double kx0 = k0 * std::sin(theta);
     std::complex<double> kxg = std::sqrt(kx0 * kx0 - 2. * m * Vg / (hbar * hbar));
+    double n0 = 1.;
+    std::complex<double> ng = kxg / kx0;
+
     std::complex<double> eikgz = std::cos(kxg * zeta) + I * std::sin(kxg * zeta);
     std::complex<double> numer, denom;
-    numer = 2. * I * kx0 / eikgz;
-    denom = kx0 * kxg * M(0, 1) - M(1, 0) + I * (kx0 * M(1, 1) + kxg * M(0, 0));
+    numer = 2. * I * n0 / eikgz;
+    denom = n0 * ng * M(0, 1) - M(1, 0) + I * (n0 * M(1, 1) + ng * M(0, 0));
 
     return numer / denom;
 }
@@ -84,6 +87,7 @@ int sim2()
     double T2norm[N_loop];
     double zeta;
     std::complex<double> R[N_loop], T[N_loop];
+    std::complex<double> R_normed, T_normed;
     Eigen::Matrix2d layermatrix_ni_ti;
     Eigen::Matrix2d refmat;
     std::ofstream fileR(OUTPUT_R);
@@ -108,9 +112,12 @@ int sim2()
         T[j] = transparent(k0, theta, V_sio2, zeta, refmat);
         R2norm[j] = std::norm(R[j]);
         T2norm[j] = std::norm(T[j]);
+        R_normed = R[j] / sqrt(std::norm(R[j]) + std::norm(T[j]));
+        T_normed = T[j] / sqrt(std::norm(R[j]) + std::norm(T[j]));
 
         fileR << lambda[j] << " " << R[j].real() << " " << R[j].imag() << " " << R2norm[j] << std::endl;
         fileT << lambda[j] << " " << T[j].real() << " " << T[j].imag() << " " << T2norm[j] << std::endl;
+        fileD << lambda[j] << " " << R2norm[j] + T2norm[j] << " " << std::norm(R_normed) + std::norm(T_normed) << std::endl;
     }
 
     fileR.close();

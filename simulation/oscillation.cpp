@@ -6,8 +6,8 @@
 #include <TF1.h>
 
 // datafiles
-#define INPUT_FILE_O "./dat/outO_g_mix.dat"
-#define INPUT_FILE_H "./dat/outH_g_mix.dat"
+#define INPUT_FILE_O "./dat/O_beam.dat"
+#define INPUT_FILE_H "./dat/H_beam.dat"
 
 // physical constants
 #define pi 3.141592
@@ -18,7 +18,7 @@
 
 // alignment constants
 #define Lambda_min 2e-10
-#define Lambda_max 9e-10
+#define Lambda_max 12e-10
 #define TOTAL_LENGTH 1
 #define DAQ_FREQ 62.5e+6 / 256
 
