@@ -1,70 +1,131 @@
-#include <cmath>
-#include <complex>
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include <Eigen/Dense>
-#include "TCanvas.h"
-#include "TF1.h"
-#include "TAxis.h"
-#include "TMultiGraph.h"
+#include<iostream>
+#include<fstream>
+#include<Eigen/Dense>
+#include<complex>
 
-#define J_per_eV 1.6022e-19
-#define hbar 1.055e-34
-#define m 1.675e-27
-#define g 9.8
+// FILES
+#define OUTPUT_R "../dat/reflection.dat"
+#define OUTPUT_T "../dat/transparency.dat"
+#define OUTPUT_D "../dat/norm.dat"
+
+// PHYS & MATH CONSTANTS
+std::complex<double> I(0, 1.);
+#define h 6.62607015e-34
 #define pi 3.14159265
+#define J_per_eV 1.6022e-19
+constexpr double hbar = h / (2 * pi);
+constexpr double m = 1.675e-27;
 
-constexpr double delta_D = 1; // ratio of layers thickness
-// constexpr double delta_D = .93;
-
-// optical potentials
-constexpr double V_sio2 = 90.9e-9 * J_per_eV;
-constexpr double V_ni = 224.e-9 * J_per_eV;
+constexpr double V_sio2 = 90.9e-09 * J_per_eV;
+constexpr double V_ni = 224.e-09 * J_per_eV;
 constexpr double V_ti = -40.e-9 * J_per_eV;
 
-// constants about the multilayer mirror
-constexpr double D_ni = 13.35e-9 / delta_D;
-constexpr double D_ti = 9.83e-9 / delta_D;
+constexpr double delta_D = 1.;
+constexpr double D_ni = 133.5e-10 / delta_D;
+constexpr double D_ti = 98.3e-10 / delta_D;
+
 constexpr int N_bilayer = 8;
 
-// constants about alignments
-constexpr double lambda_min = 2.e-10;
-constexpr double lambda_max = 9.e-10;
-constexpr double d_lambda = .01e-10;
+constexpr double lambda_min = 2.0e-10;
+constexpr double lambda_max = 12e-10;
+constexpr double d_lambda = 0.01e-10;
 
-// loop No.
+constexpr double theta = 1.05 * pi / 180;
+
 constexpr int N_loop = (int)((lambda_max - lambda_min) / d_lambda);
 
-// MATRIX OF EACH LAYER
-std::vector<std::vector<double>> matrix(double k0, double theta, double V, double D)
+Eigen::Matrix2d mat_layer(double k0, double theta, double V, double D)
 {
-    std::vector<std::vector<double>> M(2, std::vector<double>(2, 0.));
-    double kx_0 = k0 * std::sin(theta);
-    double kx_in_square = kx_0 * kx_0 - 2. * m * V / (hbar * hbar);
+    Eigen::Matrix2d M;
+    double kx0 = k0 * std::sin(theta);
+    std::complex<double> kx = std::sqrt(kx0 * kx0 - 2. * m * V / (hbar * hbar));
+    std::complex<double> nx = kx / kx0;
+    double delta = kx0 * D;
 
-    // in case n is imaginary
-    if (kx_in_square < 0)
-    {
-        double kx_in = sqrt(-kx_in_square);
-        double nx = kx_in / kx_0;
-        double zeta = kx_0 * D;
+    M(0, 0) = std::cos(nx * delta).real();
+    M(0, 1) = (std::sin(nx * delta) / nx).real();
+    M(1, 0) = (-std::sin(nx * delta) * nx).real();
+    M(1, 1) = std::cos(nx * delta).real();
 
-        M.at(0).at(0) = std::cosh(nx * zeta);
-        M.at(0).at(1) = std::sinh(nx * zeta) / nx;
-        M.at(1).at(0) = -std::sinh(nx * zeta) * nx;
-        M.at(1).at(1) = std::cosh(nx * zeta);
-    }
-    else
-    {
-        double kx_in = sqrt(kx_in_square);
-        double nx = kx_in / kx_0;
-        double zeta = kx_0 * D;
-
-        M.at(0).at(0) = std::cos(nx * zeta);
-        M.at(0).at(1) = std::sin(nx * zeta) / nx;
-        M.at(1).at(0) = -std::sin(nx * zeta) * nx;
-        M.at(1).at(1) = std::cos(nx * zeta);
-    }
     return M;
+}
+
+std::complex<double> reflect(double k0, double theta, double Vg, Eigen::Matrix2d M)
+{
+    double kx0 = k0 * std::sin(theta);
+    std::complex<double> kxg = std::sqrt(kx0 * kx0 - 2. * m * Vg / (hbar * hbar));
+    double n0 = 1.;
+    std::complex<double> ng = kxg / kx0;
+    std::complex<double> numer, denom;
+
+    numer = -n0 * ng * M(0, 1) - M(1, 0) + I * (ng * M(0, 0) - n0 * M(1, 1));
+    denom = -n0 * ng * M(0, 1) + M(1, 0) + I * (-ng * M(0, 0) - n0 * M(1, 1));
+
+    return numer / denom;
+}
+
+std::complex<double> transparent(double k0, double theta, double Vg, double zeta, Eigen::Matrix2d M)
+{
+    double kx0 = k0 * std::sin(theta);
+    std::complex<double> kxg = std::sqrt(kx0 * kx0 - 2. * m * Vg / (hbar * hbar));
+    double n0 = 1.;
+    std::complex<double> ng = kxg / kx0;
+
+    std::complex<double> eikgz = std::cos(kxg * zeta) + I * std::sin(kxg * zeta);
+    std::complex<double> numer, denom;
+    numer = 2. * I * n0 / eikgz;
+    denom = n0 * ng * M(0, 1) - M(1, 0) + I * (n0 * M(1, 1) + ng * M(0, 0));
+
+    return numer / denom;
+}
+
+int reflection()
+{
+    double lambda[N_loop];
+    double k0;
+    double R2norm[N_loop];
+    double T2norm[N_loop];
+    double zeta;
+    std::complex<double> R[N_loop], T[N_loop];
+    std::complex<double> R_normed, T_normed;
+    Eigen::Matrix2d layermatrix_ni_ti;
+    Eigen::Matrix2d refmat;
+    std::ofstream fileR(OUTPUT_R);
+    std::ofstream fileT(OUTPUT_T);
+    std::ofstream fileD(OUTPUT_D);
+
+    for (int j = 0; j < N_loop; j++)
+    {
+        lambda[j] = lambda_min + d_lambda * j;
+        k0 = 2. * pi / lambda[j];
+        zeta = 0;
+
+        layermatrix_ni_ti = mat_layer(k0, theta, V_ti, D_ti) * mat_layer(k0, theta, V_ni, D_ni);
+        refmat = Eigen::Matrix2d::Identity();
+        for (int l = 0; l < N_bilayer; l++)
+        {
+            refmat = layermatrix_ni_ti * refmat;
+            zeta += D_ni + D_ti;
+        }
+
+        R[j] = reflect(k0, theta, V_sio2, refmat);
+        T[j] = transparent(k0, theta, V_sio2, zeta, refmat);
+        R2norm[j] = std::norm(R[j]);
+        T2norm[j] = std::norm(T[j]);
+        R_normed = R[j] / sqrt(std::norm(R[j]) + std::norm(T[j]));
+        T_normed = T[j] / sqrt(std::norm(R[j]) + std::norm(T[j]));
+
+        fileR << lambda[j] << " " << R[j].real() << " " << R[j].imag() << " " << R2norm[j] << std::endl;
+        fileT << lambda[j] << " " << T[j].real() << " " << T[j].imag() << " " << T2norm[j] << std::endl;
+        fileD << lambda[j] << " " << R2norm[j] + T2norm[j] << " " << std::norm(R_normed) + std::norm(T_normed) << std::endl;
+    }
+
+    fileR.close();
+    fileT.close();
+    return 0;
+}
+
+int main()
+{
+    return reflection();
 }

@@ -88,6 +88,7 @@ int oscillation()
     h1->Add(histH, -1);
     h2->Add(histO, 1);
     h1->Divide(h2);
+    h1->Rebin(10);
 
     // FITTINGS
     std::cout << "///// FITTINGS /////" << std::endl;

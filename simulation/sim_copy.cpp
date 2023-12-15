@@ -47,7 +47,8 @@ constexpr double theta = 1.05 * pi / 180;
 constexpr double theta0 = 1e-3 * pi / 180;
 constexpr double mirror_distance = 1.;
 
-constexpr int N_loop = (int)((lambda_max - lambda_min) / d_lambda);
+constexpr int beam_count = 100;
+constexpr int N_loop_lambda = (int)((lambda_max - lambda_min) / d_lambda);
 
 // matrix M of one layer
 Eigen::Matrix2d mat_layer(double k0, double theta, double V, double D)
@@ -122,9 +123,9 @@ int sim_copy()
     tree->Branch("channel", &channel);
     tree->Branch("lambda", &lmd);
 
-    for (int l = 0; l < 100; l++)
+    for (int beam = 0; beam < beam_count; beam++)
     {
-        for (int j = 0; j < N_loop; j++)
+        for (int j = 0; j < N_loop_lambda; j++)
         {
             // initialization
             lambda = lambda_min + d_lambda * j;
@@ -139,7 +140,6 @@ int sim_copy()
                 M = mat_bilayer_ni_ti * M;
                 zeta += D_ni + D_ti;
             }
-
             R_not_normed = reflect(k0, theta, V_sio2, M);
             T_not_nnormed = transparent(k0, theta, V_sio2, zeta, M);
             R = R_not_normed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
@@ -167,12 +167,12 @@ int sim_copy()
                 channel = O_TDC;
                 tree->Fill();
             }
-            else // if (1 - probability <= probH)
+            else if (1 - probability <= probH)
             {
                 fileH << lambda << std::endl;
+                channel = H_TDC;
+                tree->Fill();
             }
-            channel = H_TDC;
-            tree->Fill();
         }
     }
 

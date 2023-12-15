@@ -88,12 +88,13 @@ int read()
     // histH->Fit("fA", "", "", Lambda_min, Lambda_max);
 
     // draw histogram
-    // histO->Rebin(10);
-    // histH->Rebin(10);
+    histO->Rebin(5);
+    histH->Rebin(5);
     histO->SetTitle("O (blue) & H (red) beam count");
-    histO->Draw();
+    histH->SetTitle("O (blue) & H (red) beam count");
     histH->SetLineColor(2);
-    histH->Draw("SAME");
+    histH->Draw();
+    histO->Draw("SAME");
 
     inputFileO.close();
     inputFileH.close();
