@@ -10,7 +10,9 @@
 #define OUTPUT_O "./dat/O_beam.dat"
 #define OUTPUT_H "./dat/H_beam.dat"
 #define OUTPUT_TREE "./tree.root"
-// #define OUTPUT_PROB "./dat/probability.dat"
+#define OUTPUT_PROB "./dat/probability.dat"
+
+#define OUT_INTERVAL 1000
 
 // CHANNELS
 #define H_TDC 0
@@ -43,13 +45,15 @@ constexpr double lambda_min = 2.0e-10;
 constexpr double lambda_max = 12e-10;
 
 // ALIGNMENT VARIABLES
-constexpr double d_lambda = 0.001e-10;
+constexpr double d_lambda = 0.00001e-10;
+constexpr double lambda_min_used = lambda_min;
+constexpr double lambda_max_used = lambda_max;
 constexpr double theta = 1.05 * pi / 180;
 constexpr double theta0 = 1e-3 * pi / 180;
 constexpr double mirror_distance = 1.;
 
-constexpr int beam_count = 1000;
-constexpr int N_loop_lambda = (int)((lambda_max - lambda_min) / d_lambda);
+constexpr int beam_count = 1;
+constexpr int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
 
 // matrix M of one layer
 Eigen::Matrix2d mat_layer(double k0, double theta, double V, double D)
@@ -111,7 +115,7 @@ int sim_copy()
     Eigen::Matrix2d M;
     std::ofstream fileO(OUTPUT_O);
     std::ofstream fileH(OUTPUT_H);
-    // std::ofstream fileP(OUTPUT_PROB);
+    std::ofstream fileP(OUTPUT_PROB);
 
     double Phi_g_main, Phi_a_main, Phi_g_sub, Phi_a_sub;
     double Phase;
@@ -130,7 +134,7 @@ int sim_copy()
         for (int j = 0; j < N_loop_lambda; j++)
         {
             // initialization
-            lambda = lambda_min + d_lambda * j;
+            lambda = lambda_min_used + d_lambda * j;
             k0 = 2. * pi / lambda;
             zeta = 0;
 
@@ -162,7 +166,7 @@ int sim_copy()
             probability = rand(mt);
             probO = std::norm(T * R * T * R + R * T * R * T * std::exp(I * Phase));
             probH = std::norm(T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase));
-            // fileP << lambda << " " << probO << " " << probH << std::endl;
+            fileP << lambda << " " << probO << " " << probH << std::endl;
             // lmd = lambda;
             if (probability < probO)
             {
@@ -177,8 +181,10 @@ int sim_copy()
                 // tree->Fill();
             }
         }
-    }
 
+        if (beam % OUT_INTERVAL == OUT_INTERVAL - 1)
+            std::cout << beam + 1 << " / " << beam_count << std::endl;
+    }
 
     fileO.close();
     fileH.close();
