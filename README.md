@@ -3,6 +3,7 @@
 ## 実験概要
 
 基本的にintroduction下「やりたい実験.pdf」に記載。
+うまく実験が回ったらtexに。
 
 ## フォルダ構造
 
@@ -11,38 +12,46 @@
 ├── introduction
 │   ├── やりたい実験.pdf：実験ノートみたいな使い方してる
 │   └── presentation.pptx：実験概要プレゼン
-├── papers：参考文献。gitには上げない
+├── papers：参考文献 (gitには上げない)
 ├── phase-calc：位相の概算に使用
 │   ├── 位相概算.xlsm：位相のオーダー評価
 │   └── ...
 ├── simulation
 │   ├── beam_count：波長-ビーム強度ヒストグラム
-│   │   └── probabilities.pdf：波動関数から求めたO/H-beam観測確率
+│   │   ├── montecarlo：モンテカルロシミュレーション
+│   │   └── theoretical：波動関数から求めたO/H-beam観測確率
+│   │       ├── noref：反射・透過係数を無視
+│   │       └── ref：反射・透過係数を入れてる
 │   ├── BL05：ビームラインの波長-強度関係 (KEKより)
 │   ├── chisq：グラフの振動フィッティングの精度計算
-│   │   ├── chi-sq.pdf：振動フィッティングの初期値-chi2関係
-│   │   └── k-value-error.pdf：振動フィッティングの初期値-フィッティング結果と理論値の差
+│   │   ├── chi2：振動フィッティングの初期値-chi2関係
+│   │   ├── k-value：振動フィッティングの初期値-フィッティング結果
+│   │   └── oscillation：振動フィッティング
 │   ├── dat：シミュレーションの計算結果生データ
 │   ├── oscil_graph：(I_H-I_O)/(I_H+I_O) シミュレーション結果のグラフ
-│   │   └── sim_without_RT：反射・透過を考慮していない場合
-│   ├── reflection：ミラー反射率 (2021年P2より)
-│   │   └── 2021P2：2021年P2のコードと結果
+│   │   └── sim_without_RT：反射・透過を考慮していない場合 (11月までの結果)
+│   ├── reflection：ミラー反射率
+│   │   ├── 2021P2：2021年P2のコードと結果
+│   │   │
+│   │   ├── reflNiTi-sim2.pdf：1枚 (bilayer×8) の波長-反射率
+│   │   └── reflNiTi2d.pdf：1枚の波長・角度-反射率
 │   ├── test：挙動確認用。実験に直接は使わない
 │   │
 │   ├── oscillation.cpp：ファイルから $(I_H-I_O)/(I_H+I_O)$ を計算
 │   ├── read.cpp：シミュレーション dat ファイルから波長-強度関係をヒストグラムにする
 │   ├── sim.cpp：波長-強度関係をモンテカルロシミュレーション
+│   ├── theoretical.gpl : 波動関数から求めた確率分布と振動の描画
 │   ├── tree_make.cpp：datファイルから TTree を作成
 │   ├── tree_read.cpp：TTree からヒストグラムを作成
 │   └── ...
-├── trash：ゴミ箱
+├── trash：ゴミ箱 (gitにはあげない)
 │
 ├── .gitignore：git に追加しないファイルを指定
 ├── README.md：これ
 └── ...
 ```
 
-## 定数表
+## 数表
 
 ### 数学・物理定数
 
@@ -88,12 +97,12 @@
 
 ## コードの動かし方
 
-### Eigen/Denseの動かし方
+### Eigen/Denseを含むコードの動かし方
 
-`g++ -I /usr/local/include/eigen3 test.cpp -o output_executable`
+`g++ -g -o out test.cpp -std=c++14 -I /usr/local/include/eigen3`
 
 ROOT も同時に動かす場合は
-`g++ -g -o simulation_code sim_copy.cpp -std=c++14 -I /usr/local/include/eigen3 -I /usr/local/include/root -L /usr/local/lib/root -lCore -lImt -lRIO -lNet -lTree -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lThread -pthread`
+`g++ -g -o simulation_code test.cpp -std=c++14 -I /usr/local/include/eigen3 -I /usr/local/include/root -L /usr/local/lib/root -lCore -lImt -lRIO -lNet -lTree -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lThread -pthread`
 のようにする。
 
 ### TTree の対話型
