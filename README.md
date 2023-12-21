@@ -51,7 +51,7 @@
 └── ...
 ```
 
-## 数表
+## 設定表
 
 ### 数学・物理定数
 
@@ -83,10 +83,12 @@
 
 ### 装置設計の可変変数
 
+- mirror distance 150e-3
 - angle 1.05º (あまり変えたくない)
 - beam time 1 h
 - DAQ downsizing 16
 - used wavelength min. 7e-10
+- used wavelength min. 9e-10
 
 ### チャンネル
 

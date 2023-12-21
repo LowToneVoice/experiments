@@ -10,7 +10,7 @@
 // #define OUTPUT_O "./dat/O_beam.dat"
 // #define OUTPUT_H "./dat/H_beam.dat"
 // #define OUTPUT_TREE "./tree.root"
-#define OUTPUT_PROB "./dat/theoretical/noref/g_main_cos.dat"
+#define OUTPUT_PROB "./dat/theoretical/ref/g_main.dat"
 
 #define OUT_INTERVAL 1000
 
@@ -23,7 +23,7 @@
 // PHYS & MATH CONSTANTS
 std::complex<double> I(0, 1.);
 #define h 6.62607015e-34
-#define pi 3.14159265
+#define pi M_PI
 #define J_per_eV 1.6022e-19
 #define m 1.675e-27
 constexpr double g = 9.8;
@@ -37,20 +37,26 @@ constexpr double V_ti = -40.e-9 * J_per_eV;
 constexpr double delta_D = 1.;
 constexpr double D_ni = 133.5e-10 / delta_D;
 constexpr double D_ti = 98.3e-10 / delta_D;
-constexpr double THICKNESS = 189e-6;
+constexpr double gap = 189e-6;
 
 constexpr int N_bilayer = 8;
 
 constexpr double lambda_min = 2.0e-10;
 constexpr double lambda_max = 12e-10;
 
+constexpr int daq_freq = 62.5e6;
+
 // ALIGNMENT VARIABLES
-constexpr double d_lambda = 0.00001e-10;
-constexpr double lambda_min_used = 7e-10;
-constexpr double lambda_max_used = 9e-10;
+constexpr double lambda_min_used = lambda_min;
+constexpr double lambda_max_used = lambda_max;
 constexpr double theta = 1.05 * pi / 180;
-constexpr double theta0 = 1e-3 * pi / 180;
-constexpr double mirror_distance = 1.;
+constexpr double theta_error = 1e-3 * pi / 180;
+constexpr double mirror_distance = 150e-3;
+constexpr double total_length = 1.;
+constexpr int daq_downsizing = 16;
+constexpr double dt = 1. / daq_freq * daq_downsizing;
+// constexpr double d_lambda = 0.00001e-10;
+constexpr double d_lambda = h / total_length / m * dt;
 
 constexpr int beam_count = 1;
 constexpr int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
@@ -103,7 +109,7 @@ std::complex<double> transparent(double k0, double theta, double Vg, double zeta
     return numer / denom;
 }
 
-int sim_copy()
+int sim()
 {
     double lambda;
     double k0;
@@ -161,20 +167,18 @@ int sim_copy()
             T_phase = std::arg(T);
 
             // Phase calculation
-            Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * THICKNESS * mirror_distance / tan(2 * theta0) * lambda;
-            Phi_a_main = 4 * pi * THICKNESS / lambda * theta0;
-            Phi_g_sub = 2 * pi * g * pow(m / h, 2) * theta0 / 2 * pow(THICKNESS / sin(theta), 2) * lambda;
-            // Phi_a_sub = -4 * pi * THICKNESS * rho * bc / 2 / pi / pow(theta, 2) * lambda * theta0;
+            Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * lambda;
+            // Phi_a_main = 4 * pi * gap / lambda * theta_error;
+            // Phi_g_sub = 2 * pi * g * pow(m / h, 2) * theta_error / 2 * pow(gap / sin(theta), 2) * lambda;
+            // Phi_a_sub = -4 * pi * gap * rho * bc / 2 / pi / pow(theta, 2) * lambda * theta_error;
             Phase = Phi_g_main;
 
             // probability calculation
-            probability = rand(mt);
-            R = 1. / sqrt(2);
-            T = I / sqrt(2);
-            // probO = std::norm(T * R * T * R + R * T * R * T * std::exp(I * Phase));
-            // probH = std::norm(T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase));
-            probO = .5 + .5 * cos(Phase);
-            probH = .5 - .5 * cos(Phase);
+            // probability = rand(mt);
+            probO = std::norm(T * R * T * R + R * T * R * T * std::exp(I * Phase));
+            probH = std::norm(T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase));
+            // probO = .5 * (1 + cos(Phase));
+            // probH = .5 - .5 * cos(Phase);
             fileP << lambda << " " << probO << " " << probH << std::endl;
             // lmd = lambda;
             // if (probability < probO)
@@ -203,5 +207,5 @@ int sim_copy()
 
 int main()
 {
-    return sim_copy();
+    return sim();
 }
