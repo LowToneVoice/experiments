@@ -89,6 +89,9 @@
 - DAQ downsizing 16
 - used wavelength min. 7e-10
 - used wavelength min. 9e-10
+- theta min. 0.2º
+- theta max. 1.5º
+- theta interval 0.01º
 
 ### チャンネル
 

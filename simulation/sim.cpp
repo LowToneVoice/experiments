@@ -3,14 +3,14 @@
 #include <random>
 #include <Eigen/Dense>
 #include <complex>
-// #include <TFile.h>
-// #include <TTree.h>
+#include <TFile.h>
+#include <TTree.h>
 
 // FILES
-// #define OUTPUT_O "./dat/O_beam.dat"
-// #define OUTPUT_H "./dat/H_beam.dat"
-// #define OUTPUT_TREE "./tree.root"
-#define OUTPUT_PROB "./dat/theoretical/ref/g_main.dat"
+#define OUTPUT_TREE "./dat/montecarlo/noref/g_main.root"
+#define OUTPUT_O "./dat/montecarlo/noref/g_main_O.dat"
+#define OUTPUT_H "./dat/montecarlo/noref/g_main_H.dat"
+#define OUTPUT_PROB "./dat/theoretical/noref/g_main2d.dat"
 
 #define OUT_INTERVAL 1000
 
@@ -43,13 +43,15 @@ constexpr int N_bilayer = 8;
 
 constexpr double lambda_min = 2.0e-10;
 constexpr double lambda_max = 12e-10;
+constexpr double theta_min = .2 * pi / 180;
+constexpr double theta_max = 1.5 * pi / 180;
 
 constexpr int daq_freq = 62.5e6;
 
 // ALIGNMENT VARIABLES
 constexpr double lambda_min_used = lambda_min;
 constexpr double lambda_max_used = lambda_max;
-constexpr double theta = 1.05 * pi / 180;
+// constexpr double theta = 1.05 * pi / 180;
 constexpr double theta_error = 1e-3 * pi / 180;
 constexpr double mirror_distance = 150e-3;
 constexpr double total_length = 1.;
@@ -57,9 +59,11 @@ constexpr int daq_downsizing = 16;
 constexpr double dt = 1. / daq_freq * daq_downsizing;
 // constexpr double d_lambda = 0.00001e-10;
 constexpr double d_lambda = h / total_length / m * dt;
+constexpr double d_theta = .05 * pi / 180;
 
-constexpr int beam_count = 1;
+constexpr int beam_count = 100;
 constexpr int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
+constexpr int N_loop_theta = (int)((theta_max - theta_min) / d_theta);
 
 // matrix M of one layer
 Eigen::Matrix2d mat_layer(double k0, double theta, double V, double D)
@@ -114,15 +118,16 @@ int sim()
     double lambda;
     double k0;
     double zeta;
+    double theta;
     std::complex<double> R, T;
     std::complex<double> R_not_normed, T_not_nnormed;
     double R2norm, T2norm, R_phase, T_phase;
     Eigen::Matrix2d mat_bilayer_ni_ti;
     Eigen::Matrix2d M;
-    // std::ofstream fileO(OUTPUT_O);
-    // std::ofstream fileH(OUTPUT_H);
+    std::ofstream fileO(OUTPUT_O);
+    std::ofstream fileH(OUTPUT_H);
     std::ofstream fileP(OUTPUT_PROB);
-    if(!fileP.is_open())
+    if (!fileO.is_open() || !fileH.is_open() || !fileP.is_open())
     {
         std::cerr << "FILE DID NOT OPENED" << std::endl;
         return 1;
@@ -133,38 +138,43 @@ int sim()
     double probability, probO, probH;
     std::mt19937 mt{(std::random_device{}())};
     std::uniform_real_distribution<double> rand(0., 1.);
-    // Double_t lmd;
-    // Int_t channel;
-    // TFile *file = new TFile(OUTPUT_TREE, "recreate");
-    // TTree *tree = new TTree("tree", "tree");
-    // tree->Branch("channel", &channel);
-    // tree->Branch("lambda", &lmd);
+    Double_t lmd, tht;
+    Int_t channel;
+    TFile *file = new TFile(OUTPUT_TREE, "recreate");
+    TTree *tree = new TTree("tree", "tree");
+    tree->Branch("channel", &channel);
+    tree->Branch("lambda", &lmd);
+    tree->Branch("theta", &tht);
 
-    for (int beam = 0; beam < beam_count; beam++)
+    for (int l = 0; l < N_loop_theta; l++)
     {
+        theta = theta_min + l * d_theta;
+        tht = theta;
+
         for (int j = 0; j < N_loop_lambda; j++)
         {
             // initialization
             lambda = lambda_min_used + d_lambda * j;
+            lmd = lambda;
             k0 = 2. * pi / lambda;
             zeta = 0;
 
             // reflection calculation
-            mat_bilayer_ni_ti = mat_layer(k0, theta, V_ti, D_ti) * mat_layer(k0, theta, V_ni, D_ni);
-            M = Eigen::Matrix2d::Identity();
-            for (int l = 0; l < N_bilayer; l++)
-            {
-                M = mat_bilayer_ni_ti * M;
-                zeta += D_ni + D_ti;
-            }
-            R_not_normed = reflect(k0, theta, V_sio2, M);
-            T_not_nnormed = transparent(k0, theta, V_sio2, zeta, M);
-            R = R_not_normed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
-            T = T_not_nnormed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
-            R2norm = std::norm(R);
-            R_phase = std::arg(R);
-            T2norm = std::norm(T);
-            T_phase = std::arg(T);
+            // mat_bilayer_ni_ti = mat_layer(k0, theta, V_ti, D_ti) * mat_layer(k0, theta, V_ni, D_ni);
+            // M = Eigen::Matrix2d::Identity();
+            // for (int l = 0; l < N_bilayer; l++)
+            // {
+            //     M = mat_bilayer_ni_ti * M;
+            //     zeta += D_ni + D_ti;
+            // }
+            // R_not_normed = reflect(k0, theta, V_sio2, M);
+            // T_not_nnormed = transparent(k0, theta, V_sio2, zeta, M);
+            // R = R_not_normed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
+            // T = T_not_nnormed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
+            // R2norm = std::norm(R);
+            // R_phase = std::arg(R);
+            // T2norm = std::norm(T);
+            // T_phase = std::arg(T);
 
             // Phase calculation
             Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * lambda;
@@ -175,32 +185,42 @@ int sim()
 
             // probability calculation
             // probability = rand(mt);
+            R = 1. / sqrt(2);
+            T = I / sqrt(2);
             probO = std::norm(T * R * T * R + R * T * R * T * std::exp(I * Phase));
             probH = std::norm(T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase));
             // probO = .5 * (1 + cos(Phase));
             // probH = .5 - .5 * cos(Phase);
-            fileP << lambda << " " << probO << " " << probH << std::endl;
-            // lmd = lambda;
-            // if (probability < probO)
-            // {
-            //     fileO << lambda << std::endl;
-            //     // channel = O_TDC;
-            //     // tree->Fill();
-            // }
-            // else if (1 - probability <= probH)
-            // {
-            //     fileH << lambda << std::endl;
-            //     // channel = H_TDC;
-            //     // tree->Fill();
-            // }
+            fileP << lambda << " " << theta << " " << probO << " " << probH << std::endl;
+
+            for (int beam = 0; beam < beam_count; beam++)
+            {
+                probability = rand(mt);
+                if (probability < probO)
+                {
+                    fileO << lambda << std::endl;
+                    channel = O_TDC;
+                    tree->Fill();
+                }
+                else if (1 - probability <= probH)
+                {
+                    fileH << lambda << std::endl;
+                    channel = H_TDC;
+                    tree->Fill();
+                }
+            }
         }
 
-        if (beam % OUT_INTERVAL == OUT_INTERVAL - 1)
-            std::cout << beam + 1 << " / " << beam_count << std::endl;
+        fileP << std::endl;
+
+        if (l % OUT_INTERVAL == OUT_INTERVAL - 1)
+        {
+            std::cout << l + 1 << " / " << beam_count << " has ended." << std::endl;
+        }
     }
 
-    // fileO.close();
-    // fileH.close();
+    fileO.close();
+    fileH.close();
     fileP.close();
     return 0;
 }

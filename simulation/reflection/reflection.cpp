@@ -4,9 +4,9 @@
 #include<complex>
 
 // FILES
-#define OUTPUT_R "../dat/reflection.dat"
-#define OUTPUT_T "../dat/transparency.dat"
-#define OUTPUT_D "../dat/norm.dat"
+#define OUTPUT_R "./reflection.dat"
+#define OUTPUT_T "./transparency.dat"
+#define OUTPUT_N "./norm.dat"
 
 // PHYS & MATH CONSTANTS
 std::complex<double> I(0, 1.);
@@ -92,7 +92,7 @@ int reflection()
     Eigen::Matrix2d refmat;
     std::ofstream fileR(OUTPUT_R);
     std::ofstream fileT(OUTPUT_T);
-    std::ofstream fileD(OUTPUT_D);
+    std::ofstream fileN(OUTPUT_N);
 
     for (int j = 0; j < N_loop; j++)
     {
@@ -117,11 +117,12 @@ int reflection()
 
         fileR << lambda[j] << " " << R[j].real() << " " << R[j].imag() << " " << R2norm[j] << std::endl;
         fileT << lambda[j] << " " << T[j].real() << " " << T[j].imag() << " " << T2norm[j] << std::endl;
-        fileD << lambda[j] << " " << R2norm[j] + T2norm[j] << " " << std::norm(R_normed) + std::norm(T_normed) << std::endl;
+        fileN << lambda[j] << " " << R2norm[j] + T2norm[j] << " " << std::norm(R_normed) + std::norm(T_normed) << std::endl;
     }
 
     fileR.close();
     fileT.close();
+    fileN.close();
     return 0;
 }
 

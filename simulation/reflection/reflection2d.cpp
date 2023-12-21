@@ -4,7 +4,7 @@
 #include <complex>
 
 // FILES
-#define OUTPUT_FILE "../dat/RT2d.dat"
+#define OUTPUT_FILE "./RT2d.dat"
 
 // PHYS & MATH CONSTANTS
 std::complex<double> I(0, 1.);
@@ -28,7 +28,7 @@ constexpr double lambda_min = 2.0e-10;
 constexpr double lambda_max = 12e-10;
 constexpr double d_lambda = 0.01e-10;
 
-constexpr double theta_min = .6 * pi / 180;
+constexpr double theta_min = 0 * pi / 180;
 constexpr double theta_max = 1.5 * pi / 180;
 constexpr double d_theta = .01 * pi / 180;
 
