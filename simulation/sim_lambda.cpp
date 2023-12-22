@@ -7,10 +7,10 @@
 #include <TTree.h>
 
 // FILES
-#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/g_main.root"
-#define OUTPUT_O "./dat/montecarlo/ref/lambda/g_main_O.dat"
-#define OUTPUT_H "./dat/montecarlo/ref/lambda/g_main_H.dat"
-#define OUTPUT_PROB "./dat/theoretical/ref/lambda/g_main.dat"
+#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/zerograv_main.root"
+#define OUTPUT_O "./dat/montecarlo/ref/lambda/zerograv_main_O.dat"
+#define OUTPUT_H "./dat/montecarlo/ref/lambda/zerograv_main_H.dat"
+#define OUTPUT_PROB "./dat/theoretical/ref/lambda/zerograv_main.dat"
 
 #define OUT_INTERVAL 1000
 
@@ -61,7 +61,7 @@ constexpr double dt = 1. / daq_freq * daq_downsizing;
 constexpr double d_lambda = h / total_length / m * dt;
 constexpr double d_theta = .05 * pi / 180;
 
-constexpr int beam_count = 100;
+constexpr int beam_count = 1000;
 constexpr int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
 constexpr int N_loop_theta = (int)((theta_max - theta_min) / d_theta);
 
@@ -172,10 +172,10 @@ int sim_lambda()
 
         // Phase calculation
         Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * lambda;
-        // Phi_a_main = 4 * pi * gap / lambda * theta_error;
-        // Phi_g_sub = 2 * pi * g * pow(m / h, 2) * theta_error / 2 * pow(gap / sin(theta), 2) * lambda;
+        Phi_a_main = 4 * pi * gap / lambda * theta_error;
+        Phi_g_sub = 2 * pi * g * pow(m / h, 2) * theta_error / 2 * pow(gap / sin(theta), 2) * lambda;
         // Phi_a_sub = -4 * pi * gap * rho * bc / 2 / pi / pow(theta, 2) * lambda * theta_error;
-        Phase = Phi_g_main;
+        Phase = Phi_a_main + Phi_g_sub;
 
         // probability calculation
         // R = 1. / sqrt(2);

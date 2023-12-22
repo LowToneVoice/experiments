@@ -7,10 +7,10 @@
 #include <TCanvas.h>
 
 // datafiles
-#define INPUT_FILE_O "./dat/montecarlo/ref/lambda/g_main_O.dat"
-#define INPUT_FILE_H "./dat/montecarlo/ref/lambda/g_main_H.dat"
-#define OUTPUT_FILE "./oscil_graph/montecarlo/ref/lambda/g_main.pdf"
-#define OUTPUT_FILE_ZOOM "./oscil_graph/montecarlo/ref/lambda/g_main_zoom.pdf"
+#define INPUT_FILE_O "./dat/montecarlo/ref/lambda/zerograv_main_O.dat"
+#define INPUT_FILE_H "./dat/montecarlo/ref/lambda/zerograv_main_H.dat"
+#define OUTPUT_FILE "./oscil_graph/montecarlo/ref/lambda/zerograv_main.pdf"
+#define OUTPUT_FILE_ZOOM "./oscil_graph/montecarlo/ref/lambda/zerograv_main_zoom.pdf"
 
 // PHYS & MATH CONSTANTS
 #define h 6.62607015e-34
@@ -81,13 +81,13 @@ int oscillation_lambda()
     h1_zoom->Divide(h2_zoom);
 
     // fittings
-    TF1 *f = new TF1("f", "([0] + [1] * x + [2]) * cos([3] * x + [4]) + [5]");
-    f->SetParNames("A0", "A1", "A2", "k_{+}", "#theta_{0}", "BG");
-    f->SetParameters(1, 0, 0, 5.8e11, 0, 0);
+    TF1 *f = new TF1("f", "([0] + [1] * x + [2]) * cos([3] * x + [4] / x + [5]) + [6]");
+    f->SetParNames("A0", "A1", "A2", "k_{+}", "k_{-}", "#theta_{0}", "BG");
+    f->SetParameters(1, 0, 0, 5.8e11, 0, 0, 0);
 
     // draw histogram
     TCanvas *c = new TCanvas("c", "oscillation", 700, 500);
-    h1->Fit("f", "", "", lambda_min, lambda_max);
+    h1->Fit("f", "", "", 7e-10, 10e-10);
     h1->Draw("c");
     c->Print(OUTPUT_FILE);
 
