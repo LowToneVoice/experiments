@@ -7,10 +7,18 @@
 #include <TCanvas.h>
 
 // datafiles
-#define INPUT_FILE_O "./dat/montecarlo/ref/lambda/zerograv_main_O.dat"
-#define INPUT_FILE_H "./dat/montecarlo/ref/lambda/zerograv_main_H.dat"
-#define OUTPUT_FILE "./oscil_graph/montecarlo/ref/lambda/zerograv_main.pdf"
-#define OUTPUT_FILE_ZOOM "./oscil_graph/montecarlo/ref/lambda/zerograv_main_zoom.pdf"
+#define INPUT_FILE_O "./dat/montecarlo/ref/lambda/g_main_O.dat"
+#define INPUT_FILE_H "./dat/montecarlo/ref/lambda/g_main_H.dat"
+#define INPUT_TREE "./dat/montecarlo/ref/lambda/g_main.root"
+#define OUTPUT_FILE "./oscil_graph/montecarlo/ref/lambda/g_main.pdf"
+#define OUTPUT_FILE_ZOOM "./oscil_graph/montecarlo/ref/lambda/g_main_zoom.pdf"
+#define OUTPUT_FILE_FOURIER "./oscil_graph/montecarlo/ref/lambda/g_main_fourier.pdf"
+
+// CHANNELS
+#define H_TDC 0
+#define O_TDC 1
+#define H_ADC 2
+#define O_ADC 3
 
 // PHYS & MATH CONSTANTS
 #define h 6.62607015e-34
@@ -26,8 +34,8 @@ constexpr double lambda_max = 12e-10;
 constexpr int daq_freq = 62.5e6;
 
 // alignment variables
-constexpr double lambda_min_used = 8e-10;
-constexpr double lambda_max_used = 8.5e-10;
+constexpr double lambda_min_used = 6.9e-10;
+constexpr double lambda_max_used = 8.4e-10;
 constexpr double theta_min = .2 * pi / 180;
 constexpr double theta_max = 1.5 * pi / 180;
 constexpr double total_length = 1.;
@@ -43,11 +51,26 @@ int oscillation_lambda()
     // open the datafile
     std::ifstream inputFileO(INPUT_FILE_O);
     std::ifstream inputFileH(INPUT_FILE_H);
-    if (!inputFileO.is_open() || !inputFileH.is_open())
+    TFile *file = TFile::Open(INPUT_TREE);
+    if (!inputFileO.is_open() || !inputFileH.is_open() || !file || file->IsZombie())
     {
         std::cerr << "Failed to open the input file." << std::endl;
         return 1;
     }
+    // TTree *tree;
+    // file->GetObject("tree", tree);
+    // if (!tree)
+    // {
+    //     std::cerr << "Failed to retrieve the tree from the file." << std::endl;
+    //     return 1;
+    // }
+
+    // Int_t channel;
+    // Double_t lambda;
+
+    // tree->SetBranchAddress("channel", &channel);
+    // tree->SetBranchAddress("lambda", &lambda);
+    // tree->Draw("(lambda*(channel==0)-lambda*(channel==1))/(lambda*(channel==0)+lambda*(channel==1))");
 
     // make histogram
     TH1F *histO = new TH1F("Obeam", "Oscil", N_loop_lambda, lambda_min, lambda_max);
@@ -79,6 +102,7 @@ int oscillation_lambda()
     h1_zoom->Add(histH_zoom, -1);
     h2_zoom->Add(histO_zoom, 1);
     h1_zoom->Divide(h2_zoom);
+    TH1 *hFourier = h1_zoom->FFT(0, "MAG");
 
     // fittings
     TF1 *f = new TF1("f", "([0] + [1] * x + [2]) * cos([3] * x + [4] / x + [5]) + [6]");
@@ -96,10 +120,26 @@ int oscillation_lambda()
     h1_zoom->Draw("c1");
     c1->Print(OUTPUT_FILE_ZOOM);
 
+    TCanvas *c2 = new TCanvas("c2", "Fourier components", 700, 500);
+    hFourier->Draw();
+    c2->Print(OUTPUT_FILE_FOURIER);
+
     delete histO;
     delete histH;
     delete histO_zoom;
     delete histH_zoom;
+    if (hFourier)
+    {
+        TCanvas *c2 = new TCanvas("c2", "Fourier components", 700, 500);
+        hFourier->Draw();
+        c2->Print(OUTPUT_FILE_FOURIER);
+        delete hFourier; // Don't forget to delete the histogram when you're done with it
+    }
+    else
+    {
+        std::cerr << "Failed to perform FFT." << std::endl;
+    }
+    
 
     return 0;
 }

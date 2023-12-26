@@ -7,10 +7,10 @@
 #include <TTree.h>
 
 // FILES
-#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/zerograv_main.root"
-#define OUTPUT_O "./dat/montecarlo/ref/lambda/zerograv_main_O.dat"
-#define OUTPUT_H "./dat/montecarlo/ref/lambda/zerograv_main_H.dat"
-#define OUTPUT_PROB "./dat/theoretical/ref/lambda/zerograv_main.dat"
+#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/g_main.root"
+#define OUTPUT_O "./dat/montecarlo/ref/lambda/g_main_O.dat"
+#define OUTPUT_H "./dat/montecarlo/ref/lambda/g_main_H.dat"
+#define OUTPUT_PROB "./dat/theoretical/ref/lambda/g_main.dat"
 
 #define OUT_INTERVAL 1000
 
@@ -26,12 +26,20 @@ std::complex<double> I(0, 1.);
 #define pi M_PI
 #define J_per_eV 1.6022e-19
 #define m 1.675e-27
+#define NA 6.02214e23
 constexpr double g = 9.8;
 constexpr double hbar = h / (2 * pi);
 
 constexpr double V_sio2 = 90.9e-09 * J_per_eV;
 constexpr double V_ni = 224.e-09 * J_per_eV;
 constexpr double V_ti = -40.e-9 * J_per_eV;
+constexpr double m_Ni = 58.6934e-3 / NA;
+constexpr double m_Ti = 47.867e-3 / NA;
+constexpr double rho_Si = 5.00e22;  // used cm3 unit in Seki's paper
+constexpr double rho_Ni = 8.908e-3 / m_Ni;
+constexpr double rho_Ti = 4.506e-3 / m_Ti;
+constexpr double bc_Ni = 10.3e-15;
+constexpr double bc_Ti = -3.36e-15;
 
 // ALIGNMENT CONSTANTS
 constexpr double delta_D = 1.;
@@ -139,10 +147,10 @@ int sim_lambda()
     std::uniform_real_distribution<double> rand(0., 1.);
     Double_t lmd;
     Int_t channel;
-    TFile *file = new TFile(OUTPUT_TREE, "recreate");
-    TTree *tree = new TTree("tree", "tree");
-    tree->Branch("channel", &channel);
-    tree->Branch("lambda", &lmd);
+    TFile file(OUTPUT_TREE, "recreate");
+    TTree tree("tree", "tree");
+    tree.Branch("channel", &channel);
+    tree.Branch("lambda", &lmd);
     int count[2] = {};
 
     for (int j = 0; j < N_loop_lambda; j++)
@@ -174,14 +182,14 @@ int sim_lambda()
         Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * lambda;
         Phi_a_main = 4 * pi * gap / lambda * theta_error;
         Phi_g_sub = 2 * pi * g * pow(m / h, 2) * theta_error / 2 * pow(gap / sin(theta), 2) * lambda;
-        // Phi_a_sub = -4 * pi * gap * rho * bc / 2 / pi / pow(theta, 2) * lambda * theta_error;
-        Phase = Phi_a_main + Phi_g_sub;
+        Phi_a_sub = -4 * pi * gap * rho_Ni * bc_Ni / 2 / pi / pow(theta, 2) * lambda * theta_error;   // maximize the value
+        Phase = Phi_g_main;
 
         // probability calculation
         // R = 1. / sqrt(2);
         // T = I / sqrt(2);
         probO = std::norm(T * R * T * R + R * T * R * T * std::exp(I * Phase));
-        probH = std::norm(T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase));
+        probH = std::norm(T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase) + R * T * T * std::exp(I * Phase));
         fileP << lambda << " " << probO << " " << probH << std::endl;
 
         for (int beam = 0; beam < beam_count; beam++)
@@ -191,25 +199,24 @@ int sim_lambda()
             {
                 fileO << lambda << std::endl;
                 channel = O_TDC;
-                tree->Fill();
+                tree.Fill();
                 count[0]++;
             }
             else if (1 - probability <= probH)
             {
                 fileH << lambda << std::endl;
                 channel = H_TDC;
-                tree->Fill();
+                tree.Fill();
                 count[1]++;
             }
         }
     }
 
-    fileP << std::endl;
-
+    tree.Write();
     fileO.close();
     fileH.close();
     fileP.close();
-    file->Close();
+    file.Close();
 
     std::cout << "counts: " << count[0] << " and " << count[1] << std::endl;
     return 0;

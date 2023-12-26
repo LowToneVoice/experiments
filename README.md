@@ -70,6 +70,9 @@
 - atomic mass of Ti 47.867 g/mol
 - mass density of Ni 8.908 g/cm3
 - mass density of Ti 4.506 g/cm3
+- neutron-nuclear scattering length of Ni 10.3 fm
+- neutron-nuclear scattering length of Ti -3.36 fm
+- atomic density of Si 5.00e22 (op. cit. p. 82)
 
 ### 装置設計の不可変定数
 
@@ -87,8 +90,8 @@
 - angle 1.05º (あまり変えたくない)
 - beam time 1 h
 - DAQ downsizing 16
-- used wavelength min. 7e-10
-- used wavelength min. 9e-10
+- used wavelength min. 6.9e-10
+- used wavelength min. 8.4e-10
 - theta min. 0.2º
 - theta max. 1.5º
 - theta interval 0.01º

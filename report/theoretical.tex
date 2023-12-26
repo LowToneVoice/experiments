@@ -1,0 +1,140 @@
+\documentclass[dvipdfmx]{jsarticle}
+\usepackage{p2report}
+
+\begin{document}
+
+\section{測定原理}
+
+
+\subsection{中性子の干渉で発生する位相差}
+
+地上の中性子は重力ポテンシャルを受け、非相対論的にはHamiltonianが
+\begin{equation*}
+    H
+    =
+    \frac{p^2}{2m}+mgz
+\end{equation*}
+となる。
+$p$は運動量、$m$は中性子質量、$g$は重力加速度でそれぞれ定数、$z$は基準面からの高さである。
+中性子が弧長パラメーター$s$で表される軌道$\gamma(s)$を速さ$v(s)$で通過するとき、Schrödinger方程式の解は
+\begin{equation*}
+    \varphi
+    =
+    \exp[
+        \frac{1}{i\hbar}\int\dd{t}
+        \qty(
+            \frac{p^2}{2m}+mgz
+        )
+    ]
+    =
+    \exp[
+        \frac{1}{i\hbar}\int_\gamma\frac{\dd{s}}{v}
+        \qty(\frac{p^2}{2m}+mgz)
+    ]
+\end{equation*}
+の形で表される。
+図\ref{fig: theoretical: neutron paths and O/H beams}のような経路を考える。
+中性子を波長$\lambda=h/mv$の単色平面波で近似すれば、面積$A$の平行四辺形での干渉によって点Eで位相差
+\begin{equation}
+    \Delta\Phi_g
+    :=
+    \Phi_\mathrm{BDE}-\Phi_\mathrm{BCE}
+    =
+    -\frac{mg}{i\hbar}
+    \oint_\mathrm{BDEC}\dd{s}\frac{z}{v}
+    =
+    i\frac{2\pi\lambda m^2gA}{h^2}\sin\delta
+\end{equation}
+が生じる。
+熱中性子では$z$の変化による速度変化は十分に小さい。
+実験に用いた波長帯$\lambda\sim\SI{e-9}{m}$では、
+% TODO: 計算せえ
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \draw[->, >=Stealth, dashed]($(-.3,0)+(-90:.3 and .5)$)arc(270:90:.3 and .5)node[above right]{$\delta$};
+        \draw[->, >=Stealth](-1,0)node[left]{A}--(.5,0);
+        \draw[dashed, preaction={line width=6pt, draw=white}]($(-.3,0)+(90:.3 and .5)$)arc(90:-90:.3 and .5);
+        \draw(.5,0)--(1,0)node[below]{B};
+        \draw(1,0)--++(.5,0);
+        \draw(1.5,0)--(2,0)node[below right]{D};
+        \draw[->, >=Stealth](2,0)--++(.5,.5);
+        \draw(2.5,.5)--++(.5,.5)node[above left]{E};
+        \draw[->, >=Stealth](3,1)--++(1,1)node[above right]{H beam};
+        \draw[->, >=Stealth](1,0)--++(.5,.5);
+        \draw(1.5,.5)--++(.5,.5)node[above left]{C};
+        \draw(2,1)--++(.5,0);
+        \draw[->, >=Stealth](2.5,1)--++(2,0)node[right]{O beam};
+        \draw[->, >=Stealth](.5,1.)--++(0,.5)node[above]{$z$};
+    \end{tikzpicture}
+    \caption{
+        中性子の経路。
+        Oビーム、Hビームは共にA→B→D→E, A→B→C→Eの経路で進んだ中性子の干渉を反映する。
+        ABを軸に全系を回転させると干渉が変化する。
+        回転角度$\delta$は平行四辺形が水平面となす角で、図のように平行四辺形が鉛直面内にあるとき$\delta=\pi/2$とする。
+        $\delta=\pm\pi/2$とき干渉が最大で、$0$のときは干渉しない。
+    }
+    \label{fig: theoretical: neutron paths and O/H beams}
+\end{figure}
+
+BDCEが平行四辺形から歪むと経路長や面積が変わって新たに位相差が生じる。
+
+% TODO: 平行度と位相差
+
+
+
+B, C, D, E各点での反射や透過による位相変換を考慮しても、上述の位相差を振動として取り出せる。
+図\ref{fig: theoretical: alignment and wave fnc}のような散乱体において入射、反射、透過の波動関数の間に
+\begin{equation*}
+    \mqty(\psi_i^1\\\psi_i^2)
+    =
+    \mqty(r & s \\ t & u)
+    \mqty(\psi_o^1\\\psi_o^2)
+\end{equation*}
+の関係があるとする。
+確率の保存から行列はユニタリでなければならず、
+\begin{equation*}
+    |r|=|s|,
+    \quad
+    |t|=|u|,
+    \quad
+\end{equation*}
+を満たす。
+BとE, CとDで用いるミラーがそれぞれ同一であるとして、それぞれのミラーの行列を
+\begin{equation*}
+    \mqty(r_\mathrm{BE} & s_\mathrm{BE} \\ t_\mathrm{BE} & u_\mathrm{BE}),
+    \quad
+    \mqty(r_\mathrm{CD} & s_\mathrm{CD} \\ t_\mathrm{CD} & u_\mathrm{CD})
+\end{equation*}
+とすれば、点Bにて波動関数$\Psi_0$だったものは点Eにて
+\begin{equation*}
+    \Psi_H
+    =
+    ,\qquad
+    \Psi_O
+    =
+\end{equation*}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \draw[ultra thick](-.75,0)--(.75,0);
+        \draw[->, >=Stealth](150:1)node[above left]{$\psi_i^1$}--(150:.5);
+        \draw[->, >=Stealth](-150:1)node[below left]{$\psi_i^2$}--(-150:.5);
+        \draw[->, >=Stealth](-150:.5)--(30:1)node[above right]{$\psi_o^1$};
+        \draw[->, >=Stealth](150:.5)--(-30:1)node[below right]{$\psi_o^2$};
+    \end{tikzpicture}
+    \caption{
+        入射・反射・透過波の波動関数。
+    }
+    \label{fig: theoretical: alignment and wave fnc}
+\end{figure}
+
+
+\subsection{反射・透過特性}
+
+反射や
+
+
+\end{document}
