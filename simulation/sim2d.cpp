@@ -52,7 +52,7 @@ constexpr int daq_freq = 62.5e6;
 constexpr double lambda_min_used = lambda_min;
 constexpr double lambda_max_used = lambda_max;
 // constexpr double theta = 1.05 * pi / 180;
-constexpr double theta_error = 1e-3 * pi / 180;
+constexpr double angle_from_parallel = 1e-3 * pi / 180;
 constexpr double mirror_distance = 150e-3;
 constexpr double total_length = 1.;
 constexpr int daq_downsizing = 16;
@@ -179,9 +179,9 @@ int sim()
 
             // Phase calculation
             Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * lambda;
-            // Phi_a_main = 4 * pi * gap / lambda * theta_error;
-            // Phi_g_sub = 2 * pi * g * pow(m / h, 2) * theta_error / 2 * pow(gap / sin(theta), 2) * lambda;
-            // Phi_a_sub = -4 * pi * gap * rho * bc / 2 / pi / pow(theta, 2) * lambda * theta_error;
+            // Phi_a_main = 4 * pi * gap / lambda * angle_from_parallel;
+            // Phi_g_sub = 2 * pi * g * pow(m / h, 2) * angle_from_parallel / 2 * pow(gap / sin(theta), 2) * lambda;
+            // Phi_a_sub = -4 * pi * gap * rho * bc / 2 / pi / pow(theta, 2) * lambda * angle_from_parallel;
             Phase = Phi_g_main;
 
             // probability calculation
