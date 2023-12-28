@@ -7,10 +7,10 @@
 #include <TTree.h>
 
 // FILES
-#define OUTPUT_TREE "./dat/montecarlo/noref/lambda/g_main.root"
-#define OUTPUT_O "./dat/montecarlo/noref/lambda/g_main_O.dat"
-#define OUTPUT_H "./dat/montecarlo/noref/lambda/g_main_H.dat"
-#define OUTPUT_PROB "./dat/theoretical/noref/lambda/g_main.dat"
+#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/ref_only.root"
+#define OUTPUT_O "./dat/montecarlo/ref/lambda/ref_only_O.dat"
+#define OUTPUT_H "./dat/montecarlo/ref/lambda/ref_only_H.dat"
+#define OUTPUT_PROB "./dat/theoretical/ref/lambda/ref_only.dat"
 
 #define OUT_INTERVAL 1000
 
@@ -183,11 +183,11 @@ int sim_lambda()
         Phi_a_main = 4 * pi * gap / lambda * angle_from_parallel;
         Phi_g_sub = 2 * pi * g * pow(m / h, 2) * angle_from_parallel / 2 * pow(gap / sin(theta), 2) * lambda;
         Phi_a_sub = -4 * pi * gap * rho_Ni * bc_Ni / 2 / pi / pow(theta, 2) * lambda * angle_from_parallel;   // maximize the value
-        Phase = Phi_g_main;
+        Phase = 0;
 
         // probability calculation
-        R = 1. / sqrt(2);
-        T = I / sqrt(2);
+        // R = 1. / sqrt(2);
+        // T = I / sqrt(2);
         probO = std::norm(T * R * T * R + R * T * R * T * std::exp(I * Phase));
         probH = std::norm(T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase) + R * T * T * std::exp(I * Phase));
         fileP << lambda << " " << probO << " " << probH << std::endl;

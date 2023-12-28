@@ -18,6 +18,8 @@
 ├── phase-calc：位相の概算に使用
 │   ├── Data_all_mikata.md：Data_all.datのフォーマット及び入射角1.05ºでの位相 (誤差付き)
 │   ├── phase.cpp：位相とその誤差の概算
+│   ├── prob_error.gpl：波動関数から出る波長-確率分布の誤差を概算
+│   ├── prob_error.pdf：波動関数から出る波長-確率分布の誤差
 │   └── ...
 │
 ├── simulation
@@ -111,7 +113,7 @@
 ### 装置設計の不可変定数
 
 - DAQ freq. 62.5e+6
-- gap thickness 189e-6
+- gap thickness $(189\pm0.1)\times10^{-6}$
 - wavelength min. 2e-10
 - wavelength max. 9e-10
 - layer thickness of Ni 13.35e-9 (op. cit. Tbl. 4.2)
@@ -121,7 +123,7 @@
 ### 装置設計の可変変数
 
 - mirror distance 150e-3
-- angle 1.05º (あまり変えたくない)
+- angle $(1.05\pm0.001)\degree$ (あまり変えたくない)
 - beam time 1 h
 - DAQ downsizing 16
 - used wavelength min. 6.9e-10
@@ -129,6 +131,7 @@
 - theta min. 0.2º
 - theta max. 1.5º
 - theta interval 0.01º
+- total length $1.000\pm.005$
 
 ### チャンネル
 
