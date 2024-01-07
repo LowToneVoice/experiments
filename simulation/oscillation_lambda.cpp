@@ -7,12 +7,12 @@
 #include <TCanvas.h>
 
 // datafiles
-#define INPUT_FILE_O "./dat/montecarlo/ref/lambda/g_main_O.dat"
-#define INPUT_FILE_H "./dat/montecarlo/ref/lambda/g_main_H.dat"
-#define INPUT_TREE "./dat/montecarlo/ref/lambda/g_main.root"
-#define OUTPUT_FILE "./oscil_graph/montecarlo/ref/lambda/g_main.pdf"
-#define OUTPUT_FILE_ZOOM "./oscil_graph/montecarlo/ref/lambda/g_main_zoom.pdf"
-#define OUTPUT_FILE_FOURIER "./oscil_graph/montecarlo/ref/lambda/g_main_fourier.pdf"
+#define INPUT_FILE_O "./dat/montecarlo/ref/lambda/g_mix_O.dat"
+#define INPUT_FILE_H "./dat/montecarlo/ref/lambda/g_mix_H.dat"
+#define INPUT_TREE "./dat/montecarlo/ref/lambda/g_mix.root"
+#define OUTPUT_FILE "./oscil_graph/montecarlo/ref/lambda/g_mix.pdf"
+#define OUTPUT_FILE_ZOOM "./oscil_graph/montecarlo/ref/lambda/g_mix_zoom.pdf"
+#define OUTPUT_FILE_FOURIER "./oscil_graph/montecarlo/ref/lambda/g_mix_fourier.pdf"
 
 // CHANNELS
 #define H_TDC 0
@@ -139,7 +139,7 @@ int oscillation_lambda()
     {
         std::cerr << "Failed to perform FFT." << std::endl;
     }
-    
+
 
     return 0;
 }

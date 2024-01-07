@@ -7,11 +7,11 @@
 #include <TCanvas.h>
 
 // FILES
-#define INPUT_TREE "./dat/montecarlo/ref/lambda/zerograv_main.root"
-#define INPUT_O "./dat/montecarlo/ref/lambda/zerograv_main_O.dat"
-#define INPUT_H "./dat/montecarlo/ref/lambda/zerograv_main_H.dat"
-#define OUTPUT "./beam_count/montecarlo/ref/lambda/zerograv_main.pdf"
-#define OUTPUT_ZOOM "./beam_count/montecarlo/ref/lambda/zerograv_main_zoom.pdf"
+#define INPUT_TREE "./dat/montecarlo/ref/lambda/g_mix.root"
+#define INPUT_O "./dat/montecarlo/ref/lambda/g_mix_O.dat"
+#define INPUT_H "./dat/montecarlo/ref/lambda/g_mix_H.dat"
+#define OUTPUT "./beam_count/montecarlo/ref/lambda/g_mix.pdf"
+#define OUTPUT_ZOOM "./beam_count/montecarlo/ref/lambda/g_mix_zoom.pdf"
 
 #define MAX_DATA_SIZE 1e+6
 

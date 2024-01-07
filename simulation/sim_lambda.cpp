@@ -7,10 +7,10 @@
 #include <TTree.h>
 
 // FILES
-#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/ref_only.root"
-#define OUTPUT_O "./dat/montecarlo/ref/lambda/ref_only_O.dat"
-#define OUTPUT_H "./dat/montecarlo/ref/lambda/ref_only_H.dat"
-#define OUTPUT_PROB "./dat/theoretical/ref/lambda/ref_only.dat"
+#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/g_mix.root"
+#define OUTPUT_O "./dat/montecarlo/ref/lambda/g_mix_O.dat"
+#define OUTPUT_H "./dat/montecarlo/ref/lambda/g_mix_H.dat"
+#define OUTPUT_PROB "./dat/theoretical/ref/lambda/g_mix.dat"
 
 #define OUT_INTERVAL 1000
 
@@ -56,11 +56,15 @@ constexpr double theta_max = 1.5 * pi / 180;
 
 constexpr int daq_freq = 62.5e6;
 
+constexpr double lambda_fade_width = .01 * (lambda_max - lambda_min);
+// constexpr double lambda_fade_width = 1e-12;
+
 // ALIGNMENT VARIABLES
 constexpr double lambda_min_used = lambda_min;
 constexpr double lambda_max_used = lambda_max;
 constexpr double theta = 1.05 * pi / 180;
-constexpr double angle_from_parallel = 1e-3 * pi / 180;
+constexpr double delta = 30 * pi / 180;
+constexpr double angle_from_parallel = .1 * pi / 180;
 constexpr double mirror_distance = 150e-3;
 constexpr double total_length = 1.;
 constexpr int daq_downsizing = 16;
@@ -72,6 +76,7 @@ constexpr double d_theta = .05 * pi / 180;
 constexpr int beam_count = 1000;
 constexpr int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
 constexpr int N_loop_theta = (int)((theta_max - theta_min) / d_theta);
+constexpr int N_loop_lambda_fade = (int)(lambda_fade_width / d_lambda);
 
 // matrix M of one layer
 Eigen::Matrix2d mat_layer(double k0, double theta, double V, double D)
@@ -128,6 +133,7 @@ int sim_lambda()
     double zeta;
     std::complex<double> R, T;
     std::complex<double> R_not_normed, T_not_nnormed;
+    std::complex<double> wave_fncO, wave_fncH;
     double R2norm, T2norm, R_phase, T_phase;
     Eigen::Matrix2d mat_bilayer_ni_ti;
     Eigen::Matrix2d M;
@@ -152,44 +158,57 @@ int sim_lambda()
     tree.Branch("channel", &channel);
     tree.Branch("lambda", &lmd);
     int count[2] = {};
+    int l;
 
     for (int j = 0; j < N_loop_lambda; j++)
     {
-        // initialization
-        lambda = lambda_min_used + d_lambda * j;
-        lmd = lambda;
-        k0 = 2. * pi / lambda;
-        zeta = 0;
+        lmd = lambda_min_used + d_lambda * j;
+        wave_fncH = 0;
+        wave_fncO = 0;
+        l = 0;
 
-        // reflection calculation
-        mat_bilayer_ni_ti = mat_layer(k0, theta, V_ti, D_ti) * mat_layer(k0, theta, V_ni, D_ni);
-        M = Eigen::Matrix2d::Identity();
-        for (int l = 0; l < N_bilayer; l++)
+        do
         {
-            M = mat_bilayer_ni_ti * M;
-            zeta += D_ni + D_ti;
-        }
-        R_not_normed = reflect(k0, theta, V_sio2, M);
-        T_not_nnormed = transparent(k0, theta, V_sio2, zeta, M);
-        R = R_not_normed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
-        T = T_not_nnormed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
-        R2norm = std::norm(R);
-        R_phase = std::arg(R);
-        T2norm = std::norm(T);
-        T_phase = std::arg(T);
+            // initialization
+            l++;
+            lambda = lmd - lambda_fade_width / 2 + l * d_lambda;
+            k0 = 2. * pi / lambda;
+            zeta = 0;
 
-        // Phase calculation
-        Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * lambda;
-        Phi_a_main = 4 * pi * gap / lambda * angle_from_parallel;
-        Phi_g_sub = 2 * pi * g * pow(m / h, 2) * angle_from_parallel / 2 * pow(gap / sin(theta), 2) * lambda;
-        Phi_a_sub = -4 * pi * gap * rho_Ni * bc_Ni / 2 / pi / pow(theta, 2) * lambda * angle_from_parallel;   // maximize the value
-        Phase = 0;
+            // reflection calculation
+            mat_bilayer_ni_ti = mat_layer(k0, theta, V_ti, D_ti) * mat_layer(k0, theta, V_ni, D_ni);
+            M = Eigen::Matrix2d::Identity();
+            for (int l = 0; l < N_bilayer; l++)
+            {
+                M = mat_bilayer_ni_ti * M;
+                zeta += D_ni + D_ti;
+            }
+            R_not_normed = reflect(k0, theta, V_sio2, M);
+            T_not_nnormed = transparent(k0, theta, V_sio2, zeta, M);
+            R = R_not_normed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
+            T = T_not_nnormed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
+            R2norm = std::norm(R);
+            R_phase = std::arg(R);
+            T2norm = std::norm(T);
+            T_phase = std::arg(T);
 
-        // probability calculation
-        // R = 1. / sqrt(2);
-        // T = I / sqrt(2);
-        probO = std::norm(T * R * T * R + R * T * R * T * std::exp(I * Phase));
-        probH = std::norm(T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase) + R * T * T * std::exp(I * Phase));
+            // Phase calculation
+            Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * lambda * sin(delta);
+            Phi_a_main = 4 * pi * gap / lambda * angle_from_parallel;
+            Phi_g_sub = 2 * pi * g * pow(m / h, 2) * angle_from_parallel / 2 * pow(gap / sin(theta), 2) * lambda * sin(delta);
+            Phi_a_sub = -4 * pi * gap * rho_Ni * bc_Ni / 2 / pi / pow(theta, 2) * lambda * angle_from_parallel; // maximize the value
+            Phase = Phi_g_main + Phi_g_sub;
+
+            // probability calculation
+            // R = 1. / sqrt(2);
+            // T = I / sqrt(2);
+            wave_fncH += (T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase) + R * T * T * std::exp(I * Phase)) / (double)(N_loop_lambda_fade == 0 ? 1 : N_loop_lambda_fade);
+            wave_fncO += (T * R * T * R + R * T * R * T * std::exp(I * Phase)) / (double)(N_loop_lambda_fade == 0 ? 1 : N_loop_lambda_fade);
+        } while (l < N_loop_lambda_fade);
+
+        probO = std::norm(wave_fncO);
+        probH = std::norm(wave_fncH);
+
         fileP << lambda << " " << probO << " " << probH << std::endl;
 
         for (int beam = 0; beam < beam_count; beam++)
@@ -219,6 +238,8 @@ int sim_lambda()
     file.Close();
 
     std::cout << "counts: " << count[0] << " and " << count[1] << std::endl;
+    std::cout << "Phi_g_main = " << -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * sin(delta) << " * lambda" << std::endl;
+
     return 0;
 }
 

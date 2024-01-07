@@ -119,11 +119,12 @@
 - layer thickness of Ni 13.35e-9 (op. cit. Tbl. 4.2)
 - layer thickness of Ti 9.83e-9 (ibid.)
 - bilayer count 8
+- mix of wavelength $0.01\times(\lambda_\mathrm{max}-\lambda_\mathrm{min})$
 
 ### 装置設計の可変変数
 
 - mirror distance 150e-3
-- angle $(1.05\pm0.001)\degree$ (あまり変えたくない)
+- angle $(1.05\pm0.1)\degree$ (あまり変えたくない)
 - beam time 1 h
 - DAQ downsizing 16
 - used wavelength min. 6.9e-10
@@ -132,6 +133,7 @@
 - theta max. 1.5º
 - theta interval 0.01º
 - total length $1.000\pm.005$
+- delta
 
 ### チャンネル
 

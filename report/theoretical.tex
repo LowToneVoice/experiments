@@ -16,6 +16,7 @@
 \end{equation*}
 となる。
 $p$は運動量、$m$は中性子質量、$g$は重力加速度でそれぞれ定数、$z$は基準面からの高さである。
+ただし熱中性子の速度変化は無視できるものとした。
 中性子が弧長パラメーター$s$で表される軌道$\gamma(s)$を速さ$v(s)$で通過するとき、Schrödinger方程式の解は
 \begin{equation*}
     \varphi
@@ -36,19 +37,16 @@ $p$は運動量、$m$は中性子質量、$g$は重力加速度でそれぞれ�
 図\ref{fig: theoretical: neutron paths and O/H beams}のような経路を考える。
 中性子を波長$\lambda=h/mv$の単色平面波で近似すれば、面積$A$の平行四辺形での干渉によって点Eで位相差
 \begin{equation}
-    \Delta\Phi_g
+    i\Delta\Phi_g
     :=
-    \Phi_\mathrm{BDE}-\Phi_\mathrm{BCE}
+    i(\Phi_\mathrm{BCE}-\Phi_\mathrm{BDE})
     =
-    -\frac{mg}{i\hbar}
+    \frac{mg}{i\hbar}
     \oint_\mathrm{BDEC}\dd{s}\frac{z}{v}
     =
-    i\frac{2\pi\lambda m^2gA}{h^2}\sin\delta
+    -i\frac{2\pi\lambda m^2gA}{h^2}\sin\delta
 \end{equation}
 が生じる。
-熱中性子では$z$の変化による速度変化は十分に小さい。
-実験に用いた波長帯$\lambda\sim\SI{e-9}{m}$では、
-% TODO: 計算せえ
 
 \begin{figure}
     \centering
@@ -72,7 +70,7 @@ $p$は運動量、$m$は中性子質量、$g$は重力加速度でそれぞれ�
         中性子の経路。
         Oビーム、Hビームは共にA→B→D→E, A→B→C→Eの経路で進んだ中性子の干渉を反映する。
         ABを軸に全系を回転させると干渉が変化する。
-        回転角度$\delta$は平行四辺形が水平面となす角で、図のように平行四辺形が鉛直面内にあるとき$\delta=\pi/2$とする。
+        回転角度$\delta$は平行四辺形が水平面となす角で、図のように平行四辺形が鉛直面内にあってCEがBDよりも高い位置にあるとき$\delta=\pi/2$とする。
         $\delta=\pm\pi/2$とき干渉が最大で、$0$のときは干渉しない。
     }
     \label{fig: theoretical: neutron paths and O/H beams}
@@ -80,17 +78,18 @@ $p$は運動量、$m$は中性子質量、$g$は重力加速度でそれぞれ�
 
 BDCEが平行四辺形から歪むと経路長や面積が変わって新たに位相差が生じる。
 
+
 % TODO: 平行度と位相差
 
 
 
-B, C, D, E各点での反射や透過による位相変換を考慮しても、上述の位相差を振動として取り出せる。
+B, C, D, E各点での反射や透過による位相の変化を考慮しても、上述の位相差を振動として取り出せる。
 図\ref{fig: theoretical: alignment and wave fnc}のような散乱体において入射、反射、透過の波動関数の間に
 \begin{equation*}
-    \mqty(\psi_i^1\\\psi_i^2)
-    =
-    \mqty(r & s \\ t & u)
     \mqty(\psi_o^1\\\psi_o^2)
+    =
+    \mqty(t & r \\ s & u)
+    \mqty(\psi_i^1\\\psi_i^2)
 \end{equation*}
 の関係があるとする。
 確率の保存から行列はユニタリでなければならず、
@@ -99,29 +98,70 @@ B, C, D, E各点での反射や透過による位相変換を考慮しても、�
     \quad
     |t|=|u|,
     \quad
+    us^\ast+rt^\ast=0
 \end{equation*}
 を満たす。
 BとE, CとDで用いるミラーがそれぞれ同一であるとして、それぞれのミラーの行列を
 \begin{equation*}
-    \mqty(r_\mathrm{BE} & s_\mathrm{BE} \\ t_\mathrm{BE} & u_\mathrm{BE}),
+    \mqty(t_\mathrm{BE} & r_\mathrm{BE} \\ s_\mathrm{BE} & u_\mathrm{BE}),
     \quad
-    \mqty(r_\mathrm{CD} & s_\mathrm{CD} \\ t_\mathrm{CD} & u_\mathrm{CD})
+    \mqty(t_\mathrm{CD} & r_\mathrm{CD} \\ s_\mathrm{CD} & u_\mathrm{CD})
 \end{equation*}
 とすれば、点Bにて波動関数$\Psi_0$だったものは点Eにて
 \begin{equation*}
-    \Psi_H
-    =
-    ,\qquad
-    \Psi_O
-    =
+    \begin{split}
+        \Psi_H
+        &=
+        \Psi_0r_\mathrm{BE}s_\mathrm{CD}r_\mathrm{BE}
+        e^{i\Phi_\mathrm{BCE}}
+        +
+        \Psi_0u_\mathrm{BE}r_\mathrm{CD}t_\mathrm{BE}
+        e^{i\Phi_\mathrm{BDE}}
+        \\
+        \Psi_O
+        &=
+        \Psi_0r_\mathrm{BE}s_\mathrm{CD}u_\mathrm{BE}
+        e^{i\Phi_\mathrm{BCE}}
+        +
+        \Psi_0u_\mathrm{BE}r_\mathrm{CD}s_\mathrm{BE}
+        e^{i\Phi_\mathrm{BDE}}
+    \end{split}
 \end{equation*}
+となる。
+簡単のため$|\Psi_0|=1$としてビーム強度を計算すると、
+\begin{equation*}
+    \begin{split}
+        I_H
+        &=
+        |\Psi_H|^2
+        =
+        \alpha[1+\cos(\Delta\Phi+\delta)]
+        \\
+        I_O
+        &=
+        |\Psi_O|^2
+        =
+        \gamma
+        -
+        \alpha\cos(\Delta\Phi+\delta)
+    \end{split}
+\end{equation*}
+を得る。
+ここに$\alpha=, \gamma=, \delta=$である。
+従ってビーム強度を測定し
+\begin{equation*}
+    \mathscr{A}
+    =
+    \frac{I_H-I_O}{I_H+I_O}
+\end{equation*}
+を計算すれば、$\Delta\Phi$を振動の位相として取り出すことが可能である。
 
 \begin{figure}
     \centering
     \begin{tikzpicture}
         \draw[ultra thick](-.75,0)--(.75,0);
-        \draw[->, >=Stealth](150:1)node[above left]{$\psi_i^1$}--(150:.5);
-        \draw[->, >=Stealth](-150:1)node[below left]{$\psi_i^2$}--(-150:.5);
+        \draw[->, >=Stealth](150:1)node[above left]{$\psi_i^2$}--(150:.5);
+        \draw[->, >=Stealth](-150:1)node[below left]{$\psi_i^1$}--(-150:.5);
         \draw[->, >=Stealth](-150:.5)--(30:1)node[above right]{$\psi_o^1$};
         \draw[->, >=Stealth](150:.5)--(-30:1)node[below right]{$\psi_o^2$};
     \end{tikzpicture}
@@ -134,7 +174,40 @@ BとE, CとDで用いるミラーがそれぞれ同一であるとして、そ�
 
 \subsection{反射・透過特性}
 
-反射や
+ミラーの反射・透過率は1次元ポテンシャル問題として計算できる。
+今回使用したミラーはガラスにTiとNiを積層しているものであり、それぞれ層の内部では中性子にoptical potentialがかかる。
+
+
+
+領域IとIIの波動関数の間には
+\begin{equation*}
+    \mqty(\Psi_\mathrm{II} \\ \Psi_\mathrm{II}')
+    =
+    \mqty(
+        \cos n_j\delta_j & n_j^{-1}\sin n_j\delta_j
+        \\
+        -n_j\sin n_j\delta_j & \cos n_j\delta_j
+    )
+    \mqty(\Psi_\mathrm{I} \\ \Psi_\mathrm{I}')
+    =
+    M_j
+    \mqty(\Psi_\mathrm{I} \\ \Psi_\mathrm{I}')
+\end{equation*}
+の関係が成り立つので、全てのレイヤーを通して
+\begin{equation*}
+    \mqty(\Psi_g \\ \Psi_g')
+    =
+    M
+    \mqty(\Psi_0 \\ \Psi_0')
+    \qquad
+    \qty[
+        M=M_N\cdots M_2M_1
+        =
+        \mqty(M_{11} & M_{12} \\ M_{21} & M_{22})
+    ]
+\end{equation*}
+と書ける。
+$\Psi_0=e^{ik\zeta_0}+Re^{-ik\zeta_0}, \Psi_g=Te^{ik\zeta_0}$となる$R, T$を求めると、
 
 
 \end{document}
