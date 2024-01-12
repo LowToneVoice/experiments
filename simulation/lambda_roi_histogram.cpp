@@ -6,6 +6,7 @@
 
 // datafiles
 #define INPUT_TREE "./BL05/20231224225335_list_copy.root"
+#define OUTPUT_TREE "./dat/experiments/20231224225335.root"
 #define OUTPUT_FILE "./beam_count/test/20231224225335.pdf"
 
 #define h 6.62607015e-34
@@ -18,16 +19,20 @@ constexpr double factor_tof2lambda = h / total_length / m;
 
 int lambda_roi_histogram()
 {
+    Double_t lambda;
+    double tof;
+    TFile output(OUTPUT_TREE, "recreate");
+
     // open the datafile
-    TFile *file = TFile::Open(INPUT_TREE);
-    if (!file || file->IsZombie())
+    TFile *input = TFile::Open(INPUT_TREE);
+    if (!input || input->IsZombie())
     {
         std::cerr << "Failed to open the input file." << std::endl;
         return 1;
     }
 
     TTree *T;
-    file->GetObject("T", T);
+    input->GetObject("T", T);
     if(!T)
     {
         std::cerr << "Failed to retrieve the tree from the file." << std::endl;
