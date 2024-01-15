@@ -27,7 +27,7 @@ int fft_copy()
     TF1 *fsin = new TF1("fsin", "sin(x)+sin(2*x)+sin(0.5*x)+1", 0, 4 * TMath::Pi());
     fsin->Draw();
 
-    Int_t n = 25;
+    Int_t n = 30;
     TH1D *hsin = new TH1D("hsin", "hsin", n + 1, 0, 4 * TMath::Pi());
     Double_t x;
 

@@ -33,6 +33,10 @@ int position()
     TH1F *histogram = (TH1F *)gPad->GetPrimitive("htemp");
     if (histogram)
         histogram->SetTitle("Beam count at xy position");
+    else
+    {
+        std::cerr << "There is no histogram" << std::endl;
+    }
 
     c1->Print(OUTPUT_FILE);
 

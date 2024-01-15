@@ -7,10 +7,10 @@
 #include <TTree.h>
 
 // FILES
-#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/g_mix.root"
-#define OUTPUT_O "./dat/montecarlo/ref/lambda/g_mix_O.dat"
-#define OUTPUT_H "./dat/montecarlo/ref/lambda/g_mix_H.dat"
-#define OUTPUT_PROB "./dat/theoretical/ref/lambda/g_mix.dat"
+#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/g_mix_5deg.root"
+#define OUTPUT_O "./dat/montecarlo/ref/lambda/g_mix_5deg_O.dat"
+#define OUTPUT_H "./dat/montecarlo/ref/lambda/g_mix_5deg_H.dat"
+#define OUTPUT_PROB "./dat/theoretical/ref/lambda/g_mix_5deg.dat"
 
 #define OUT_INTERVAL 1000
 
@@ -63,7 +63,7 @@ constexpr double lambda_fade_width = .01 * (lambda_max - lambda_min);
 constexpr double lambda_min_used = lambda_min;
 constexpr double lambda_max_used = lambda_max;
 constexpr double theta = 1.05 * pi / 180;
-constexpr double delta = 30 * pi / 180;
+constexpr double delta = 5 * pi / 180;
 constexpr double angle_from_parallel = .1 * pi / 180;
 constexpr double mirror_distance = 150e-3;
 constexpr double total_length = 1.;
