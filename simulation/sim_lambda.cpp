@@ -13,6 +13,11 @@
 #define OUTPUT_PROB "./dat/theoretical/ref/lambda/g_mix_5deg.dat"
 
 #define OUT_INTERVAL 1000
+const int G_MAIN = 1;
+const int G_SUB = 1;
+const int A_MAIN = 0;
+const int A_SUB = 0;
+const bool REFLECTION = true;
 
 // CHANNELS
 #define H_TDC 0
@@ -197,11 +202,14 @@ int sim_lambda()
             Phi_a_main = 4 * pi * gap / lambda * angle_from_parallel;
             Phi_g_sub = 2 * pi * g * pow(m / h, 2) * angle_from_parallel / 2 * pow(gap / sin(theta), 2) * lambda * sin(delta);
             Phi_a_sub = -4 * pi * gap * rho_Ni * bc_Ni / 2 / pi / pow(theta, 2) * lambda * angle_from_parallel; // maximize the value
-            Phase = Phi_g_main + Phi_g_sub;
+            Phase = Phi_g_main * G_MAIN + Phi_g_sub * G_SUB + Phi_a_main * A_MAIN + Phi_a_sub * A_SUB;
 
             // probability calculation
-            // R = 1. / sqrt(2);
-            // T = I / sqrt(2);
+            if (REFLECTION == false)
+            {
+                R = 1. / sqrt(2);
+                T = I / sqrt(2);
+            }
             wave_fncH += (T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase) + R * T * T * std::exp(I * Phase)) / (double)(N_loop_lambda_fade == 0 ? 1 : N_loop_lambda_fade);
             wave_fncO += (T * R * T * R + R * T * R * T * std::exp(I * Phase)) / (double)(N_loop_lambda_fade == 0 ? 1 : N_loop_lambda_fade);
         } while (l < N_loop_lambda_fade);
@@ -209,7 +217,7 @@ int sim_lambda()
         probO = std::norm(wave_fncO);
         probH = std::norm(wave_fncH);
 
-        fileP << lambda << " " << probO << " " << probH << std::endl;
+        fileP << lambda << " " << probH << " " << probO << std::endl;
 
         for (int beam = 0; beam < beam_count; beam++)
         {
@@ -228,6 +236,12 @@ int sim_lambda()
                 tree.Fill();
                 count[1]++;
             }
+        }
+
+        // progress display
+        if (j % OUT_INTERVAL == OUT_INTERVAL - 1)
+        {
+            std::cout << j + 1 << " / " << N_loop_lambda << " has finished." << std::endl;
         }
     }
 

@@ -48,48 +48,36 @@ constexpr int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lamb
 
 int oscillation_lambda()
 {
-    // open the datafile
-    std::ifstream inputFileO(INPUT_FILE_O);
-    std::ifstream inputFileH(INPUT_FILE_H);
+    // open the data file
     TFile *file = TFile::Open(INPUT_TREE);
-    if (!inputFileO.is_open() || !inputFileH.is_open() || !file || file->IsZombie())
+    if (!file || file->IsZombie())
     {
-        std::cerr << "Failed to open the input file." << std::endl;
+        std::cerr << "Failed to open the file." << std::endl;
         return 1;
     }
-    // TTree *tree;
-    // file->GetObject("tree", tree);
-    // if (!tree)
-    // {
-    //     std::cerr << "Failed to retrieve the tree from the file." << std::endl;
-    //     return 1;
-    // }
+    TTree *tree;
+    file->GetObject("tree", tree);
+    if(!tree)
+    {
+        std::cerr << "There is no tree available." << std::endl;
+        return 1;
+    }
 
-    // Int_t channel;
-    // Double_t lambda;
-
-    // tree->SetBranchAddress("channel", &channel);
-    // tree->SetBranchAddress("lambda", &lambda);
-    // tree->Draw("(lambda*(channel==0)-lambda*(channel==1))/(lambda*(channel==0)+lambda*(channel==1))");
+    // conditions
+    TCut CutH = ("channel==" + std::to_string(H_TDC)).c_str();
+    TCut CutO = ("channel==" + std::to_string(O_TDC)).c_str();
 
     // make histogram
-    TH1F *histO = new TH1F("Obeam", "Oscil", N_loop_lambda, lambda_min, lambda_max);
-    TH1F *histH = new TH1F("Hbeam", "Oscil", N_loop_lambda, lambda_min, lambda_max);
-    TH1F *histO_zoom = new TH1F("Obeam", "Oscil", N_loop_lambda, lambda_min_used, lambda_max_used);
-    TH1F *histH_zoom = new TH1F("Hbeam", "Oscil", N_loop_lambda, lambda_min_used, lambda_max_used);
+    TH1F *histO = new TH1F("histO", "Oscil", N_loop_lambda, lambda_min, lambda_max);
+    TH1F *histH = new TH1F("histH", "Oscil", N_loop_lambda, lambda_min, lambda_max);
+    TH1F *histH_zoom = new TH1F("histH_zoom", "Oscil", N_loop_lambda, lambda_min_used, lambda_max_used);
+    TH1F *histO_zoom = new TH1F("histO_zoom", "Oscil", N_loop_lambda, lambda_min_used, lambda_max_used);
+    tree->Draw("lambda>>histH", CutH);
+    tree->Draw("lambda>>histO", CutO);
+    tree->Draw("lambda>>histH_zoom", CutH);
+    tree->Draw("lambda>>histO_zoom", CutO);
 
     double lambda, theta;
-
-    while (inputFileO >> lambda)
-    {
-        histO->Fill(lambda);
-        histO_zoom->Fill(lambda);
-    }
-    while (inputFileH >> lambda)
-    {
-        histH->Fill(lambda);
-        histH_zoom->Fill(lambda);
-    }
 
     // data calculations
     TH1F *h1 = (TH1F *)histO->Clone();
@@ -104,19 +92,19 @@ int oscillation_lambda()
     h1_zoom->Divide(h2_zoom);
     TH1 *hFourier = h1_zoom->FFT(0, "MAG");
 
-    // fittings
-    TF1 *f = new TF1("f", "([0] + [1] * x + [2]) * cos([3] * x + [4] / x + [5]) + [6]");
-    f->SetParNames("A0", "A1", "A2", "k_{+}", "k_{-}", "#theta_{0}", "BG");
-    f->SetParameters(1, 0, 0, 5.8e11, 0, 0, 0);
+    // // fittings
+    // TF1 *f = new TF1("f", "([0] + [1] * x + [2]) * cos([3] * x + [4] / x + [5]) + [6]");
+    // f->SetParNames("A0", "A1", "A2", "k_{+}", "k_{-}", "#theta_{0}", "BG");
+    // f->SetParameters(1, 0, 0, 5.8e11, 0, 0, 0);
 
     // draw histogram
     TCanvas *c = new TCanvas("c", "oscillation", 700, 500);
-    h1->Fit("f", "", "", 7e-10, 10e-10);
+    // h1->Fit("f", "", "", 7e-10, 10e-10);
     h1->Draw("c");
     c->Print(OUTPUT_FILE);
 
     TCanvas *c1 = new TCanvas("c1", "oscillation", 700, 500);
-    h1_zoom->Fit("f", "", "", lambda_min_used, lambda_max_used);
+    // h1_zoom->Fit("f", "", "", lambda_min_used, lambda_max_used);
     h1_zoom->Draw("c1");
     c1->Print(OUTPUT_FILE_ZOOM);
 
