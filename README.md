@@ -8,14 +8,14 @@
 
 - [ ] ROOT Cern上でのFFT実装
   - [ ] tutorialの確認
-    - [ ] tutorialのFFTがFFTされたように見えない
+    - [x] tutorialのFFTがFFTされたように見えない
   - [ ] 実装
-- [ ] JPARCのROOTファイルに沿った実装
+- [x] JPARCのROOTファイルに沿った実装
   - [x] positionの実装
   - [x] lambda_roi_histogramの実装
-  - [ ] oscillation_lambdaの変更
-  - [ ] read_lambdaの変更
-  - [ ] sim_lambdaの変更
+  - [x] oscillation_lambdaの変更
+  - [x] read_lambdaの変更
+  - [x] sim_lambdaの変更
 - [ ] 誤差の実装
   - [x] lambdaの誤差の組入
   - [ ] lambdaの誤差の確認
@@ -28,7 +28,7 @@
 ### 実験装置
 
 - [ ] 設計
-  - [ ] 要求の整理
+  - [x] 要求の整理
   - [ ] 図面作成
 - [ ] 必要機材の整理
   - [ ] エタロン
@@ -205,6 +205,11 @@
 
 ### 装置設計の不可変定数
 
+- beam line: BL05 低発散ビームブランチ [J-PARC MLF](https://mlfinfo.jp/ja/bl05/)
+- beam height 30e-3 (cf. 2024/01/19 thread)
+- beam width 6e-3 (cf. 2024/01/19 thread)
+- ethalone area 12e-3 x 12e-3
+- double slit width (sum of 2) 260e-6
 - DAQ freq. 62.5e+6
 - gap thickness $(189\pm0.1)\times10^{-6}$
 - wavelength min. 2e-10

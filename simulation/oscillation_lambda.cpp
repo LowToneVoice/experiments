@@ -7,12 +7,16 @@
 #include <TCanvas.h>
 
 // datafiles
-#define INPUT_FILE_O "./dat/montecarlo/ref/lambda/g_mix_O.dat"
-#define INPUT_FILE_H "./dat/montecarlo/ref/lambda/g_mix_H.dat"
-#define INPUT_TREE "./dat/montecarlo/ref/lambda/g_mix.root"
-#define OUTPUT_FILE "./oscil_graph/montecarlo/ref/lambda/g_mix.pdf"
-#define OUTPUT_FILE_ZOOM "./oscil_graph/montecarlo/ref/lambda/g_mix_zoom.pdf"
-#define OUTPUT_FILE_FOURIER "./oscil_graph/montecarlo/ref/lambda/g_mix_fourier.pdf"
+#define INPUT_TREE "./dat/montecarlo/ref/lambda/g_mix_60deg_N8e6.root"
+#define OUTPUT_FILE "./oscil_graph/montecarlo/ref/lambda/g_mix_60deg_N8e6.pdf"
+#define OUTPUT_FILE_ZOOM "./oscil_graph/montecarlo/ref/lambda/g_mix_60deg_N8e6_zoom.pdf"
+#define OUTPUT_FILE_FOURIER "./oscil_graph/montecarlo/ref/lambda/g_mix_60deg_N8e6_fourier.pdf"
+
+// fitting range and initial conditions
+constexpr double fit_range[] = {10, 15};
+constexpr double fit_par_height = 300;
+constexpr double fit_par_position = 13;
+constexpr double fit_par_width = 1;
 
 // CHANNELS
 #define H_TDC 0
@@ -91,11 +95,16 @@ int oscillation_lambda()
     h2_zoom->Add(histO_zoom, 1);
     h1_zoom->Divide(h2_zoom);
     TH1 *hFourier = h1_zoom->FFT(0, "MAG");
+    hFourier->GetXaxis()->SetRangeUser(0, 50);
 
-    // // fittings
-    // TF1 *f = new TF1("f", "([0] + [1] * x + [2]) * cos([3] * x + [4] / x + [5]) + [6]");
-    // f->SetParNames("A0", "A1", "A2", "k_{+}", "k_{-}", "#theta_{0}", "BG");
-    // f->SetParameters(1, 0, 0, 5.8e11, 0, 0, 0);
+    // fittings
+    TF1 *f = new TF1("gaus", "[0]*exp(-0.5*((x-[1])/[2])^2)", fit_range[0], fit_range[1]);
+    f->SetParameters(fit_par_height, fit_par_position, fit_par_width);
+    hFourier->Fit("gaus","","", fit_range[0], fit_range[1]);
+    Double_t p0 = f->GetParameter(1);
+    Double_t p0e = f->GetParError(1);
+    Double_t chi2 = f->GetChisquare();
+    Int_t Ndof = f->GetNDF();
 
     // draw histogram
     TCanvas *c = new TCanvas("c", "oscillation", 700, 500);
@@ -122,6 +131,8 @@ int oscillation_lambda()
         hFourier->Draw();
         c2->Print(OUTPUT_FILE_FOURIER);
         delete hFourier; // Don't forget to delete the histogram when you're done with it
+        double resultK = -p0 * 2 * TMath::Pi() / (lambda_max_used - lambda_min_used);
+        std::cout << "k = " << resultK << std::endl;
     }
     else
     {

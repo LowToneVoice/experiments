@@ -2,12 +2,12 @@ from math import pi
 from scipy.optimize import curve_fit
 import numpy as np
 import matplotlib.pyplot as plt
-isFit = True
-plot_range = [0.1*10**11, .5*10**12]
+isFit = False
+plot_range = [0.1*10**11, .7*10**12]
 fit_range = [0.2*10**12, .7*10**12]
 
-inputFile = "./dat/theoretical/ref/lambda/g_mix_5deg.dat"
-outputFile = "./oscil_graph/theoretical/ref/lambda/g_mix_5deg_fourier.pdf"
+inputFile = "./dat/theoretical/ref/lambda/mix_mix_90deg_N8e6_ALPHA1e-3.dat"
+outputFile = "./oscil_graph/theoretical/ref/lambda/mix_mix_90deg_N8e6_ALPHA1e-3_fourier.pdf"
 
 # (O-H)/(O+H)
 
@@ -57,7 +57,7 @@ if isFit:
              "highest freq = {:e} +- {:e}".format(popt[1], popt[2]))
 
 
-# plt.xlim(-.1, plot_range[1])
+plt.xlim(-.1, plot_range[1])
 plt.ylim(-200, 2*10**3)
 plt.grid(False)
 plt.savefig(outputFile)

@@ -1,6 +1,6 @@
 set term pdfcairo
-input="dat/theoretical/ref/lambda/g_mix_5deg.dat"
-outFolderFile="theoretical/ref/lambda/g_mix_5deg"
+input="dat/theoretical/ref/lambda/mix_mix_5deg_N8e6_ALPHAe-2.dat"
+outFolderFile="theoretical/ref/lambda/mix_mix_5deg_N8e6_ALPHAe-2"
 lambda_min=2e-10
 lambda_max=12e-10
 lambda_zoom_min=6.9e-10
@@ -13,20 +13,20 @@ set xlabel "lambda"
 
 set ylabel "probability"
 plot \
-input u 1:2 w l title "O beam", \
-input u 1:3 w l title "H beam", \
+input u 1:2 w l title "H beam", \
+input u 1:3 w l title "O beam", \
 input u 1:($2+$3) w l title "sum"
 
 set output "beam_count/".outFolderFile."_zoom.pdf"
 set xrange [lambda_zoom_min:lambda_zoom_max]
 plot \
-input u 1:2 w l title "O beam", \
-input u 1:3 w l title "H beam", \
+input u 1:2 w l title "H beam", \
+input u 1:3 w l title "O beam", \
 input u 1:($2+$3) w l title "sum"
 
 set output "oscil_graph/".outFolderFile.".pdf"
 set xrange [lambda_min:lambda_max]
-set ylabel "(I_O-I_H) / (I_O+I_H)"
+set ylabel "(I_H-I_O) / (I_H+I_O)"
 set nokey
 # f(x)=(a1+a2*x*x)*cos(k*x+t0)+BC+1e-0
 # a1=1
@@ -40,12 +40,13 @@ plot input u 1:(($2-$3)/($2+$3)) w l
 
 set output "oscil_graph/".outFolderFile."_zoom.pdf"
 set xrange [lambda_zoom_min:lambda_zoom_max]
-set ylabel "(I_O-I_H) / (I_O+I_H)"
+set ylabel "(I_H-I_O) / (I_H+I_O)"
 set nokey
-f(x)=(a1)*cos(k*x+t0)+BC+1e-1
-a1=1
-k=6e11
-t0=.1
-BC=-.3
-fit f(x) input u 1:(($2-$3)/($2+$3)) via a1,k,t0,BC
-plot input u 1:(($2-$3)/($2+$3)) w l, f(x) w l
+# f(x)=(a1)*cos(k*x+t0)+BC+1e-1
+# a1=1
+# k=6e11
+# t0=.1
+# BC=-.3
+# fit f(x) input u 1:(($2-$3)/($2+$3)) via a1,k,t0,BC
+plot input u 1:(($2-$3)/($2+$3)) w l
+# replot f(x) w l

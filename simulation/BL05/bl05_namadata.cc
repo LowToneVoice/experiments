@@ -16,6 +16,7 @@
 constexpr double mass = 1.675e-27; // 中性子の質量
 constexpr double hbar = 1.055e-34;
 constexpr double L_tof = 18022e-03;
+constexpr double TEISU = 2. * 3.14159 * hbar / (mass * L_tof);
 
 void bl05_namadata(){
     double MYPI = 3.1415;
@@ -24,11 +25,11 @@ void bl05_namadata(){
     TFile *file = new TFile("./bl05/20210208160817_list.root");//ファイルの読み込み
     TTree *tree = (TTree*) file -> Get("T");
 
-    TH1D *h1 = new TH1D("h1", "h1", 1000, 0, 45000*teisu);//空のヒストグラム  
+    TH1D *h1 = new TH1D("h1", "h1", 1000, 0, 45000*teisu);//空のヒストグラム
 
     tree -> Draw(Form("%e*tof>>h1", teisu), "f==4");//波長分布の書き込み
 
-    double maxkp = tree -> GetMaximum("kp"); 
+    double maxkp = tree -> GetMaximum("kp");
     h1 -> Scale(25./maxkp);//縦軸をcpsに変換
 
     h1 -> SetTitle("BL05 wavelength [cps]");

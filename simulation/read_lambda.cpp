@@ -7,9 +7,9 @@
 #include <TCanvas.h>
 
 // FILES
-#define INPUT_TREE "./dat/montecarlo/ref/lambda/g_mix_5deg.root"
-#define OUTPUT "./beam_count/montecarlo/ref/lambda/g_mix_5deg.pdf"
-#define OUTPUT_ZOOM "./beam_count/montecarlo/ref/lambda/g_mix_5deg_zoom.pdf"
+#define INPUT_TREE "./dat/montecarlo/ref/lambda/g_mix_90deg_N8e6.root"
+#define OUTPUT "./beam_count/montecarlo/ref/lambda/g_mix_90deg_N8e6.pdf"
+#define OUTPUT_ZOOM "./beam_count/montecarlo/ref/lambda/g_mix_90deg_N8e6_zoom.pdf"
 
 #define MAX_DATA_SIZE 1e+6
 

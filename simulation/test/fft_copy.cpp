@@ -6,19 +6,35 @@
 
 int fft_copy()
 {
+    // Histograms
+    // =========
+    // prepare the canvas for drawing
     TCanvas *myc = new TCanvas("myc", "Fast Fourier Transform", 800, 600);
-    TPad *c1_1 = new TPad("c1_1", "c1_1", .01, .67, .49, .99);
-    TPad *c1_2 = new TPad("c1_2", "c1_2", .51, .67, .99, .99);
-    TPad *c1_3 = new TPad("c1_3", "c1_3", .01, .34, .49, .65);
-    TPad *c1_4 = new TPad("c1_4", "c1_4", .51, .34, .99, .65);
-    TPad *c1_5 = new TPad("c1_5", "c1_5", .01, .01, .49, .32);
-    TPad *c1_6 = new TPad("c1_6", "c1_6", .51, .01, .99, .32);
+    myc->SetFillColor(45);
+    TPad *c1_1 = new TPad("c1_1", "c1_1", 0.01, 0.67, 0.49, 0.99);
+    TPad *c1_2 = new TPad("c1_2", "c1_2", 0.51, 0.67, 0.99, 0.99);
+    TPad *c1_3 = new TPad("c1_3", "c1_3", 0.01, 0.34, 0.49, 0.65);
+    TPad *c1_4 = new TPad("c1_4", "c1_4", 0.51, 0.34, 0.99, 0.65);
+    TPad *c1_5 = new TPad("c1_5", "c1_5", 0.01, 0.01, 0.49, 0.32);
+    TPad *c1_6 = new TPad("c1_6", "c1_6", 0.51, 0.01, 0.99, 0.32);
     c1_1->Draw();
     c1_2->Draw();
     c1_3->Draw();
     c1_4->Draw();
     c1_5->Draw();
     c1_6->Draw();
+    c1_1->SetFillColor(30);
+    c1_1->SetFrameFillColor(42);
+    c1_2->SetFillColor(30);
+    c1_2->SetFrameFillColor(42);
+    c1_3->SetFillColor(30);
+    c1_3->SetFrameFillColor(42);
+    c1_4->SetFillColor(30);
+    c1_4->SetFrameFillColor(42);
+    c1_5->SetFillColor(30);
+    c1_5->SetFrameFillColor(42);
+    c1_6->SetFillColor(30);
+    c1_6->SetFrameFillColor(42);
 
     c1_1->cd();
     TH1::AddDirectory(kFALSE);
@@ -27,28 +43,46 @@ int fft_copy()
     TF1 *fsin = new TF1("fsin", "sin(x)+sin(2*x)+sin(0.5*x)+1", 0, 4 * TMath::Pi());
     fsin->Draw();
 
-    Int_t n = 30;
+    Int_t n = 25;
     TH1D *hsin = new TH1D("hsin", "hsin", n + 1, 0, 4 * TMath::Pi());
     Double_t x;
 
-    // Fill the histogram with function values
+    // Fill thew histogram with function values
     for (Int_t i = 0; i <= n; i++)
     {
         x = (Double_t(i) / n) * (4 * TMath::Pi());
         hsin->SetBinContent(i + 1, fsin->Eval(x));
     }
-    hsin->Draw("same");
+    hsin->Draw();
+    fsin->GetXaxis()->SetLabelSize(.05);
+    fsin->GetYaxis()->SetLabelSize(.05);
 
-    // Compute the transform and look at the magnitude of the output
     c1_2->cd();
     TH1 *hm = nullptr;
     TVirtualFFT::SetTransform(nullptr);
     hm = hsin->FFT(hm, "MAG");
     hm->SetTitle("Magnitude of the 1st transform");
     hm->SetStats(kFALSE);
-    // NOTE: for "real" frequencies you have to divide the x-axes range with the range of your function (in this case 4*Pi);
-    // y-axes has to be rescaled by a factor of 1/SQRT(n) to be right: this is not done automatically!
-    // hm->GetXaxis()->SetLimits(0, 1.0 / (4 * TMath::Pi()));
+
+    // Print the frequencies corresponding to each bin
+    // Print the frequencies corresponding to each bin within the expected range
+    Double_t binWidth = 1.0 / (4 * TMath::Pi() * n);
+    Double_t nyquistFreq = 0.5 / binWidth;
+
+    for (Int_t i = 0; i <= n; i++)
+    {
+        Double_t frequency = i * binWidth;
+
+        // Skip frequencies beyond the Nyquist frequency
+        if (frequency > nyquistFreq)
+        {
+            break;
+        }
+
+        Double_t magnitude = hm->GetBinContent(i + 1);
+        std::cout << "Frequency: " << frequency << ", Magnitude: " << magnitude << std::endl;
+    }
+
     hm->Draw();
 
     return 1;

@@ -7,16 +7,16 @@
 #include <TTree.h>
 
 // FILES
-#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/g_mix_5deg.root"
-#define OUTPUT_O "./dat/montecarlo/ref/lambda/g_mix_5deg_O.dat"
-#define OUTPUT_H "./dat/montecarlo/ref/lambda/g_mix_5deg_H.dat"
-#define OUTPUT_PROB "./dat/theoretical/ref/lambda/g_mix_5deg.dat"
+#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/mix_mix_90deg_N8e6_ALPHA1e-3.root"
+#define OUTPUT_O "./dat/montecarlo/ref/lambda/mix_mix_O_90deg_N8e6_ALPHA1e-3.dat"
+#define OUTPUT_H "./dat/montecarlo/ref/lambda/mix_mix_H_90deg_N8e6_ALPHA1e-3.dat"
+#define OUTPUT_PROB "./dat/theoretical/ref/lambda/mix_mix_90deg_N8e6_ALPHA1e-3.dat"
 
 #define OUT_INTERVAL 1000
 const int G_MAIN = 1;
 const int G_SUB = 1;
-const int A_MAIN = 0;
-const int A_SUB = 0;
+const int A_MAIN = 1;
+const int A_SUB = 1;
 const bool REFLECTION = true;
 
 // CHANNELS
@@ -68,8 +68,8 @@ constexpr double lambda_fade_width = .01 * (lambda_max - lambda_min);
 constexpr double lambda_min_used = lambda_min;
 constexpr double lambda_max_used = lambda_max;
 constexpr double theta = 1.05 * pi / 180;
-constexpr double delta = 5 * pi / 180;
-constexpr double angle_from_parallel = .1 * pi / 180;
+constexpr double delta = 90 * pi / 180;
+constexpr double angle_from_parallel = .001 * pi / 180;
 constexpr double mirror_distance = 150e-3;
 constexpr double total_length = 1.;
 constexpr int daq_downsizing = 16;
@@ -253,6 +253,7 @@ int sim_lambda()
 
     std::cout << "counts: " << count[0] << " and " << count[1] << std::endl;
     std::cout << "Phi_g_main = " << -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * sin(delta) << " * lambda" << std::endl;
+    std::cout << "used N = " << beam_count * N_loop_lambda * (lambda_max_used - lambda_min_used) / (lambda_max - lambda_min) << std::endl;
 
     return 0;
 }
