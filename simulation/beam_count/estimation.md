@@ -50,3 +50,10 @@ tofは 0 ~ 45000 µs を 1000 分割しているので、bin幅は
 ### beam area
 
 (slit width) x (ethalone height) = 3.12e-2 cm2
+
+## beam count at lambda region of interest
+
+`d_lambda = 9.88e-13`,
+then line in lambda-count histogram is `count_per_second = -2.05e9 * lambda + 1.86`.
+Therefore, when using d_lambda,
+`count_per_second = -2.05e9 * (d_lambda / 9.88e-13) * lambda + 1.86`.

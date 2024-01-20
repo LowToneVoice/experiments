@@ -6,17 +6,25 @@
 #include <TTree.h>
 #include <TCanvas.h>
 
-// datafiles
-#define INPUT_TREE "./dat/montecarlo/ref/lambda/mix_mix_30deg_10min_ALPHA2e-3.root"
-#define OUTPUT_FILE "./oscil_graph/montecarlo/ref/lambda/mix_mix_30deg_10min_ALPHA2e-3.pdf"
-#define OUTPUT_FILE_ZOOM "./oscil_graph/montecarlo/ref/lambda/mix_mix_30deg_10min_ALPHA2e-3_zoom.pdf"
-#define OUTPUT_FILE_FOURIER "./oscil_graph/montecarlo/ref/lambda/mix_mix_30deg_10min_ALPHA2e-3_fourier.pdf"
+// data labels
+std::string PHASE_CONTRIB = "mix";
+std::string MAIN_SUB = "mix";
+std::string ANGLE_DELTA_DEG = "30";
+std::string TIME_MIN = "10";
+std::string ANGLE_FROM_PARALLEL_DEG = "2e-3";
 
 // fitting range and initial conditions
 constexpr double fit_range[] = {7, 12};
 constexpr double fit_par_height = 300;
 constexpr double fit_par_position = 9;
 constexpr double fit_par_width = 1;
+
+// datafiles
+std::string INPUT_TREE = "./dat/montecarlo/ref/lambda/" + PHASE_CONTRIB + "_" + MAIN_SUB + "_" + ANGLE_DELTA_DEG + "deg_" + TIME_MIN + "min_ALPHA" + ANGLE_FROM_PARALLEL_DEG + ".root";
+std::string OUTPUT_FILE = "./oscil_graph/montecarlo/ref/lambda/" + PHASE_CONTRIB + "_" + MAIN_SUB + "_" + ANGLE_DELTA_DEG + "deg_" + TIME_MIN + "min_ALPHA" + ANGLE_FROM_PARALLEL_DEG + ".pdf";
+std::string OUTPUT_FILE_ZOOM = "./oscil_graph/montecarlo/ref/lambda/zoom/" + PHASE_CONTRIB + "_" + MAIN_SUB + "_" + ANGLE_DELTA_DEG + "deg_" + TIME_MIN + "min_ALPHA" + ANGLE_FROM_PARALLEL_DEG + ".pdf";
+std::string OUTPUT_FILE_FOURIER = "./oscil_graph/montecarlo/ref/lambda/" + PHASE_CONTRIB + "_" + MAIN_SUB + "_" + ANGLE_DELTA_DEG + "deg_" + TIME_MIN + "min_ALPHA" + ANGLE_FROM_PARALLEL_DEG + "_fourier.pdf";
+std::string OUTPUT_FILE_FOURIER_WIDE = "./oscil_graph/montecarlo/ref/lambda/" + PHASE_CONTRIB + "_" + MAIN_SUB + "_" + ANGLE_DELTA_DEG + "deg_" + TIME_MIN + "min_ALPHA" + ANGLE_FROM_PARALLEL_DEG + "_fourier_wide.pdf";
 
 // CHANNELS
 #define H_TDC 0
@@ -94,6 +102,7 @@ int oscillation_lambda()
     h1_zoom->Add(histH_zoom, -1);
     h2_zoom->Add(histO_zoom, 1);
     h1_zoom->Divide(h2_zoom);
+    TH1 *hFourier_wide = h1_zoom->FFT(0, "MAG");
     TH1 *hFourier = h1_zoom->FFT(0, "MAG");
     hFourier->GetXaxis()->SetRangeUser(0, 50);
 
