@@ -2,13 +2,40 @@ from math import pi
 from scipy.optimize import curve_fit
 import numpy as np
 import matplotlib.pyplot as plt
-isFit = False
-plot_range = [0.1*10**11, .7*10**12]
-fit_range = [0.2*10**12, .7*10**12]
+isFit = True
+isShow = False
+FitByHand = False
+fit_range_by_hand = [0.e12,.3e12]
+fit_height = 300
+fit_width = .5e11
+fit_range_width = 2e11
+plot_range = [0, 1*10**12]
+plot_range_wide = [0., 5*10**13]
 
-inputFile = "./dat/theoretical/ref/lambda/mix_mix_90deg_N8e6_ALPHA1e-3.dat"
-outputFile = "./oscil_graph/theoretical/ref/lambda/mix_mix_90deg_N8e6_ALPHA1e-3_fourier.pdf"
+# data labels
+PHASE_CONTRIB = "mix"
+MAIN_SUB = "mix"
+ANGLE_DELTA_DEG = "30"
+TIME_MIN = "10"
+ANGLE_FROM_PARALLEL_DEG = "6e-3"
 
+# data files
+FORMAT = PHASE_CONTRIB + "_" + MAIN_SUB + "_" + ANGLE_DELTA_DEG + \
+    "deg_" + TIME_MIN + "min_ALPHA" + ANGLE_FROM_PARALLEL_DEG
+inputFile = "./dat/theoretical/" + FORMAT + ".dat"
+outputFile = "./oscil_graph/theoretical/fourier/" + FORMAT + ".pdf"
+outputFileWide = "./oscil_graph/theoretical/fourier_wide/" + FORMAT + ".pdf"
+
+# fitting range calculation
+g = 9.8
+h = 6.62607015e-34
+m = 1.675e-27
+gap = 189e-6
+mirror_distance = 150e-3
+theta = 1.05 * pi / 180
+delta = float(ANGLE_DELTA_DEG) * pi / 180
+peak_position = 2 * pi * g * pow(m / h, 2) * 2 * gap * \
+    mirror_distance / np.tan(2 * theta) * np.sin(delta)
 # (O-H)/(O+H)
 
 
@@ -31,33 +58,51 @@ data = list(map(eq, inputList[:, 1], inputList[:, 2]))
 amp = np.abs(np.fft.fft(data))
 freq = 2*pi*np.abs(np.fft.fftfreq(len(wavelength),
                    np.mean(np.diff(wavelength))))
-# print(len(freq))
-# print(freq[50:100])
-# print(amp)
 
 plt.figure(figsize=(8, 5))
-plt.title('Fourier Transform')
-plt.xlabel('Frequency')
+plt.title('Fourier Transform ' + PHASE_CONTRIB + " " + MAIN_SUB + ' at delta = ' + ANGLE_DELTA_DEG + " deg ALPHA" + ANGLE_FROM_PARALLEL_DEG)
+plt.xlabel('wave number [/m]')
 plt.ylabel('Magnitude')
 plt.plot(freq, amp)
 
 # Fitting
 if isFit:
-    freq = freq[50:100]
-    amp = amp[50:100]
-    popt, pocv = curve_fit(gaussian, freq, amp, p0=[
-                           1*10**3, 5.3*10**10, .2*10**11, 0])
+    if FitByHand:
+        fit_range = fit_range_by_hand
+        peak_position = np.mean(fit_range)
+        fit_width = fit_range_by_hand[1] - fit_range_by_hand[0]
+    else:
+        fit_range = [peak_position - fit_range_width, peak_position + fit_range_width]
+    print("peak position is {:e}".format(peak_position))
+    freq_fit = freq[(freq > fit_range[0]) & (freq < fit_range[1])]
+    amp_fit = amp[(freq > fit_range[0]) & (freq < fit_range[1])]
+    popt, pocv = curve_fit(gaussian, freq_fit, amp_fit, p0=[
+                           fit_height, peak_position, fit_width, 0])
     perr = np.sqrt(pocv)
-    print(popt[0])
-    print(popt[1])
-    print(pocv)
-    fit = gaussian(freq, *popt)
-    plt.plot(freq, fit)
-    plt.text(popt[1], popt[0]*1.25,
+    print('peak at {:e}'.format(popt[1]))
+    fit = gaussian(freq_fit, *popt)
+    plt.plot(freq_fit, fit)
+    plt.text(popt[1]+fit_width, popt[0]*0.8,
              "highest freq = {:e} +- {:e}".format(popt[1], popt[2]))
 
-
-plt.xlim(-.1, plot_range[1])
-plt.ylim(-200, 2*10**3)
+plt.xlim(plot_range[0], plot_range[1])
+# plt.ylim(-200, 2*10**3)
 plt.grid(False)
 plt.savefig(outputFile)
+plt.close()
+
+plt.xlim(plot_range_wide[0], plot_range_wide[1])
+plt.ylim(-1, 10)
+plt.plot(freq, amp)
+plt.savefig(outputFileWide)
+
+if isFit:
+    plt.plot(freq_fit, fit)
+    plt.text(popt[1]+fit_width, popt[0]*0.8,
+             "highest freq = {:e} +- {:e}".format(popt[1], popt[2]))
+
+plt.title('Fourier Transform ' + PHASE_CONTRIB + " " + MAIN_SUB + ' at delta = ' + ANGLE_DELTA_DEG + " deg ALPHA" + ANGLE_FROM_PARALLEL_DEG)
+plt.xlabel('wave number [/m]')
+plt.ylabel('Magnitude')
+if isShow:
+    plt.show()

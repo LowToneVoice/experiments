@@ -8,7 +8,7 @@ BL05 低発散ビームブランチを使用
 [J-PARC MLF](https://mlfinfo.jp/ja/bl05/)
 
 - beam height 30 mm
-- beam width 6 mm (after collimation)
+- beam width 6 mm (after collimation), 8 mm (before collimation)
 - beam intensity 5.4e4 n/s/cm2
 - beam発散角 5.4e-2 µstr
 - 中性子ビーム成形B4Cスリット(7.5 m位置と12 m 位置)
@@ -39,6 +39,9 @@ tofは 0 ~ 45000 µs を 1000 分割しているので、bin幅は
 - layer thickness of Ni 13.35 nm (cf. Seki 2011, Tbl. 4.3)
 - layer thickness of Ti 9.83 nm (ibid.)
 - bilayer count 8
+
+beam collimation外さないと30ºでエタロンがビームからはみ出る。
+外せば収まる。
 
 ### 装置設計変数
 

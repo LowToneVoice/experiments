@@ -1,13 +1,26 @@
 set term pdfcairo
-input="dat/theoretical/ref/lambda/mix_mix_5deg_N8e6_ALPHAe-2.dat"
-outFolderFile="theoretical/ref/lambda/mix_mix_5deg_N8e6_ALPHAe-2"
+
+# data labels
+PHASE_CONTRIB="mix"
+MAIN_SUB="mix"
+ANGLE_DELTA_DEG="30"
+TIME_MIN="60"
+ANGLE_FROM_PARALLEL_DEG="1e-1"
+LMD_USED_MIN = "7e-10"
+LMD_USED_MAX = "10e-10"
+
+# datafiles
+FILE_FORMAT = PHASE_CONTRIB."_".MAIN_SUB."_".ANGLE_DELTA_DEG."deg_".TIME_MIN."min_ALPHA".ANGLE_FROM_PARALLEL_DEG."_lmd".LMD_USED_MIN."to".LMD_USED_MAX
+input="dat/theoretical/".FILE_FORMAT.".dat"
+outFolderFile="theoretical/".FILE_FORMAT
+
 lambda_min=2e-10
 lambda_max=12e-10
 lambda_zoom_min=6.9e-10
 lambda_zoom_max=8.4e-10
 unit=1e10
 
-set output "beam_count/".outFolderFile.".pdf"
+set output "./beam_count/theoretical/normal/".FILE_FORMAT.".pdf"
 set xrange [lambda_min:lambda_max]
 set xlabel "lambda"
 
@@ -17,14 +30,14 @@ input u 1:2 w l title "H beam", \
 input u 1:3 w l title "O beam", \
 input u 1:($2+$3) w l title "sum"
 
-set output "beam_count/".outFolderFile."_zoom.pdf"
+set output "./beam_count/theoretical/zoom/".FILE_FORMAT."pdf"
 set xrange [lambda_zoom_min:lambda_zoom_max]
 plot \
 input u 1:2 w l title "H beam", \
 input u 1:3 w l title "O beam", \
 input u 1:($2+$3) w l title "sum"
 
-set output "oscil_graph/".outFolderFile.".pdf"
+set output "./oscil_graph/theoretical/normal/".FILE_FORMAT.".pdf"
 set xrange [lambda_min:lambda_max]
 set ylabel "(I_H-I_O) / (I_H+I_O)"
 set nokey
@@ -38,7 +51,7 @@ set nokey
 plot input u 1:(($2-$3)/($2+$3)) w l
 # replot f(x) title "fitting"
 
-set output "oscil_graph/".outFolderFile."_zoom.pdf"
+set output "./oscil_graph/theoretical/zoom/".FILE_FORMAT.".pdf"
 set xrange [lambda_zoom_min:lambda_zoom_max]
 set ylabel "(I_H-I_O) / (I_H+I_O)"
 set nokey

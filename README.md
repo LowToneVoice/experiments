@@ -208,6 +208,7 @@
 - beam line: BL05 低発散ビームブランチ [J-PARC MLF](https://mlfinfo.jp/ja/bl05/)
 - beam height 30e-3 (cf. 2024/01/19 thread)
 - beam width 6e-3 (cf. 2024/01/19 thread)
+- beam intensity 5.4e4 n/s/cm2
 - ethalone area 12e-3 x 12e-3
 - double slit width (sum of 2) 260e-6
 - DAQ freq. 62.5e+6

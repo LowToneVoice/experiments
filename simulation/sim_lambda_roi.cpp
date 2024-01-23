@@ -6,17 +6,20 @@
 #include <TFile.h>
 #include <TTree.h>
 
-// FILES
-#define OUTPUT_TREE "./dat/montecarlo/ref/lambda/mix_mix_30deg_10min_ALPHA2e-3.root"
-#define OUTPUT_O "./dat/montecarlo/ref/lambda/mix_mix_O_30deg_10min_ALPHA2e-3.dat"
-#define OUTPUT_H "./dat/montecarlo/ref/lambda/mix_mix_H_30deg_10min_ALPHA2e-3.dat"
-#define OUTPUT_PROB "./dat/theoretical/ref/lambda/mix_mix_30deg_10min_ALPHA2e-3.dat"
+using namespace std;
+using namespace Eigen;
 
 #define OUT_INTERVAL 1000
-const int G_MAIN = 1;
-const int G_SUB = 1;
-const int A_MAIN = 1;
-const int A_SUB = 1;
+
+// data labels
+string PHASE_CONTRIB = "mix";
+string MAIN_SUB = "mix";
+string ANGLE_DELTA_DEG = "30";
+string TIME_MIN = "60";
+string ANGLE_FROM_PARALLEL_DEG = "1e-1";
+string LMD_USED_MIN = "7e-10";
+string LMD_USED_MAX = "10e-10";
+
 const bool REFLECTION = true;
 
 // CHANNELS
@@ -26,7 +29,7 @@ const bool REFLECTION = true;
 #define O_ADC 3
 
 // PHYS & MATH CONSTANTS
-std::complex<double> I(0, 1.);
+complex<double> I(0, 1.);
 #define h 6.62607015e-34
 #define pi M_PI
 #define J_per_eV 1.6022e-19
@@ -40,7 +43,7 @@ constexpr double V_ni = 224.e-09 * J_per_eV;
 constexpr double V_ti = -40.e-9 * J_per_eV;
 constexpr double m_Ni = 58.6934e-3 / NA;
 constexpr double m_Ti = 47.867e-3 / NA;
-constexpr double rho_Si = 5.00e22;  // used cm3 unit in Seki's paper
+constexpr double rho_Si = 5.00e22; // used cm3 unit in Seki's paper
 constexpr double rho_Ni = 8.908e-3 / m_Ni;
 constexpr double rho_Ti = 4.506e-3 / m_Ti;
 constexpr double bc_Ni = 10.3e-15;
@@ -54,6 +57,9 @@ constexpr double gap = 189e-6;
 
 constexpr int N_bilayer = 8;
 
+constexpr double ethalone_height = 12e-3;
+constexpr double slit_width = 260e-6;
+
 constexpr double lambda_min = 2.0e-10;
 constexpr double lambda_max = 10e-10;
 constexpr double theta_min = .2 * pi / 180;
@@ -64,12 +70,11 @@ constexpr int daq_freq = 62.5e6;
 constexpr double lambda_fade_width = .01 * (lambda_max - lambda_min);
 // constexpr double lambda_fade_width = 1e-12;
 
+constexpr double whole_beam_intensity_perSec_perArea = 5.4e8; // /s/m2
+constexpr double TDC_area = 5065049 / whole_beam_intensity_perSec_perArea;
+
 // ALIGNMENT VARIABLES
-constexpr double lambda_min_used = 6.9e-10;
-constexpr double lambda_max_used = 8.4e-10;
 constexpr double theta = 1.05 * pi / 180;
-constexpr double delta = 30 * pi / 180;
-constexpr double angle_from_parallel = .002 * pi / 180;
 constexpr double mirror_distance = 150e-3;
 constexpr double total_length = 1.;
 constexpr int daq_downsizing = 16;
@@ -77,15 +82,16 @@ constexpr double dt = 1. / daq_freq * daq_downsizing;
 // constexpr double d_lambda = 0.00001e-10;
 constexpr double d_lambda = h / total_length / m * dt;
 constexpr double d_theta = .05 * pi / 180;
-constexpr double beam_time_sec = 10 * 60;
 
-constexpr int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
-constexpr int N_loop_theta = (int)((theta_max - theta_min) / d_theta);
 constexpr int N_loop_lambda_fade = (int)(lambda_fade_width / d_lambda);
 
 // beam count per sec
 double beam_count_per_sec(double lambda)
 {
+    // in case lambda is over 0.9 nm
+    if (lambda > 9e-10)
+        return 0;
+
     const double L_tof_sample = 18022e-03;
     const double tof_max_sample = 45000e-6;
     const double sample_division = 1000;
@@ -95,43 +101,52 @@ double beam_count_per_sec(double lambda)
 
     // count_per_sec := k1 * lambda + k2 at d_lambda = d_lambda = 9.88e-13
     double k1[5], k2[5];
+    double count;
     for (int i = 0; i < 5; i++)
     {
         k1[i] = (position[i + 1][1] - position[i][1]) / (position[i + 1][0] - position[i][0]);
         k2[i] = position[i][1] - k1[i] * position[i][0];
 
         if (position[i][0] <= lambda && lambda < position[i + 1][0])
-            return k1[i] * lambda * (d_lambda / d_lambda_sample) + k2[i];
+        {
+            count = k1[i] * lambda * (d_lambda / d_lambda_sample) + k2[i] * (d_lambda / d_lambda_sample);
+            if (count > 1)
+            {
+                cerr << "count is over 1 / s. lambda is " << lambda << endl;
+            }
+            return count * (ethalone_height * slit_width / TDC_area);
+        }
     }
 
+    cerr << "lambda is out of range" << endl;
     return 0;
 }
 
 // matrix M of one layer
-Eigen::Matrix2d mat_layer(double k0, double theta, double V, double D)
+Matrix2d mat_layer(double k0, double theta, double V, double D)
 {
-    Eigen::Matrix2d M;
-    double kx0 = k0 * std::sin(theta);
-    std::complex<double> kx = std::sqrt(kx0 * kx0 - 2. * m * V / (hbar * hbar));
-    std::complex<double> nx = kx / kx0;
+    Matrix2d M;
+    double kx0 = k0 * sin(theta);
+    complex<double> kx = sqrt(kx0 * kx0 - 2. * m * V / (hbar * hbar));
+    complex<double> nx = kx / kx0;
     double delta = kx0 * D;
 
-    M(0, 0) = std::cos(nx * delta).real();
-    M(0, 1) = (std::sin(nx * delta) / nx).real();
-    M(1, 0) = (-std::sin(nx * delta) * nx).real();
-    M(1, 1) = std::cos(nx * delta).real();
+    M(0, 0) = cos(nx * delta).real();
+    M(0, 1) = (sin(nx * delta) / nx).real();
+    M(1, 0) = (-sin(nx * delta) * nx).real();
+    M(1, 1) = cos(nx * delta).real();
 
     return M;
 }
 
 // complex reflection factor
-std::complex<double> reflect(double k0, double theta, double Vg, Eigen::Matrix2d M)
+complex<double> reflect(double k0, double theta, double Vg, Matrix2d M)
 {
-    double kx0 = k0 * std::sin(theta);
-    std::complex<double> kxg = std::sqrt(kx0 * kx0 - 2. * m * Vg / (hbar * hbar));
+    double kx0 = k0 * sin(theta);
+    complex<double> kxg = sqrt(kx0 * kx0 - 2. * m * Vg / (hbar * hbar));
     double n0 = 1.;
-    std::complex<double> ng = kxg / kx0;
-    std::complex<double> numer, denom;
+    complex<double> ng = kxg / kx0;
+    complex<double> numer, denom;
 
     numer = -n0 * ng * M(0, 1) - M(1, 0) + I * (ng * M(0, 0) - n0 * M(1, 1));
     denom = -n0 * ng * M(0, 1) + M(1, 0) + I * (-ng * M(0, 0) - n0 * M(1, 1));
@@ -140,55 +155,115 @@ std::complex<double> reflect(double k0, double theta, double Vg, Eigen::Matrix2d
 }
 
 // complex transparent factor
-std::complex<double> transparent(double k0, double theta, double Vg, double zeta, Eigen::Matrix2d M)
+complex<double> transparent(double k0, double theta, double Vg, double zeta, Matrix2d M)
 {
-    double kx0 = k0 * std::sin(theta);
-    std::complex<double> kxg = std::sqrt(kx0 * kx0 - 2. * m * Vg / (hbar * hbar));
+    double kx0 = k0 * sin(theta);
+    complex<double> kxg = sqrt(kx0 * kx0 - 2. * m * Vg / (hbar * hbar));
     double n0 = 1.;
-    std::complex<double> ng = kxg / kx0;
+    complex<double> ng = kxg / kx0;
 
-    std::complex<double> eikgz = std::cos(kxg * zeta) + I * std::sin(kxg * zeta);
-    std::complex<double> numer, denom;
+    complex<double> eikgz = cos(kxg * zeta) + I * sin(kxg * zeta);
+    complex<double> numer, denom;
     numer = 2. * I * n0 / eikgz;
     denom = n0 * ng * M(0, 1) - M(1, 0) + I * (n0 * M(1, 1) + ng * M(0, 0));
 
     return numer / denom;
 }
 
-int sim_lambda_roi()
+int sim_lambda_roi(
+    string phase_contrib_input = PHASE_CONTRIB,
+    string main_sub_input = MAIN_SUB,
+    string time_min_input = TIME_MIN,
+    string angle_delta_deg_input = ANGLE_DELTA_DEG,
+    string angle_from_parallel_deg_input = ANGLE_FROM_PARALLEL_DEG,
+    string lmd_used_min_input = LMD_USED_MIN,
+    string lmd_used_max_input = LMD_USED_MAX
+)
 {
+    // file names
+    string FORMAT = phase_contrib_input + "_" + main_sub_input + "_" + angle_delta_deg_input + "deg_" + time_min_input + "min_ALPHA" + angle_from_parallel_deg_input + "_lmd" + lmd_used_min_input + "to" + lmd_used_max_input;
+    string OUTPUT_TREE = "./dat/montecarlo/root/" + FORMAT + ".root";
+    string OUTPUT_H = "./dat/montecarlo/dat/" + FORMAT + "_H.dat";
+    string OUTPUT_O = "./dat/montecarlo/dat/" + FORMAT + "_O.dat";
+    string OUTPUT_PROB = "./dat/theoretical/" + FORMAT + ".dat";
+
+    // main / sub selection
+    int G_MAIN = 0, G_SUB = 0, A_MAIN = 0, A_SUB = 0;
+    bool flag = false;
+    if (PHASE_CONTRIB == "mix" || PHASE_CONTRIB == "g")
+    {
+        if (MAIN_SUB == "mix" || MAIN_SUB == "main")
+        {
+            G_MAIN = 1;
+            flag = true;
+        }
+        if (MAIN_SUB == "mix" || MAIN_SUB == "sub")
+        {
+            G_SUB = 1;
+            flag = true;
+        }
+    }
+    if (PHASE_CONTRIB == "mix" || PHASE_CONTRIB == "a")
+    {
+        if (MAIN_SUB == "mix" || MAIN_SUB == "main")
+        {
+            A_MAIN = 1;
+            flag = true;
+        }
+        if (MAIN_SUB == "mix" || MAIN_SUB == "sub")
+        {
+            A_SUB = 1;
+            flag = true;
+        }
+    }
+    if (flag == false)
+    {
+        cerr << "Simulation type is not correct." << endl;
+        return 1;
+    }
+
+    // input value
+    const double lambda_min_used = stod(lmd_used_min_input);
+    const double lambda_max_used = stod(lmd_used_max_input);
+    const double delta = stod(angle_delta_deg_input) * pi / 180;
+    const double beam_time_sec = stod(time_min_input) * 60;
+    const double angle_from_parallel = stod(angle_from_parallel_deg_input) * pi / 180;
+
+    const int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
+
     double lambda;
     double k0;
     double zeta;
-    std::complex<double> R, T;
-    std::complex<double> R_not_normed, T_not_nnormed;
-    std::complex<double> wave_fncO, wave_fncH;
+    complex<double> R, T;
+    complex<double> R_not_normed, T_not_nnormed;
+    complex<double> wave_fncO, wave_fncH;
     double R2norm, T2norm, R_phase, T_phase;
-    Eigen::Matrix2d mat_bilayer_ni_ti;
-    Eigen::Matrix2d M;
-    std::ofstream fileO(OUTPUT_O);
-    std::ofstream fileH(OUTPUT_H);
-    std::ofstream fileP(OUTPUT_PROB);
+    Matrix2d mat_bilayer_ni_ti;
+    Matrix2d M;
+    ofstream fileO(OUTPUT_O);
+    ofstream fileH(OUTPUT_H);
+    ofstream fileP(OUTPUT_PROB);
     if (!fileO.is_open() || !fileH.is_open() || !fileP.is_open())
     {
-        std::cerr << "FILE DID NOT OPENED" << std::endl;
+        cerr << "FILE DID NOT OPENED" << endl;
         return 1;
     }
 
     double Phi_g_main, Phi_a_main, Phi_g_sub, Phi_a_sub;
     double Phase;
     double probability, probO, probH;
-    std::mt19937 mt{(std::random_device{}())};
-    std::uniform_real_distribution<double> rand(0., 1.);
+    mt19937 mt{(random_device{}())};
+    uniform_real_distribution<double> rand(0., 1.);
     Double_t lmd;
     Int_t channel;
-    TFile file(OUTPUT_TREE, "recreate");
+    TFile file(OUTPUT_TREE.c_str(), "recreate");
     TTree tree("tree", "tree");
     tree.Branch("channel", &channel);
     tree.Branch("lambda", &lmd);
     int count[2] = {};
     int beam_count = 0;
     int l;
+    double max_prob = 0;
 
     for (int j = 0; j < N_loop_lambda; j++)
     {
@@ -207,7 +282,7 @@ int sim_lambda_roi()
 
             // reflection calculation
             mat_bilayer_ni_ti = mat_layer(k0, theta, V_ti, D_ti) * mat_layer(k0, theta, V_ni, D_ni);
-            M = Eigen::Matrix2d::Identity();
+            M = Matrix2d::Identity();
             for (int l = 0; l < N_bilayer; l++)
             {
                 M = mat_bilayer_ni_ti * M;
@@ -215,12 +290,12 @@ int sim_lambda_roi()
             }
             R_not_normed = reflect(k0, theta, V_sio2, M);
             T_not_nnormed = transparent(k0, theta, V_sio2, zeta, M);
-            R = R_not_normed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
-            T = T_not_nnormed / sqrt(std::norm(R_not_normed) + std::norm(T_not_nnormed));
-            R2norm = std::norm(R);
-            R_phase = std::arg(R);
-            T2norm = std::norm(T);
-            T_phase = std::arg(T);
+            R = R_not_normed / sqrt(norm(R_not_normed) + norm(T_not_nnormed));
+            T = T_not_nnormed / sqrt(norm(R_not_normed) + norm(T_not_nnormed));
+            R2norm = norm(R);
+            R_phase = arg(R);
+            T2norm = norm(T);
+            T_phase = arg(T);
 
             // Phase calculation
             Phi_g_main = -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * lambda * sin(delta);
@@ -230,23 +305,22 @@ int sim_lambda_roi()
             Phase = Phi_g_main * G_MAIN + Phi_g_sub * G_SUB + Phi_a_main * A_MAIN + Phi_a_sub * A_SUB;
 
             // probability calculation
-            if (REFLECTION == false)
-            {
-                R = 1. / sqrt(2);
-                T = I / sqrt(2);
-            }
-            wave_fncH += (T * R * T * T * T + R * T * R * R * T * std::exp(I * Phase) + R * T * T * std::exp(I * Phase)) / (double)(N_loop_lambda_fade == 0 ? 1 : N_loop_lambda_fade);
-            wave_fncO += (T * R * T * R + R * T * R * T * std::exp(I * Phase)) / (double)(N_loop_lambda_fade == 0 ? 1 : N_loop_lambda_fade);
+            wave_fncH += (T * R * T * T * T + R * T * R * R * T * exp(I * Phase) + R * T * T * exp(I * Phase)) / (double)(N_loop_lambda_fade == 0 ? 1 : N_loop_lambda_fade);
+            wave_fncO += (T * R * T * R + R * T * R * T * exp(I * Phase)) / (double)(N_loop_lambda_fade == 0 ? 1 : N_loop_lambda_fade);
         } while (l < N_loop_lambda_fade);
 
-        probO = std::norm(wave_fncO);
-        probH = std::norm(wave_fncH);
+        probO = norm(wave_fncO);
+        probH = norm(wave_fncH);
 
-        fileP << lmd << " " << probH << " " << probO << std::endl;
+        fileP << lmd << " " << probH << " " << probO << endl;
 
         for (int time_sec = 0; time_sec < beam_time_sec; time_sec++)
         {
             double beam_entry_probability = beam_count_per_sec(lmd);
+            if (max_prob < probO * beam_entry_probability)
+                max_prob = probO * beam_entry_probability;
+            if (max_prob < probH * beam_entry_probability)
+                max_prob = probH * beam_entry_probability;
 
             // when beam does not enter
             if (rand(mt) > beam_entry_probability)
@@ -258,14 +332,14 @@ int sim_lambda_roi()
                 probability = rand(mt);
                 if (probability < probO)
                 {
-                    fileO << lambda << std::endl;
+                    fileO << lambda << endl;
                     channel = O_TDC;
                     tree.Fill();
                     count[0]++;
                 }
                 else if (1 - probability <= probH)
                 {
-                    fileH << lambda << std::endl;
+                    fileH << lambda << endl;
                     channel = H_TDC;
                     tree.Fill();
                     count[1]++;
@@ -276,7 +350,7 @@ int sim_lambda_roi()
         // progress display
         if (j % OUT_INTERVAL == OUT_INTERVAL - 1)
         {
-            std::cout << j + 1 << " / " << N_loop_lambda << " has finished." << std::endl;
+            std::cout << j + 1 << " / " << N_loop_lambda << " has finished." << endl;
         }
     }
 
@@ -286,9 +360,10 @@ int sim_lambda_roi()
     fileP.close();
     file.Close();
 
-    std::cout << "counts: " << count[0] << " and " << count[1] << std::endl;
-    std::cout << "Phi_g_main = " << -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * sin(delta) << " * lambda" << std::endl;
-    std::cout << "used N = " << beam_count * N_loop_lambda << std::endl;
+    std::cout << "counts: " << count[0] << " and " << count[1] << endl;
+    std::cout << "Phi_g_main = " << -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * sin(delta) << " * lambda" << endl;
+    std::cout << "used N = " << setprecision(3) << float(beam_count * N_loop_lambda) << endl;
+    std::cout << "max probability: " << max_prob << endl;
 
     return 0;
 }
