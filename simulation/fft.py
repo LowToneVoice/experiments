@@ -15,13 +15,16 @@ plot_range_wide = [0., 5*10**13]
 # data labels
 PHASE_CONTRIB = "mix"
 MAIN_SUB = "mix"
-ANGLE_DELTA_DEG = "30"
-TIME_MIN = "10"
-ANGLE_FROM_PARALLEL_DEG = "6e-3"
+ANGLE_DELTA_DEG = "0"
+TIME_MIN = "60"
+ANGLE_FROM_PARALLEL_DEG = "0"
+LMD_USED_MIN = "7e-10"
+LMD_USED_MAX = "10e-10"
 
 # data files
 FORMAT = PHASE_CONTRIB + "_" + MAIN_SUB + "_" + ANGLE_DELTA_DEG + \
-    "deg_" + TIME_MIN + "min_ALPHA" + ANGLE_FROM_PARALLEL_DEG
+    "deg_" + TIME_MIN + "min_ALPHA" + ANGLE_FROM_PARALLEL_DEG + \
+    "_lmd" + LMD_USED_MIN + "to" + LMD_USED_MAX
 inputFile = "./dat/theoretical/" + FORMAT + ".dat"
 outputFile = "./oscil_graph/theoretical/fourier/" + FORMAT + ".pdf"
 outputFileWide = "./oscil_graph/theoretical/fourier_wide/" + FORMAT + ".pdf"

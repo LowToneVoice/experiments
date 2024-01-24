@@ -15,7 +15,7 @@ using namespace Eigen;
 string PHASE_CONTRIB = "mix";
 string MAIN_SUB = "mix";
 string ANGLE_DELTA_DEG = "30";
-string TIME_MIN = "60";
+string TIME_MIN = "30";
 string ANGLE_FROM_PARALLEL_DEG = "1e-1";
 string LMD_USED_MIN = "7e-10";
 string LMD_USED_MAX = "10e-10";
@@ -77,7 +77,7 @@ constexpr double TDC_area = 5065049 / whole_beam_intensity_perSec_perArea;
 constexpr double theta = 1.05 * pi / 180;
 constexpr double mirror_distance = 150e-3;
 constexpr double total_length = 1.;
-constexpr int daq_downsizing = 16;
+constexpr int daq_downsizing = 256;
 constexpr double dt = 1. / daq_freq * daq_downsizing;
 // constexpr double d_lambda = 0.00001e-10;
 constexpr double d_lambda = h / total_length / m * dt;
@@ -88,37 +88,57 @@ constexpr int N_loop_lambda_fade = (int)(lambda_fade_width / d_lambda);
 // beam count per sec
 double beam_count_per_sec(double lambda)
 {
-    // in case lambda is over 0.9 nm
-    if (lambda > 9e-10)
+    // const double L_tof_sample = 18022e-03;
+    // const double tof_max_sample = 45000e-6;
+    // const double sample_division = 1000;
+    // const double d_lambda_sample = (tof_max_sample / sample_division) * h / L_tof_sample / m;
+    const double d_lambda_sample = 1e-3 * 1e-9;
+
+    const double position[][2] = {
+        {0.22e-9, 0},
+        {0.254e-9, 81},
+        {0.28e-9, 84.8},
+        {0.428e-9, 48.8},
+        {0.63e-9, 19.9},
+        {0.794e-9, 9},
+        {1e-9, 2.8}};
+    const int num_of_point = sizeof(position) / sizeof(position[0]);
+
+    // in case lambda is out of range
+    if (lambda < position[0][0] || position[num_of_point - 1][0] < lambda)
         return 0;
 
-    const double L_tof_sample = 18022e-03;
-    const double tof_max_sample = 45000e-6;
-    const double sample_division = 1000;
-    const double d_lambda_sample = (tof_max_sample / sample_division) * h / L_tof_sample / m;
-
-    double position[][2] = {{.216e-9, 0}, {.265e-9, 2.57}, {.4e-9, 1.5}, {.7e-9, .38}, {.8e-9, .22}, {.94e-9, 0}};
-
     // count_per_sec := k1 * lambda + k2 at d_lambda = d_lambda = 9.88e-13
-    double k1[5], k2[5];
+    double k1[10], k2[10];
+    double sum = 0;
     double count;
-    for (int i = 0; i < 5; i++)
-    {
-        k1[i] = (position[i + 1][1] - position[i][1]) / (position[i + 1][0] - position[i][0]);
-        k2[i] = position[i][1] - k1[i] * position[i][0];
+    int i, j;
 
+    // // solving sum
+    // for (i = 0; i < num_of_point; i++)
+    // {
+    //     k1[i] = (position[i + 1][1] - position[i][1]) / (position[i + 1][0] - position[i][0]);
+    //     k2[i] = position[i][1] - k1[i] * position[i][0];
+
+    //     for (j = 0; j < (position[i + 1][0] - position[i][0]) / d_lambda_sample; j++)
+    //     {
+    //         sum += k1[i] * (position[i][0] + j * d_lambda_sample) + k2[i];
+    //     }
+    // }
+
+    for (i = 0; i < num_of_point; i++)
+    {
         if (position[i][0] <= lambda && lambda < position[i + 1][0])
         {
-            count = k1[i] * lambda * (d_lambda / d_lambda_sample) + k2[i] * (d_lambda / d_lambda_sample);
-            if (count > 1)
-            {
-                cerr << "count is over 1 / s. lambda is " << lambda << endl;
-            }
-            return count * (ethalone_height * slit_width / TDC_area);
+            k1[i] = (position[i + 1][1] - position[i][1]) / (position[i + 1][0] - position[i][0]);
+            k2[i] = position[i][1] - k1[i] * position[i][0];
+            count = (k1[i] * lambda + k2[i]) * (d_lambda / d_lambda_sample);
+            // return count * (ethalone_height * slit_width / TDC_area);
+            return count;
         }
     }
 
-    cerr << "lambda is out of range" << endl;
+    cerr << "lambda is out of range, but not excepted" << endl;
     return 0;
 }
 
@@ -177,8 +197,7 @@ int sim_lambda_roi(
     string angle_delta_deg_input = ANGLE_DELTA_DEG,
     string angle_from_parallel_deg_input = ANGLE_FROM_PARALLEL_DEG,
     string lmd_used_min_input = LMD_USED_MIN,
-    string lmd_used_max_input = LMD_USED_MAX
-)
+    string lmd_used_max_input = LMD_USED_MAX)
 {
     // file names
     string FORMAT = phase_contrib_input + "_" + main_sub_input + "_" + angle_delta_deg_input + "deg_" + time_min_input + "min_ALPHA" + angle_from_parallel_deg_input + "_lmd" + lmd_used_min_input + "to" + lmd_used_max_input;
@@ -314,38 +333,59 @@ int sim_lambda_roi(
 
         fileP << lmd << " " << probH << " " << probO << endl;
 
-        for (int time_sec = 0; time_sec < beam_time_sec; time_sec++)
+        for (int particle = 0; particle < beam_time_sec * beam_count_per_sec(lmd); particle++)
         {
-            double beam_entry_probability = beam_count_per_sec(lmd);
-            if (max_prob < probO * beam_entry_probability)
-                max_prob = probO * beam_entry_probability;
-            if (max_prob < probH * beam_entry_probability)
-                max_prob = probH * beam_entry_probability;
-
-            // when beam does not enter
-            if (rand(mt) > beam_entry_probability)
-                continue;
-            else
+            beam_count++;
+            probability = rand(mt);
+            probability = rand(mt);
+            if (probability < probO)
             {
-                beam_count++;
-
-                probability = rand(mt);
-                if (probability < probO)
-                {
-                    fileO << lambda << endl;
-                    channel = O_TDC;
-                    tree.Fill();
-                    count[0]++;
-                }
-                else if (1 - probability <= probH)
-                {
-                    fileH << lambda << endl;
-                    channel = H_TDC;
-                    tree.Fill();
-                    count[1]++;
-                }
+                fileO << lambda << endl;
+                channel = O_TDC;
+                tree.Fill();
+                count[0]++;
+            }
+            else if (1 - probability <= probH)
+            {
+                fileH << lambda << endl;
+                channel = H_TDC;
+                tree.Fill();
+                count[1]++;
             }
         }
+
+        // for (int time_sec = 0; time_sec < beam_time_sec; time_sec++)
+        // {
+        //     double beam_entry_probability = beam_count_per_sec(lmd);
+        //     if (max_prob < probO * beam_entry_probability)
+        //         max_prob = probO * beam_entry_probability;
+        //     if (max_prob < probH * beam_entry_probability)
+        //         max_prob = probH * beam_entry_probability;
+
+        //     // when beam does not enter
+        //     if (rand(mt) > beam_entry_probability)
+        //         continue;
+        //     else
+        //     {
+        //         beam_count++;
+
+        //         probability = rand(mt);
+        //         if (probability < probO)
+        //         {
+        //             fileO << lambda << endl;
+        //             channel = O_TDC;
+        //             tree.Fill();
+        //             count[0]++;
+        //         }
+        //         else if (1 - probability <= probH)
+        //         {
+        //             fileH << lambda << endl;
+        //             channel = H_TDC;
+        //             tree.Fill();
+        //             count[1]++;
+        //         }
+        //     }
+        // }
 
         // progress display
         if (j % OUT_INTERVAL == OUT_INTERVAL - 1)
@@ -363,7 +403,7 @@ int sim_lambda_roi(
     std::cout << "counts: " << count[0] << " and " << count[1] << endl;
     std::cout << "Phi_g_main = " << -2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * sin(delta) << " * lambda" << endl;
     std::cout << "used N = " << setprecision(3) << float(beam_count * N_loop_lambda) << endl;
-    std::cout << "max probability: " << max_prob << endl;
+    // std::cout << "max probability: " << max_prob << endl;
 
     return 0;
 }

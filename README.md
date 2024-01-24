@@ -233,6 +233,9 @@
 - theta interval 0.01º
 - total length $1.000\pm.005$
 - delta 30º
+- slit width 0.2e-3
+- slit height 10e-3
+- 縦方向発散 10 mrad (full open)
 
 ### チャンネル
 

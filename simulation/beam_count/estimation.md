@@ -43,6 +43,9 @@ tofは 0 ~ 45000 µs を 1000 分割しているので、bin幅は
 beam collimation外さないと30ºでエタロンがビームからはみ出る。
 外せば収まる。
 
+Beam強度ですが、スリットサイズ0.2 x 10 mm、縦方向発散をSlitをFull open(10 mrad)したときに30 kcpsくらいになります。
+見積もりに使ったtoy Monte Carloを送ります。
+
 ### 装置設計変数
 
 - angle theta 1.05º
