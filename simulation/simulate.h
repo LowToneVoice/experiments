@@ -19,7 +19,7 @@ string PHASE_CONTRIB = "mix";
 string MAIN_SUB = "mix";
 string ANGLE_DELTA_DEG = "30";
 string TIME_MIN = "10";
-string ANGLE_FROM_PARALLEL_DEG = "5e-2";
+string ANGLE_FROM_PARALLEL_DEG = "1e-1";
 string LMD_USED_MIN = "7e-10";
 string LMD_USED_MAX = "10e-10";
 
@@ -100,7 +100,6 @@ string FILE_FORMAT(
 {
     return phase_contrib_input + "_" + main_sub_input + "_" + angle_delta_deg_input + "deg_" + time_min_input + "min_ALPHA" + angle_from_parallel_deg_input + "_lmd" + lmd_used_min_input + "to" + lmd_used_max_input;
 }
-
 string TITLE_FORMAT(
     string phase_contrib_input = PHASE_CONTRIB,
     string main_sub_input = MAIN_SUB,
@@ -212,11 +211,11 @@ int sim_lambda_roi(
     string lmd_used_max_input = LMD_USED_MAX)
 {
     // file names
-    string FILE_FORMAT = phase_contrib_input + "_" + main_sub_input + "_" + angle_delta_deg_input + "deg_" + time_min_input + "min_ALPHA" + angle_from_parallel_deg_input + "_lmd" + lmd_used_min_input + "to" + lmd_used_max_input;
-    string OUTPUT_TREE = "./dat/montecarlo/root/" + FILE_FORMAT + ".root";
-    string OUTPUT_H = "./dat/montecarlo/dat/" + FILE_FORMAT + "_H.dat";
-    string OUTPUT_O = "./dat/montecarlo/dat/" + FILE_FORMAT + "_O.dat";
-    string OUTPUT_PROB = "./dat/theoretical/" + FILE_FORMAT + ".dat";
+    string file_format = FILE_FORMAT(phase_contrib_input, main_sub_input, time_min_input, angle_delta_deg_input, angle_from_parallel_deg_input, lmd_used_min_input, lmd_used_max_input);
+    string OUTPUT_TREE = "./dat/montecarlo/root/" + file_format + ".root";
+    string OUTPUT_H = "./dat/montecarlo/dat/" + file_format + "_H.dat";
+    string OUTPUT_O = "./dat/montecarlo/dat/" + file_format + "_O.dat";
+    string OUTPUT_PROB = "./dat/theoretical/" + file_format + ".dat";
 
     // main / sub selection
     int G_MAIN = 0, G_SUB = 0, A_MAIN = 0, A_SUB = 0;
@@ -388,6 +387,68 @@ int sim_lambda_roi(
     std::cout << "used N = " << setprecision(3) << beam_count << endl;
     std::cout << "min probability: " << min_prob << endl;
     std::cout << "max probability: " << max_prob << endl;
+
+    return 0;
+}
+
+
+/*
+    FROM theoretical_lambda.gpl
+*/
+int theoretical_lambda(
+    string phase_contrib_input = PHASE_CONTRIB,
+    string main_sub_input = MAIN_SUB,
+    string time_min_input = TIME_MIN,
+    string angle_delta_deg_input = ANGLE_DELTA_DEG,
+    string angle_from_parallel_deg_input = ANGLE_FROM_PARALLEL_DEG,
+    string lmd_used_min_input = LMD_USED_MIN,
+    string lmd_used_max_input = LMD_USED_MAX)
+{
+    // datafiles
+    string file_format = FILE_FORMAT(phase_contrib_input, main_sub_input, time_min_input, angle_delta_deg_input, angle_from_parallel_deg_input, lmd_used_min_input, lmd_used_max_input);
+    FILE *gpl_file;
+    string input_file = "./dat/theoretical/" + file_format + ".dat";
+    string output_beam_normal = "./beam_count/theoretical/normal/" + file_format + ".png";
+    string output_beam_zoom = "./beam_count/theoretical/zoom/" + file_format + ".png";
+    string output_oscil_normal = "./oscil_graph/theoretical/normal/" + file_format + ".png";
+    string output_oscil_zoom = "./oscil_graph/theoretical/zoom/" + file_format + ".png";
+    gpl_file = popen("gnuplot", "w");
+
+    // input data
+    double lambda_min_used = stod(lmd_used_min_input);
+    double lambda_max_used = stod(lmd_used_max_input);
+
+    // normal beam
+    fprintf(gpl_file, "input='%s'\n", input_file.c_str());
+    fprintf(gpl_file, "set term png\n");
+    fprintf(gpl_file, "set output '%s'\n", output_beam_normal.c_str());
+    fprintf(gpl_file, "set xrange [%e:%e]\n", lambda_min, lambda_max * 1.2);
+    fprintf(gpl_file, "set xlabel 'lambda'\n");
+    fprintf(gpl_file, "set ylabel 'probability'\n");
+    fprintf(gpl_file, "plot input u 1:2 w l title 'H beam', ");
+    fprintf(gpl_file, "input u 1:3 w l title 'O beam', ");
+    fprintf(gpl_file, "input u 1:($2+$3) w l title 'sum'\n");
+
+    // zoom beam
+    fprintf(gpl_file, "set output '%s'\n", output_beam_zoom.c_str());
+    fprintf(gpl_file, "set xrange [%e:%e]\n", lambda_min_used, lambda_max_used);
+    fprintf(gpl_file, "plot input u 1:2 w l title 'H beam', ");
+    fprintf(gpl_file, "input u 1:3 w l title 'O beam', ");
+    fprintf(gpl_file, "input u 1:($2+$3) w l title 'sum'\n");
+
+    // oscillation normal
+    fprintf(gpl_file, "set output '%s'\n", output_oscil_normal.c_str());
+    fprintf(gpl_file, "set xrange [%e:%e]\n", lambda_min, lambda_max);
+    fprintf(gpl_file, "set ylabel '(I_H-I_O) / (I_H+I_O)'\n");
+    fprintf(gpl_file, "set nokey\n");
+    fprintf(gpl_file, "plot input u 1:(($2-$3)/($2+$3)) w l\n");
+
+    // oscillation zoom
+    fprintf(gpl_file, "set output '%s'\n", output_oscil_zoom.c_str());
+    fprintf(gpl_file, "set xrange [%e:%e]\n", lambda_min_used, lambda_max_used);
+    fprintf(gpl_file, "plot input u 1:(($2-$3)/($2+$3)) w l\n");
+
+    pclose(gpl_file);
 
     return 0;
 }

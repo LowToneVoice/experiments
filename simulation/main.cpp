@@ -2,15 +2,13 @@
 
 int main()
 {
-    if (sim_lambda_roi() != 0)
-    {
-        cerr << "Error" << endl;
-        return 1;
-    }
+    sim_lambda_roi();
 
     read_lambda();
 
     oscillation_lambda();
+
+    theoretical_lambda();
 
     return 0;
 }

@@ -167,17 +167,6 @@ int oscillation_lambda(
         }
     }
 
-    // TH1F *h1 = (TH1F *)histO->Clone();
-    // TH1F *h2 = (TH1F *)histH->Clone();
-    // h1->Add(histH, -1);
-    // h2->Add(histO, 1);
-    // h1->Divide(h2);
-    // TH1F *h1_zoom = (TH1F *)histO_zoom->Clone();
-    // TH1F *h2_zoom = (TH1F *)histH_zoom->Clone();
-    // h1_zoom->Add(histH_zoom, -1);
-    // h2_zoom->Add(histO_zoom, 1);
-    // h1_zoom->Divide(h2_zoom);
-
     // transform FFT from n space to K space
     TH1 *hFourier_n = h_oscil_zoom->FFT(0, "MAG");
     int Nbins = hFourier_n->GetXaxis()->GetNbins();
