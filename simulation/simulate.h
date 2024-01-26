@@ -22,6 +22,7 @@ string TIME_MIN = "10";
 string ANGLE_FROM_PARALLEL_DEG = "1e-1";
 string LMD_USED_MIN = "7e-10";
 string LMD_USED_MAX = "10e-10";
+string FILE_EXTENSION = "png";
 
 // FITTING RANGE AND INITIAL CONDITIONS
 constexpr double fit_width = 1.5e11;
@@ -402,25 +403,28 @@ int theoretical_lambda(
     string angle_delta_deg_input = ANGLE_DELTA_DEG,
     string angle_from_parallel_deg_input = ANGLE_FROM_PARALLEL_DEG,
     string lmd_used_min_input = LMD_USED_MIN,
-    string lmd_used_max_input = LMD_USED_MAX)
+    string lmd_used_max_input = LMD_USED_MAX,
+    string file_extension = FILE_EXTENSION)
 {
     // datafiles
     string file_format = FILE_FORMAT(phase_contrib_input, main_sub_input, time_min_input, angle_delta_deg_input, angle_from_parallel_deg_input, lmd_used_min_input, lmd_used_max_input);
     FILE *gpl_file;
     string input_file = "./dat/theoretical/" + file_format + ".dat";
-    string output_beam_normal = "./beam_count/theoretical/normal/" + file_format + ".png";
-    string output_beam_zoom = "./beam_count/theoretical/zoom/" + file_format + ".png";
-    string output_oscil_normal = "./oscil_graph/theoretical/normal/" + file_format + ".png";
-    string output_oscil_zoom = "./oscil_graph/theoretical/zoom/" + file_format + ".png";
+    string output_beam_normal = "./beam_count/theoretical/normal/" + file_format + "." + file_extension;
+    string output_beam_zoom = "./beam_count/theoretical/zoom/" + file_format + "." + file_extension;
+    string output_oscil_normal = "./oscil_graph/theoretical/normal/" + file_format + "." + file_extension;
+    string output_oscil_zoom = "./oscil_graph/theoretical/zoom/" + file_format + "." + file_extension;
     gpl_file = popen("gnuplot", "w");
 
     // input data
     double lambda_min_used = stod(lmd_used_min_input);
     double lambda_max_used = stod(lmd_used_max_input);
+    string title_format = TITLE_FORMAT(phase_contrib_input, main_sub_input, time_min_input, angle_delta_deg_input, angle_from_parallel_deg_input, lmd_used_min_input, lmd_used_max_input);
 
     // normal beam
     fprintf(gpl_file, "input='%s'\n", input_file.c_str());
     fprintf(gpl_file, "set term png\n");
+    fprintf(gpl_file, "set title '%s'\n", title_format.c_str());
     fprintf(gpl_file, "set output '%s'\n", output_beam_normal.c_str());
     fprintf(gpl_file, "set xrange [%e:%e]\n", lambda_min, lambda_max * 1.2);
     fprintf(gpl_file, "set xlabel 'lambda'\n");
