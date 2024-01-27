@@ -14,7 +14,8 @@
 using namespace std;
 using namespace Eigen;
 
-// DATA LABELS
+// DATA LABELS DEFAULTS
+// DO NOT CHANGE HERE!!!
 string PHASE_CONTRIB = "mix";
 string MAIN_SUB = "mix";
 string ANGLE_DELTA_DEG = "30";
@@ -22,7 +23,7 @@ string TIME_MIN = "10";
 string ANGLE_FROM_PARALLEL_DEG = "1e-1";
 string LMD_USED_MIN = "7e-10";
 string LMD_USED_MAX = "10e-10";
-string FILE_EXTENSION = "png";
+string FILE_EXTENSION = "pdf";
 
 // FITTING RANGE AND INITIAL CONDITIONS
 constexpr double fit_width = 1.5e11;
@@ -260,7 +261,8 @@ int sim_lambda_roi(
     const double beam_time_sec = stod(time_min_input) * 60;
     const double angle_from_parallel = stod(angle_from_parallel_deg_input) * pi / 180;
 
-    const int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
+    // const int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
+    const int N_loop_lambda = (int)((lambda_max - lambda_min) / d_lambda);
 
     double lambda;
     double k0;
@@ -298,7 +300,8 @@ int sim_lambda_roi(
 
     for (int j = 0; j < N_loop_lambda; j++)
     {
-        lmd = lambda_min_used + d_lambda * j;
+        lmd = lambda_min + d_lambda * j;
+        // lmd = lambda_min_used + d_lambda * j;
         wave_fncH = 0;
         wave_fncO = 0;
         l = 0;

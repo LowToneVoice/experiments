@@ -11,13 +11,14 @@ int read_lambda(
     string angle_delta_deg_input = ANGLE_DELTA_DEG,
     string angle_from_parallel_deg_input = ANGLE_FROM_PARALLEL_DEG,
     string lmd_used_min_input = LMD_USED_MIN,
-    string lmd_used_max_input = LMD_USED_MAX)
+    string lmd_used_max_input = LMD_USED_MAX,
+    string file_extension = FILE_EXTENSION)
 {
     // data file names
     string file_format = FILE_FORMAT(phase_contrib_input, main_sub_input, time_min_input, angle_delta_deg_input, angle_from_parallel_deg_input, lmd_used_min_input, lmd_used_max_input);
     string INPUT_TREE = "./dat/montecarlo/root/" + file_format + ".root";
-    string OUTPUT = "./beam_count/montecarlo/normal/" + file_format + ".pdf";
-    string OUTPUT_ZOOM = "./beam_count/montecarlo/zoom/" + file_format + ".pdf";
+    string OUTPUT = "./beam_count/montecarlo/normal/" + file_format + "." + file_extension;
+    string OUTPUT_ZOOM = "./beam_count/montecarlo/zoom/" + file_format + "." + file_extension;
     string title_format = TITLE_FORMAT(phase_contrib_input, main_sub_input, time_min_input, angle_delta_deg_input, angle_from_parallel_deg_input, lmd_used_min_input, lmd_used_max_input);
 
     // input values
@@ -81,15 +82,16 @@ int oscillation_lambda(
     string angle_delta_deg_input = ANGLE_DELTA_DEG,
     string angle_from_parallel_deg_input = ANGLE_FROM_PARALLEL_DEG,
     string lmd_used_min_input = LMD_USED_MIN,
-    string lmd_used_max_input = LMD_USED_MAX)
+    string lmd_used_max_input = LMD_USED_MAX,
+    string file_extension = FILE_EXTENSION)
 {
     // data file names
     string file_format = FILE_FORMAT(phase_contrib_input, main_sub_input, time_min_input, angle_delta_deg_input, angle_from_parallel_deg_input, lmd_used_min_input, lmd_used_max_input);
     string INPUT_TREE = "./dat/montecarlo/root/" + file_format + ".root";
-    string OUTPUT_FILE = "./oscil_graph/montecarlo/normal/" + file_format + ".pdf";
-    string OUTPUT_FILE_ZOOM = "./oscil_graph/montecarlo/zoom/" + file_format + ".pdf";
-    string OUTPUT_FILE_FOURIER = "./oscil_graph/montecarlo/fourier/" + file_format + ".pdf";
-    string OUTPUT_FILE_FOURIER_WIDE = "./oscil_graph/montecarlo/fourier_wide/" + file_format + ".pdf";
+    string OUTPUT_FILE = "./oscil_graph/montecarlo/normal/" + file_format + "." + file_extension;
+    string OUTPUT_FILE_ZOOM = "./oscil_graph/montecarlo/zoom/" + file_format + "." + file_extension;
+    string OUTPUT_FILE_FOURIER = "./oscil_graph/montecarlo/fourier/" + file_format + "." + file_extension;
+    string OUTPUT_FILE_FOURIER_WIDE = "./oscil_graph/montecarlo/fourier_wide/" + file_format + "." + file_extension;
     string title_format = TITLE_FORMAT(phase_contrib_input, main_sub_input, time_min_input, angle_delta_deg_input, angle_from_parallel_deg_input, lmd_used_min_input, lmd_used_max_input);
 
     // input values
