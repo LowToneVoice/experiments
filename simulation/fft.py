@@ -17,11 +17,11 @@ PHASE_CONTRIB = "mix"
 MAIN_SUB = "mix"
 ANGLE_DELTA_DEG = "30"
 TIME_MIN = "10"
-ANGLE_FROM_PARALLEL_DEG = "2.5e-2"
+ANGLE_FROM_PARALLEL_DEG = "0"
 LMD_USED_MIN = "7e-10"
 LMD_USED_MAX = "10e-10"
 
-output_extension="png"
+output_extension="pdf"
 
 # data files
 FORMAT = PHASE_CONTRIB + "_" + MAIN_SUB + "_" + ANGLE_DELTA_DEG + \
@@ -71,6 +71,7 @@ plt.xlabel('wave number [/m]')
 plt.ylabel('Magnitude')
 plt.axvline(x=peak_position, color="red")
 plt.text(peak_position, 0, "expected peak = {:.4e}".format(peak_position), color="red")
+plt.ylim(-1, 80)
 plt.plot(freq, amp)
 
 # Fitting
