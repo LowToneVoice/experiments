@@ -26,8 +26,8 @@ string LMD_USED_MAX = "10e-10";
 string FILE_EXTENSION = "pdf";
 
 // FITTING RANGE AND INITIAL CONDITIONS
-constexpr double fit_width = 1.5e11;
-constexpr double fit_par_height = 30;
+constexpr double fit_width_peak = 1.5e11;
+constexpr double fit_peak_height = 30;
 
 #define OUT_INTERVAL 100
 const bool REFLECTION = true;
@@ -395,7 +395,6 @@ int sim_lambda_roi(
     return 0;
 }
 
-
 /*
     FROM theoretical_lambda.gpl
 */
@@ -424,9 +423,21 @@ int theoretical_lambda(
     double lambda_max_used = stod(lmd_used_max_input);
     string title_format = TITLE_FORMAT(phase_contrib_input, main_sub_input, time_min_input, angle_delta_deg_input, angle_from_parallel_deg_input, lmd_used_min_input, lmd_used_max_input);
 
-    // normal beam
     fprintf(gpl_file, "input='%s'\n", input_file.c_str());
     fprintf(gpl_file, "set term png\n");
+
+    // fittings
+    fprintf(gpl_file, "f(x)=A*cos(k1*x+k2/x+c)+a*(x-C)**2+B+1e-2\n");
+    fprintf(gpl_file, "A=0.8\n");
+    fprintf(gpl_file, "k1=-3e11\n");
+    fprintf(gpl_file, "k2=4e-8\n");
+    fprintf(gpl_file, "c=1e-1\n");
+    fprintf(gpl_file, "a=1e20\n");
+    fprintf(gpl_file, "C=7.5e-10\n");
+    fprintf(gpl_file, "B=-0.1\n");
+    fprintf(gpl_file, "fit [7e-10:8.4e-10] f(x) input u 1:(($2-$3)/($2+$3)) via A,k1,k2,c,a,C,B\n");
+
+    // normal beam
     fprintf(gpl_file, "set title '%s'\n", title_format.c_str());
     fprintf(gpl_file, "set output '%s'\n", output_beam_normal.c_str());
     fprintf(gpl_file, "set xrange [%e:%e]\n", lambda_min, lambda_max * 1.2);
@@ -448,12 +459,13 @@ int theoretical_lambda(
     fprintf(gpl_file, "set xrange [%e:%e]\n", lambda_min, lambda_max);
     fprintf(gpl_file, "set ylabel '(I_H-I_O) / (I_H+I_O)'\n");
     fprintf(gpl_file, "set nokey\n");
-    fprintf(gpl_file, "plot input u 1:(($2-$3)/($2+$3)) w l\n");
+    fprintf(gpl_file, "set yrange [-2:2]\n");
+    fprintf(gpl_file, "plot input u 1:(($2-$3)/($2+$3)) w l, f(x)\n");
 
     // oscillation zoom
     fprintf(gpl_file, "set output '%s'\n", output_oscil_zoom.c_str());
     fprintf(gpl_file, "set xrange [%e:%e]\n", lambda_min_used, lambda_max_used);
-    fprintf(gpl_file, "plot input u 1:(($2-$3)/($2+$3)) w l\n");
+    fprintf(gpl_file, "plot input u 1:(($2-$3)/($2+$3)) w l, f(x)\n");
 
     pclose(gpl_file);
 

@@ -181,17 +181,25 @@ int oscillation_lambda(
 
     // fittings
     const double peak_position = 2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * sin(std::stod(ANGLE_DELTA_DEG) * pi / 180);
-    const double fit_range[] = {peak_position - fit_width, peak_position + fit_width};
-    TF1 *f = new TF1("gaus", "[0] * exp(-0.5 * ((x-[1]) / [2])^2)", fit_range[0], fit_range[1]);
-    f->SetParameters(fit_par_height, peak_position, fit_width);
-    hFourier->Fit("gaus", "", "", fit_range[0], fit_range[1]);
-    Double_t p0 = f->GetParameter(1);
-    Double_t p0e = f->GetParError(1);
-    Double_t chi2 = f->GetChisquare();
-    Int_t Ndof = f->GetNDF();
+    // oscillation
+    const double fit_range_oscil[] = {6.9, 8.5}; // TODO: find a good value
+    TF1 *f_oscil = new TF1("oscil", "[0] * cos(x * [1] + x / [2] + [3]) + [4] * (x - [5])^2 + [6]", fit_range_oscil[0], fit_range_oscil[1]);
+    f_oscil->SetParameters(0.5, peak_position, 1e10, 0, 1e-10, 7.5e-10, 0);
+    h_oscil->Fit("oscil", "", "", fit_range_oscil[0], fit_range_oscil[1]);
+    Double_t k1oscil = f_oscil->GetParameter(1);
+    Double_t k2oscil = f_oscil->GetParameter(2);
+    // peak
+    const double fit_range_peak[] = {peak_position - fit_width_peak, peak_position + fit_width_peak};
+    TF1 *f_peak = new TF1("gaus", "[0] * exp(-0.5 * ((x-[1]) / [2])^2)", fit_range_peak[0], fit_range_peak[1]);
+    f_peak->SetParameters(fit_peak_height, peak_position, fit_width_peak);
+    hFourier->Fit("gaus", "", "", fit_range_peak[0], fit_range_peak[1]);
+    Double_t p0_peak = f_peak->GetParameter(1);
+    Double_t p0e_peak = f_peak->GetParError(1);
+    Double_t chi2 = f_peak->GetChisquare();
+    Int_t Ndof = f_peak->GetNDF();
 
     TH1D *hFourier_wide = (TH1D *)hFourier->Clone();
-    hFourier->GetXaxis()->SetRangeUser(0, 1e12);
+    // hFourier->GetXaxis()->SetRangeUser(0, 1e12);
 
     // draw histogram
     TCanvas *c1 = new TCanvas("c1", "oscillation", 700, 500);
@@ -218,9 +226,9 @@ int oscillation_lambda(
     c4->Print(OUTPUT_FILE_FOURIER_WIDE.c_str());
 
     // result of peak position
-    double resultK = -p0 * 2 * TMath::Pi() / (lambda_max_used - lambda_min_used);
-    double resultK_error = p0e * 2 * TMath::Pi() / (lambda_max_used - lambda_min_used);
-    std::cout << "k = " << -p0 << " +- " << p0e << std::endl;
+    double resultK = -p0_peak * 2 * TMath::Pi() / (lambda_max_used - lambda_min_used);
+    double resultK_error = p0e_peak * 2 * TMath::Pi() / (lambda_max_used - lambda_min_used);
+    std::cout << "k = " << -p0_peak << " +- " << p0e_peak << std::endl;
 
     return 0;
 }

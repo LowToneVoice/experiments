@@ -11,3 +11,9 @@ a.out
 *.pptx
 *.key
 *.synctex.gz
+*.aux
+*.dvi
+*.log
+*.out
+*.blg
+*.bbl
