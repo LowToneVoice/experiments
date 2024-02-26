@@ -5,36 +5,51 @@
 
 \section{数値計算による実験方法の検討}
 
-実験に先立ってモンテカルロシミュレーションを行った。
+実験に先立って
+\begin{itemize}
+    \item 波動関数の直接計算による確率分布の計算
+    \item 確率分布に基づくモンテカルロシミュレーション
+\end{itemize}
+を行った。
 
-\begin{figure}
-    \centering
-    \begin{tikzpicture}
-        \tikzset{Terminal/.style={rounded rectangle,  draw,  text centered, text width=3cm, minimum height=1.5cm}};
-        \tikzset{Process/.style={rectangle,  draw,  text centered, text width=3cm, minimum height=1.5cm}};
-        \tikzset{Decision/.style={diamond,  draw,  text centered, aspect=3,text width=5cm, minimum height=1.5cm}};
-        \node[Terminal](a)at (0,0){Start};
-        \node[Process, below=1.5 of a.center](b){ぷろせす};
-        \draw[->, thick]  (a) --(b);
-        \node[Process, below=2 of b.center](c){ぷろせす};
-        \draw[->, thick]  (b) --(c);
-        \node[Decision](d)at (0,-7.5){はんだんするぞ！};
-        \draw[->, thick]  (c) --(d);
-        \node[Process, above left=of d ](da){なんらかのぷろせす};
-        \draw[->,thick]  (d)node[below, xshift=-100]{No} -| (da);
-        \draw[->,thick]  (da) |- (0,-3.5);
-        \node[Process, below=1.75 of d.center](e){第一関門クリア！};
-        \draw[->, thick]  (d) --(e) node[right,yshift=30]{Yes};
-        \node[Decision, below=1.35 of e.center](f){はんだんその2};
-        \draw[->, thick]  (e) --(f);
-        \node[Process, above right=of f](fa){もどる};
-        \draw[->, thick]  (f)node[below, xshift=100]{No}  -| (fa);
-        \draw[->,thick]  (fa) |-(0,-3.5);
-        \node[Process, below=1.75 of f.center](g){第二関門突破！};
-        \draw[->, thick]  (f) --(g)node[right,yshift=30]{Yes};
-        \node[Terminal, below=1.75 of g.center](h){End};
-        \draw[->, thick]  (g) --(h);
-    \end{tikzpicture}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \begin{tikzpicture}
+%         \tikzset{Terminal/.style={rounded rectangle,  draw,  text centered, text width=3cm, minimum height=1.5cm}};
+%         \tikzset{Process/.style={rectangle,  draw,  text centered, text width=3cm, minimum height=1.5cm}};
+%         \tikzset{Decision/.style={diamond,  draw,  text centered, aspect=3,text width=5cm, minimum height=1.5cm}};
+%         \node[Terminal](a)at (0,0){Start};
+%         \node[Process, below=1.5 of a.center](b){Process};
+%         \draw[->, thick]  (a) --(b);
+%         \node[Process, below=2 of b.center](c){Process};
+%         \draw[->, thick]  (b) --(c);
+%         \node[Decision](d)at (0,-7.5){Judge};
+%         \draw[->, thick]  (c) --(d);
+%         \node[Process, above left=of d ](da){Process};
+%         \draw[->,thick]  (d)node[below, xshift=-100]{No} -| (da);
+%         \draw[->,thick]  (da) |- (0,-3.5);
+%         \node[Process, below=1.75 of d.center](e){1st gate};
+%         \draw[->, thick]  (d) --(e) node[right,yshift=30]{Yes};
+%         \node[Decision, below=1.35 of e.center](f){Judge 2};
+%         \draw[->, thick]  (e) --(f);
+%         \node[Process, above right=of f](fa){Back};
+%         \draw[->, thick]  (f)node[below, xshift=100]{No}  -| (fa);
+%         \draw[->,thick]  (fa) |-(0,-3.5);
+%         \node[Process, below=1.75 of f.center](g){2nd gate};
+%         \draw[->, thick]  (f) --(g)node[right,yshift=30]{Yes};
+%         \node[Terminal, below=1.75 of g.center](h){End};
+%         \draw[->, thick]  (g) --(h);
+%     \end{tikzpicture}
+% \end{figure}
+
+
+\subsection{波動関数の直接計算}
+
+\eqref{eq: theoretical: R and T}を用いて図\ref{fig: theoretical: alpha and paths}点EにおけるHビーム、Oビームの波動関数を計算、強度を求めると図のようになった。
+
+
+\subsection{モンテカルロシミュレーション}
+
+波動関数に従ってモンテカルロシミュレーションを行い、
 
 \end{document}

@@ -29,7 +29,7 @@
 
 - [ ] 設計
   - [x] 要求の整理
-  - [ ] 図面作成
+  - [x] 図面作成
 - [ ] 必要機材の整理
   - [x] エタロン
   - [x] ステージ
@@ -38,8 +38,8 @@
     - [ ] 長さ計測
     - [ ] 角度計測
 - [ ] 必要機材の調達確認
-  - [ ] エタロン
-  - [ ] ステージ
+  - [x] エタロン
+  - [x] ステージ
   - [ ] エタロンとステージのインターフェース
 - [ ] 必要機材の稼働確認
   - [ ] ステージ操作方法
@@ -50,7 +50,27 @@
 基本的にintroduction下「やりたい実験.pdf」に記載。
 うまく実験が回ったらtexに。
 
-## フォルダ構造・命名規則
+## ファイル命名規則
+
+### 本実験データ
+
+- 通し番号 (4桁) .root
+- カットなし通し番号 (4桁) カットあり通し番号 (4桁) $\delta$ (deg, 3桁, 0.1ºまで) 計測時間 (秒, 5桁) (.root / .pdf / .png)
+
+### シミュレーションデータ
+
+- 入れている現象 (g/a/mix) _ 入れている効果の次数 (main/sub/mix) _ 測定時間 _ $\delta$ _ $\alpha$ _ lambda range (.root / .pdf / .png)
+- 入れている現象 (g/a/mix) _ 入れている効果の次数 (main/sub/mix) _ 測定時間 _ $\delta$ _ $\alpha$ _ lambda range _ channel (O/H) .dat
+
+### 例
+
+- `0304.root` : 通し番号304実験生データ。
+- `0025002630000360.root` : 通し番号25&26の合成, カットなし, $\delta=30.0 \deg$, 360秒計測。
+- `0340c04501250.root` : 通し番号340, カットはcルート, $\delta=4.5 \deg$, 1250秒計測。
+- `mix_mix_5deg_10min_ALPHA5e-3_lmd7e-10to10e-10.root` : 重力・角度差込み, 副次項込み, $\delta=5 \deg$, 10 min計測, $\alpha=5\times10^{-3} \deg$, $7\times10^{-10}\leq\lambda\leq10\times10^{-10}$
+- `g_main_30deg_10min_ALPHA1e-3_lmd7e-10to10e-10_H.dat` : 重力効果のみ, 主要項のみ, $\delta=30 \deg$, 10 min計測, $\alpha=1\times10^{-3} \deg$, $7\times10^{-10}\leq\lambda\leq10\times10^{-10}$, H beam
+
+## フォルダ構造
 
 ``` folder tree
 .
@@ -203,8 +223,10 @@
 
 - TDC H beam: 0
 - TDC O beam: 1
-- ADC H beam: 2
-- ADC O beam: 3
+- C cut H beam TDC: 2
+- D cut H beam TDC: 3
+- C cut O beam TDC: 4
+- D cut O beam TDC: 5
 
 ## コードの動かし方
 
@@ -256,6 +278,7 @@ Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
   - cf. [反射率計算コード](https://drive.google.com/drive/folders/1OXl9TjSrukBzPKXic_n39EXW2YIPZwYu?usp=drive_link)
 - [Werner, Kaiser, Arif, Clothier, Physica B+C, Volume 151, Issues 1–2, 1988.](https://doi.org/10.1016/0378-4363(88)90141-6) (COWの新しい結果)
 - [Y. Seki, 2011](http://hdl.handle.net/2433/142371) (中性子干渉実験周辺、特に屈折率計算)
+- [M. Kitaguchi, 2004](https://doi.org/10.14989/doctor.k11047) (コヒーレンス長)
 
 ### 使わないやつ
 

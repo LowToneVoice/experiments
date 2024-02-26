@@ -4,7 +4,7 @@
     FROM read_lambda.cpp
 */
 
-int read_lambda(
+int read_lambda_perSec(
     string phase_contrib_input = PHASE_CONTRIB,
     string main_sub_input = MAIN_SUB,
     string time_min_input = TIME_MIN,
@@ -25,6 +25,7 @@ int read_lambda(
     const double lambda_min_used = stod(lmd_used_min_input);
     const double lambda_max_used = stod(lmd_used_max_input);
     const int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
+    const double time_sec = stod(time_min_input) * 60;
 
     // open the datafile
     TFile *file = TFile::Open(INPUT_TREE.c_str());
@@ -41,21 +42,22 @@ int read_lambda(
         return 1;
     }
 
+    // build canvases
     TCanvas *c1 = new TCanvas("c1", "histograms on lambda", 600, 400);
     TCanvas *c2 = new TCanvas("c2", "histograms on lambda", 600, 400);
     TCut CutH = ("channel==" + std::to_string(H_TDC)).c_str();
     TCut CutO = ("channel==" + std::to_string(O_TDC)).c_str();
-    TString title = Form("O (blue) & H (red) %s; lambda [m]; beam count", title_format.c_str());
+    TString title = Form("O (blue) & H (red) %s; lambda [m]; beam count [/s]", title_format.c_str());
 
+    // normal histogram
     c1->cd();
     TH1D *histH = new TH1D("histH", "lambda-count of H beam", N_loop_lambda, lambda_min, lambda_max);
     TH1D *histO = new TH1D("histO", "lambda-count of O beam", N_loop_lambda, lambda_min, lambda_max);
     histO->SetTitle(title);
     histH->SetTitle(title);
     histH->SetLineColor(2);
-    tree->Draw("lambda>>histH", CutH);
-    tree->Draw("lambda>>histO", CutO, "same");
-    c1->Print(OUTPUT.c_str());
+    tree->Draw("lambda>>histH", CutH, "eh");
+    tree->Draw("lambda>>histO", CutO, "same eh");
 
     c2->cd();
     TH1D *histH_zoom = new TH1D("histH_zoom", "lambda-count of H beam", N_loop_lambda, lambda_min_used, lambda_max_used);
@@ -63,8 +65,32 @@ int read_lambda(
     histO_zoom->SetTitle(title);
     histH_zoom->SetTitle(title);
     histH_zoom->SetLineColor(2);
-    tree->Draw("lambda>>histH_zoom", CutH);
-    tree->Draw("lambda>>histO_zoom", CutO, "same");
+    tree->Draw("lambda>>histH_zoom", CutH, "eh");
+    tree->Draw("lambda>>histO_zoom", CutO, "same eh");
+
+    // divide by time
+    for (int bin = 1; bin <= histH->GetXaxis()->GetNbins(); bin++)
+    {
+        histH->SetBinContent(bin, histH->GetBinContent(bin) / time_sec);
+        histH->SetBinError(bin, histH->GetBinError(bin) / time_sec);
+    }
+    for (int bin = 1; bin <= histO->GetXaxis()->GetNbins(); bin++)
+    {
+        histO->SetBinContent(bin, histO->GetBinContent(bin) / time_sec);
+        histO->SetBinError(bin, histO->GetBinError(bin) / time_sec);
+    }
+    for (int bin = 1; bin <= histH_zoom->GetXaxis()->GetNbins(); bin++)
+    {
+        histH_zoom->SetBinContent(bin, histH_zoom->GetBinContent(bin) / time_sec);
+        histH_zoom->SetBinError(bin, histH_zoom->GetBinError(bin) / time_sec);
+    }
+    for (int bin = 1; bin <= histO_zoom->GetXaxis()->GetNbins(); bin++)
+    {
+        histO_zoom->SetBinContent(bin, histO_zoom->GetBinContent(bin) / time_sec);
+        histO_zoom->SetBinError(bin, histO_zoom->GetBinError(bin) / time_sec);
+    }
+
+    c1->Print(OUTPUT.c_str());
     c2->Print(OUTPUT_ZOOM.c_str());
 
     return 0;

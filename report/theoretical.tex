@@ -172,7 +172,7 @@ $\bm{p}$は運動量、$m$は中性子質量、$g$は重力加速度でそれぞ
         \path[name intersections={of=refF2 and G2}];
         \node at(intersection-1)[anchor=north]{E};
         % values
-        \draw[dashed]($(half11)+({180-\tht}:1)$)arc({180-\tht}:180:1)node[anchor=south east]{$\theta$};
+        % \draw[dashed]($(half11)+({180-\tht}:1)$)arc({180-\tht}:180:1)node[anchor=south east]{$\theta$};
         \draw[dashed](full2)--++(-2,0)++(.5,0)arc(180:{180-\alp}:1.5)node[anchor=south]{$\alpha$};
         \draw[<->, >=Stealth]($(full2)+(0,1)$)node[anchor=center](P){}--($(full1)!(P)!($(full1)+(0,1)$)$)node[anchor=center](Q){};
         \node at($(P)!.5!(Q)$)[anchor=south]{$L$};
@@ -346,7 +346,8 @@ $n_j^2:={k_j^2}/{k^2},\;\zeta:=kx$とすると、エネルギー$E$で入射し�
 \end{equation*}
 と書ける。
 $\Psi_0=e^{ik\zeta_0}+Re^{-ik\zeta_0}, \Psi_g=Te^{ik(\zeta+\zeta_0)}$となる$R, T$を求めると、
-\begin{equation*}
+\begin{equation}
+    \label{eq: theoretical: R and T}
     \begin{split}
         R
         &=
@@ -356,23 +357,28 @@ $\Psi_0=e^{ik\zeta_0}+Re^{-ik\zeta_0}, \Psi_g=Te^{ik(\zeta+\zeta_0)}$となる$R
         &=
         \frac{2e^{-ik\zeta}ik}{ik(M_{11}-ikM_{12})-(M_{21}-ikM_{22})}
     \end{split}
-\end{equation*}
+\end{equation}
 を得る。
 
 \begin{figure}
     \centering
     \begin{tikzpicture}
-        \foreach \x in {0,1,2,3}
+        \foreach \x in {0,1}
         {
-            \draw({\x/2},0)rectangle({\x/2+.25},3);
-            \draw[fill=gray]({\x/2+.25},0)rectangle({\x/2+.5},3);
-            \draw({\x/2+4},0)rectangle({\x/2+4+.25},3);
-            \draw[fill=gray]({\x/2+4+.25},0)rectangle({\x/2+4+.5},3);
-        };
-        \draw[<->, >=Stealth](2,1.5)--(4,1.5);
-        \node at(3,1.5)[anchor=south]{$D$};
+            \draw(.2,{\x/2})rectangle(3.5,{\x/2+.25});
+            \draw[fill=gray](.2,{\x/2+.25})rectangle(3.5,{\x/2+.5});
+        }
+        \node at(1.75,1.5)[anchor=center]{$\vdots$};
+        \draw[->, >=Stealth, thick]($(1,0)!-.5!(2,1)$)--($(1,0)!1.5!(2,1)$);
+        \draw[->, >=Stealth, thick](1.5,0)--($(1.5,0)!1.5!(2.5,1)$);
+        \draw[->, >=Stealth, thick](2,0)--($(2,0)!1.5!(3,1)$);
+        \draw[->, >=Stealth, thick](1,0)--++(.5,-.5);
+        \draw[->, >=Stealth, thick](1.25,.25)--++(.75,-.75);
+        \draw[->, >=Stealth, thick](1.5,.5)--++(1,-1);
+        \draw[->, >=Stealth, thick](1.75,.75)--++(1.25,-1.25);
+        \draw[->, >=Stealth, thick](2,1)--++(1.5,-1.5);
     \end{tikzpicture}
-    \caption{多層膜ミラーの構造}
+    \caption{多層膜ミラーの構造とビームの反射・透過。}
     \label{fig: multilayer mirror}
 \end{figure}
 

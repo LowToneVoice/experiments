@@ -18,9 +18,9 @@ using namespace Eigen;
 // DO NOT CHANGE HERE!!!
 string PHASE_CONTRIB = "mix";
 string MAIN_SUB = "mix";
-string ANGLE_DELTA_DEG = "30";
+string ANGLE_DELTA_DEG = "5";
 string TIME_MIN = "10";
-string ANGLE_FROM_PARALLEL_DEG = "1e-1";
+string ANGLE_FROM_PARALLEL_DEG = "1e-3";
 string LMD_USED_MIN = "7e-10";
 string LMD_USED_MAX = "10e-10";
 string FILE_EXTENSION = "pdf";
@@ -35,8 +35,10 @@ const bool REFLECTION = true;
 // CHANNELS
 #define H_TDC 0
 #define O_TDC 1
-#define H_ADC 2
-#define O_ADC 3
+#define H_TDC_Ccut 2
+#define H_TDC_Dcut 3
+#define O_TDC_Ccut 4
+#define O_TDC_Dcut 5
 
 // PHYS & MATH CONSTANTS
 complex<double> I(0, 1.);
