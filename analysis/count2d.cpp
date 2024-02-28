@@ -1,17 +1,15 @@
-#include<iostream>
-#include<TFile.h>
-#include<TH1F.h>
-#include<TTree.h>
-#include<TCanvas.h>
+#include"config.h"
 
-// datafiles
-#define INPUT_TREE "./BL05/20231224225335_list_copy.root"
-#define OUTPUT_FILE "./beam_count/position/20231224225335.pdf"
+#define input_default "../simulation/BL05/20231224225335_list_copy.root"
+#define output_default "./beam_count/position/20231224225335.pdf"
 
-int position()
+int count2d(
+    string input_tree = input_default,
+    string output_img_file = output_default
+)
 {
     // open the datafile
-    TFile *file = TFile::Open(INPUT_TREE);
+    TFile *file = TFile::Open(input_tree.c_str());
     if (!file || file->IsZombie())
     {
         std::cerr << "Failed to open the input file" << std::endl;
@@ -20,7 +18,7 @@ int position()
 
     TTree *T;
     file->GetObject("T", T);
-    if(!T)
+    if (!T)
     {
         std::cerr << "Failed to retrieve the tree from the file." << std::endl;
         return 1;
@@ -38,12 +36,8 @@ int position()
         std::cerr << "There is no histogram" << std::endl;
     }
 
-    c1->Print(OUTPUT_FILE);
+    c1->Print(output_img_file.c_str());
 
     return 0;
 }
 
-int main()
-{
-    return position();
-}

@@ -9,11 +9,11 @@
 #include<TROOT.h>
 
 // datafiles
-#define INPUT_TREE "./BL05/20231224225335_list_copy.root"
-#define OUTPUT_TREE "./dat/experiments/20231224225335.root"
-#define OUTPUT_TREE_UPPER_LIM "./dat/experiments/20231224225335_upperLim.root"
-#define OUTPUT_FILE "./beam_count/test/20231224225335.pdf"
-#define OUTPUT_FILE_TOF "./beam_count/test/20231224225335_tof.pdf"
+#define INPUT_TREE "../simulation/BL05/20231224225335_list_copy.root"
+#define OUTPUT_TREE "./data/20231224225335.root"
+#define OUTPUT_TREE_UPPER_LIM "./data/experiments/20231224225335_upperLim.root"
+#define OUTPUT_FILE "./img/count/20231224225335_lmd.pdf"
+#define OUTPUT_FILE_TOF "./count/20231224225335_tof.pdf"
 
 constexpr double x_range_H[] = {.41, .44};
 constexpr double y_range_H[] = {.34, .48};

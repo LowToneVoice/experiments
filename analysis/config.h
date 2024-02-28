@@ -2,7 +2,6 @@
 #include <fstream>
 #include <random>
 #include <complex>
-#include <Eigen/Dense>
 #include <TFile.h>
 #include <TTree.h>
 #include <TCanvas.h>
@@ -12,11 +11,11 @@
 #include <TF1.h>
 
 using namespace std;
-using namespace Eigen;
 
 // FITTING RANGE AND INITIAL CONDITIONS
 constexpr double fit_width_peak = 1.5e11;
 constexpr double fit_peak_height = 30;
+constexpr double lambda_max_displayed = 1.5e-8;
 
 // CHANNELS
 #define H_TDC 0
@@ -33,7 +32,7 @@ complex<double> I(0, 1.);
 #define J_per_eV 1.6022e-19
 #define m 1.675e-27
 #define NA 6.02214e23
-constexpr double g = 9.8;
+#define g = 9.8;
 constexpr double hbar = h / (2 * pi);
 
 constexpr double V_sio2 = 90.9e-09 * J_per_eV;
@@ -52,19 +51,13 @@ constexpr double bc_Ti = -3.36e-15;
 constexpr double lambda_min = 2.0e-10;
 constexpr double lambda_max = 10e-10;
 constexpr int daq_freq = 62.5e6;
-constexpr double lambda_fade_width = .01 * (lambda_max - lambda_min);
-// constexpr double lambda_fade_width = 1e-12;
-constexpr double whole_beam_intensity_perSec_perArea = 5.4e8; // /s/m2
 // ethalones
 constexpr double delta_D = 1.;
 constexpr double D_ni = 133.5e-10 / delta_D;
 constexpr double D_ti = 98.3e-10 / delta_D;
 constexpr double gap = 189e-6;
 constexpr int N_bilayer = 8;
-constexpr double ethalone_height = 12e-3;
-constexpr double slit_width = 0.2e-3;
 // TDC
-// constexpr double TDC_area = 5065049 / whole_beam_intensity_perSec_perArea;
 
 // ALIGNMENT VARIABLES
 // ethalone
@@ -74,4 +67,3 @@ constexpr double mirror_distance = 150e-3;
 constexpr double total_length = 1.;
 constexpr int daq_downsizing = 256;
 constexpr double dt = 1. / daq_freq * daq_downsizing;
-
