@@ -64,6 +64,6 @@ constexpr int N_bilayer = 8;
 constexpr double theta = 1.05 * pi / 180;
 constexpr double mirror_distance = 150e-3;
 // TDC
-constexpr double total_length = 1.;
+constexpr double total_length = 1.8;
 constexpr int daq_downsizing = 256;
 constexpr double dt = 1. / daq_freq * daq_downsizing;

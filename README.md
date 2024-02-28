@@ -27,35 +27,35 @@
 
 ### 実験装置
 
-- [ ] 設計
+- [x] 設計
   - [x] 要求の整理
   - [x] 図面作成
-- [ ] 必要機材の整理
+- [x] 必要機材の整理
   - [x] エタロン
   - [x] ステージ
-  - [ ] 試料とステージのインターフェース
-  - [ ] アラインメント配置の測定機器
-    - [ ] 長さ計測
-    - [ ] 角度計測
-- [ ] 必要機材の調達確認
+  - [x] 試料とステージのインターフェース
+  - [x] アラインメント配置の測定機器
+    - [x] 長さ計測
+    - [x] 角度計測
+- [x] 必要機材の調達確認
   - [x] エタロン
   - [x] ステージ
-  - [ ] エタロンとステージのインターフェース
-- [ ] 必要機材の稼働確認
-  - [ ] ステージ操作方法
+  - [x] エタロンとステージのインターフェース
+- [x] 必要機材の稼働確認
+  - [x] ステージ操作方法
 - [ ] 組み立て
 
 ## 実験概要
 
 基本的にintroduction下「やりたい実験.pdf」に記載。
-うまく実験が回ったらtexに。
+実験原理はreport下theoretical.pdfに。
 
 ## ファイル命名規則
 
 ### 本実験データ
 
-- 通し番号 (4桁) .root
-- カットなし通し番号 (4桁) カットあり通し番号 (4桁) $\delta$ (deg, 3桁, 0.1ºまで) 計測時間 (秒, 5桁) (.root / .pdf / .png)
+- 原則J-PARCに従う
+- 波長などを取り出したrootファイルは先頭lmdを付記
 
 ### シミュレーションデータ
 
@@ -64,9 +64,6 @@
 
 ### 例
 
-- `0304.root` : 通し番号304実験生データ。
-- `0025002630000360.root` : 通し番号25&26の合成, カットなし, $\delta=30.0 \deg$, 360秒計測。
-- `0340c04501250.root` : 通し番号340, カットはcルート, $\delta=4.5 \deg$, 1250秒計測。
 - `mix_mix_5deg_10min_ALPHA5e-3_lmd7e-10to10e-10.root` : 重力・角度差込み, 副次項込み, $\delta=5 \deg$, 10 min計測, $\alpha=5\times10^{-3} \deg$, $7\times10^{-10}\leq\lambda\leq10\times10^{-10}$
 - `g_main_30deg_10min_ALPHA1e-3_lmd7e-10to10e-10_H.dat` : 重力効果のみ, 主要項のみ, $\delta=30 \deg$, 10 min計測, $\alpha=1\times10^{-3} \deg$, $7\times10^{-10}\leq\lambda\leq10\times10^{-10}$, H beam
 
@@ -74,18 +71,30 @@
 
 ``` folder tree
 .
+├── analysis: 本実験解析
+│   ├── data
+│   ├── img
+│   │   ├── count: ビームカウント
+│   │   │   ├── lmd: 横軸波長
+│   │   │   └── tof: 横軸tof
+│   │   └── oscillation: 振動
+│   ├── analysis.h: 解析で回すrootコードがいっぱい
+│   └── config.h: 各種設定
+|
 ├── introduction
-│   ├── やりたい実験.pdf: 実験ノートみたいな使い方してる
+│   ├── やりたい実験.pdf: 実験計画ノートみたいな使い方してる
 │   └── presentation.pptx: 実験概要プレゼン
 │
 ├── papers: 参考文献 (gitには上げない)
 │
-├── phase-calc: 位相の概算に使用
+├── phase-calc: 位相の概算に使用 (gitから削除)
 │   ├── Data_all_mikata.md: Data_all.datのフォーマット及び入射角1.05ºでの位相 (誤差付き)
 │   ├── phase.cpp: 位相とその誤差の概算
 │   ├── prob_error.gpl: 波動関数から出る波長-確率分布の誤差を概算
 │   ├── prob_error.pdf: 波動関数から出る波長-確率分布の誤差
 │   └── ...
+│
+├── pictures: 実験風景 (gitには上げない)
 │
 ├── simulation
 │   ├── beam_count: 波長-ビーム強度ヒストグラム
@@ -192,7 +201,7 @@
 - beam width 6e-3 (cf. 2024/01/19 thread)
 - beam intensity 5.4e4 n/s/cm2
 - ethalone area 12e-3 x 12e-3
-- double slit width (sum of 2) 260e-6
+- double slit width (sum of 2) 200e-6
 - DAQ freq. 62.5e+6
 - gap thickness $(189\pm0.1)\times10^{-6}$
 - wavelength min. 2e-10
@@ -205,7 +214,7 @@
 ### 装置設計の可変変数
 
 - mirror distance 150e-3
-- angle $(1.05\pm0.1)\degree$ (あまり変えたくない)
+- angle $1.0 \degree$ (あまり変えたくない)
 - beam time 1 h
 - DAQ downsizing 16
 - used wavelength min. 6.9e-10
@@ -213,7 +222,7 @@
 - theta min. 0.2º
 - theta max. 1.5º
 - theta interval 0.01º
-- total length $1.000\pm.005$
+- total length $1.835\pm.005$
 - delta 30º
 - slit width 0.2e-3
 - slit height 10e-3

@@ -7,6 +7,8 @@
 *.dSYM
 a.out
 /papers
+/phase-calc
+/pictures
 /trash
 *.key
 *.synctex.gz
