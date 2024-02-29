@@ -2,6 +2,7 @@
 #include <fstream>
 #include <random>
 #include <complex>
+#include <cmath>
 #include <TFile.h>
 #include <TTree.h>
 #include <TCanvas.h>
@@ -28,12 +29,10 @@ constexpr double lambda_max_displayed = 1.5e-8;
 // PHYS & MATH CONSTANTS
 complex<double> I(0, 1.);
 #define h 6.62607015e-34
-#define pi M_PI
 #define J_per_eV 1.6022e-19
 #define m 1.675e-27
 #define NA 6.02214e23
-#define g = 9.8;
-constexpr double hbar = h / (2 * pi);
+#define g 9.8;
 
 constexpr double V_sio2 = 90.9e-09 * J_per_eV;
 constexpr double V_ni = 224.e-09 * J_per_eV;
@@ -57,13 +56,23 @@ constexpr double D_ni = 133.5e-10 / delta_D;
 constexpr double D_ti = 98.3e-10 / delta_D;
 constexpr double gap = 189e-6;
 constexpr int N_bilayer = 8;
-// TDC
+// tdc
 
 // ALIGNMENT VARIABLES
 // ethalone
-constexpr double theta = 1.05 * pi / 180;
+constexpr double theta = 1.05 * M_PI / 180;
 constexpr double mirror_distance = 150e-3;
-// TDC
+// tdc
 constexpr double total_length = 1.8;
 constexpr int daq_downsizing = 256;
+// focus range
+constexpr double lambda_max_focus = 8.5e-10;
+constexpr double lambda_min_focus = 6.9e-10;
+
+// CALCULATED
+constexpr double hbar = h / (2 * M_PI);
 constexpr double dt = 1. / daq_freq * daq_downsizing;
+constexpr double factor2tof = h / total_length / m;
+constexpr double dLambda = dt * factor2tof;
+constexpr int nBins = (int)((lambda_max - lambda_min) / dLambda);
+constexpr int nBins_zoom = (int)((lambda_max_focus - lambda_min_focus) / dLambda);

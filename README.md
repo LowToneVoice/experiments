@@ -6,24 +6,7 @@
 
 ### 数値計算
 
-- [x] ROOT Cern上でのFFT実装
-  - [x] tutorialの確認
-    - [x] tutorialのFFTがFFTされたように見えない
-  - [x] 実装
-- [x] JPARCのROOTファイルに沿った実装
-  - [x] positionの実装
-  - [x] lambda_roi_histogramの実装
-  - [x] oscillation_lambdaの変更
-  - [x] read_lambdaの変更
-  - [x] sim_lambdaの変更
-- [ ] 誤差の実装
-  - [x] lambdaの誤差の組入
-  - [ ] lambdaの誤差の確認
-  - [ ] アラインメントの誤差の組入
-  - [ ] アラインメントの誤差の確認
-  - [x] 統計誤差の組入
-  - [ ] 統計誤差の確認
-- [x] 統計数の把握
+- ビーム強度をカットした時の値で割る
 
 ### 実験装置
 
