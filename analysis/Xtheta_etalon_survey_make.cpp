@@ -3,16 +3,18 @@
 
 int main()
 {
-    double start = 179;
-    double end = 181;
-    double step = .05;
-    int time_perStep_sec = 120;
+    double start_theta = 179;
+    double end_theta = 181;
+    double step_theta = .05;
+    int time_perStep_sec_theta = 60;
+
 
     std::ofstream outFile("theta_etalon_survey.m");
 
     std::string target_obj = "theta_etalon";
     std::string command = "setPosition";
-    int numx = (int)((end - start) / step);
+    int numx = (int)((end_X - start_X) / step_X);
+    int num_theta = (int)((end_theta - start_theta) / step_theta);
 
     int KPperTime = 25;
     int count = 0;
@@ -27,6 +29,11 @@ int main()
 
         for (int i = 0; i < numx; i++)
         {
+            for (int j = 0; j < num_theta; j++)
+            {
+                /* code */
+            }
+
             outFile << target_obj << " " << command << ":" << std::to_string(start + step * i) << ";" << std::endl;
             outFile << "niki startDetection;" << std::endl;
             outFile << "gate waitWhileKP:" << std::to_string(KPperTime * time_perStep_sec) << ";" << std::endl;
