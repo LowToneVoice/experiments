@@ -1,0 +1,15 @@
+2023/09/15
+MakeNikiを改造。
+RPMTとFRPを両方読めるようにした。
+MakeNiki 20230621165938_list_000.dat 3
+とするとFRP用のrootファイルを作成する。
+nOption=0,1,2はそのまま。
+
+
+2016/04/25
+MakeNikiを改造。
+MakeNiki 201603290750_list_000.dat 2
+で連続してfileを読むようにした.
+Fileを最後まで読んだのち,
+201603290750_list.root
+というroot fileを作る。

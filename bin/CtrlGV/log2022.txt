@@ -1,0 +1,561 @@
+
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 6.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 4.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  1.000000 s.
+#    Case 2:  3.000000 s.
+#    Case 3:  5.000000 s.
+#    Case 4:  7.000000 s.
+#    Case 5:  9.000000 s.
+#    Case 6:  11.000000 s.
+#    Total case number of storage time: 6
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 6.000000 s.
+#   >> Duration of DAQ: 4.000000 s.
+#   >> Duration of cleaning after DAQ: 2.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 11:58:16 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 11:58:16 2022
+
+Run 1 Start @ Fri Jun 10 11:58:22 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 11:58:35 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 11:58:51 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 11:59:08 2022
+Storage time is 2 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 11:59:08 2022
+
+
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 6.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 4.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  2.000000 s.
+#    Case 2:  4.000000 s.
+#    Case 3:  6.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 6.000000 s.
+#   >> Duration of DAQ: 4.000000 s.
+#   >> Duration of cleaning after DAQ: 2.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 15:10:46 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 15:10:46 2022
+
+
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 6.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 4.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  2.000000 s.
+#    Case 2:  4.000000 s.
+#    Case 3:  6.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 6.000000 s.
+#   >> Duration of DAQ: 4.000000 s.
+#   >> Duration of cleaning after DAQ: 2.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 15:11:58 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 15:11:58 2022
+
+Run 1 Start @ Fri Jun 10 15:12:04 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 15:12:04 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 15:12:08 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 15:12:10 2022
+Storage time is 2 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 15:12:11 2022
+
+Run 2 Start @ Fri Jun 10 15:12:17 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 15:12:17 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 15:12:21 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 15:12:23 2022
+Storage time is 4 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 15:12:25 2022
+
+Run 3 Start @ Fri Jun 10 15:12:31 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 15:12:31 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 15:12:36 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 15:12:38 2022
+Storage time is 6 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 15:12:42 2022
+
+Run 4 Start @ Fri Jun 10 15:12:48 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 15:12:48 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 15:12:52 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 15:12:54 2022
+Storage time is 2 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 15:12:55 2022
+
+
+
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 20.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 16:15:49 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:15:49 2022
+
+Run 1 Start @ Fri Jun 10 16:16:49 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:16:49 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:17:29 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:17:49 2022
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:17:50 2022
+
+
+
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 16:19:06 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:19:07 2022
+
+Run 1 Start @ Fri Jun 10 16:20:07 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:20:07 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:20:47 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:20:49 2022
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:21:07 2022
+
+Run 2 Start @ Fri Jun 10 16:22:07 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:22:07 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:22:48 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:22:50 2022
+Storage time is 40 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:23:28 2022
+
+Run 3 Start @ Fri Jun 10 16:24:28 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:24:28 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:25:08 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:25:11 2022
+Storage time is 60 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:26:09 2022
+
+Run 4 Start @ Fri Jun 10 16:27:09 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:27:09 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:27:49 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:27:51 2022
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:28:10 2022
+
+Run 5 Start @ Fri Jun 10 16:29:10 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:29:10 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:29:50 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:29:52 2022
+Storage time is 40 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:30:30 2022
+
+Run 6 Start @ Fri Jun 10 16:31:30 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:31:30 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:32:11 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:32:13 2022
+Storage time is 60 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:33:11 2022
+
+Run 7 Start @ Fri Jun 10 16:34:11 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:34:11 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:34:51 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:34:54 2022
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:35:12 2022
+
+Run 8 Start @ Fri Jun 10 16:36:12 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:36:12 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:36:52 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:36:54 2022
+Storage time is 40 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:37:33 2022
+
+Run 9 Start @ Fri Jun 10 16:38:33 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:38:33 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:39:13 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:39:15 2022
+Storage time is 60 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:40:13 2022
+
+Run 10 Start @ Fri Jun 10 16:41:13 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:41:13 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 16:41:54 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 16:41:56 2022
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 16:42:14 2022
+
+Run 11 Start @ Fri Jun 10 16:43:14 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 16:43:14 2022
+
+
+
+
+Storage measurement starts at 2022/06/10 19:21:53.
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 19:21:53 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 19:21:53 2022
+
+
+
+
+
+************************************************************************
+****            ***  ******  *****      *****        ****    ****  *****
+*********  ********  ******  ***  *****  ***  ******  ***  *  ***  *****
+*********  ********  ******  ***  **********  ******  ***  **  **  *****
+*********  ********  ******  ***  **********          ***  ***  *  *****
+*********  ********  ******  ***  *****  ***  ******  ***  ****    *****
+*********  *********        *****       ****  ******  ***  *****   *****
+************************************************************************
+
+Storage measurement starts at 2022/06/10 19:31:33.
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 19:31:33 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 19:31:33 2022
+
+
+
+
+
+************************************************************************
+****            ***  ******  *****      *****        ****    ****  *****
+*********  ********  ******  ***  *****  ***  ******  ***  *  ***  *****
+*********  ********  ******  ***  **********  ******  ***  **  **  *****
+*********  ********  ******  ***  **********          ***  ***  *  *****
+*********  ********  ******  ***  *****  ***  ******  ***  ****    *****
+*********  *********        *****       ****  ******  ***  *****   *****
+************************************************************************
+
+Storage measurement starts at 2022/06/10 19:32:12.
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 19:32:12 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 19:32:12 2022
+
+
+
+
+
+************************************************************************
+****            ***  ******  *****      *****        ****    ****  *****
+*********  ********  ******  ***  *****  ***  ******  ***  *  ***  *****
+*********  ********  ******  ***  **********  ******  ***  **  **  *****
+*********  ********  ******  ***  **********          ***  ***  *  *****
+*********  ********  ******  ***  *****  ***  ******  ***  ****    *****
+*********  *********        *****       ****  ******  ***  *****   *****
+************************************************************************
+
+Storage measurement starts at 2022/06/10 19:37:45.
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 19:37:45 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 19:37:45 2022
+
+
+
+
+
+########################################################################
+####            ###  ######  #####      #####        ####    ####  #####
+#########  ########  ######  ###  #####  ###  ######  ###  #  ###  #####
+#########  ########  ######  ###  ##########  ######  ###  ##  ##  #####
+#########  ########  ######  ###  ##########          ###  ###  #  #####
+#########  ########  ######  ###  #####  ###  ######  ###  ####    #####
+#########  #########        #####       ####  ######  ###  #####   #####
+########################################################################
+
+Storage measurement starts at 2022/06/10 19:38:40.
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 19:38:40 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 19:38:40 2022
+
+Run 1 Start @ Fri Jun 10 19:39:40 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 19:39:40 2022
+
+
+
+
+########################################################################
+####            ###  ######  #####      #####        ####    #####  ####
+#########  ########  ######  ###  #####  ###  ######  ###  #  ####  ####
+#########  ########  ######  ###  ##########  ######  ###  ##  ###  ####
+#########  ########  ######  ###  ##########          ###  ###  ##  ####
+#########  ########  ######  ###  #####  ###  ######  ###  ####  #  ####
+#########  #########        #####       ####  ######  ###  #####    ####
+########################################################################
+
+Storage measurement starts at 2022/06/10 19:42:16.
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 19:42:16 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 19:42:16 2022
+
+
+
+
+
+########################################################################
+####            ###  ######  #####      #####        ####    #####  ####
+#########  ########  ######  ###  #####  ###  ######  ###  #  ####  ####
+#########  ########  ######  ###  ##########  ######  ###  ##  ###  ####
+#########  ########  ######  ###  ##########          ###  ###  ##  ####
+#########  ########  ######  ###  #####  ###  ######  ###  ####  #  ####
+#########  #########        #####       ####  ######  ###  #####    ####
+########################################################################
+
+Storage measurement starts at 2022/06/10 19:42:40.
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 19:42:40 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 19:42:40 2022
+
+
+
+
+
+########################################################################
+####            ###  ######  #####      #####        ####    #####  ####
+#########  ########  ######  ###  #####  ###  ######  ###  #  ####  ####
+#########  ########  ######  ###  ##########  ######  ###  ##  ###  ####
+#########  ########  ######  ###  ##########          ###  ###  ##  ####
+#########  ########  ######  ###  #####  ###  ######  ###  ####  #  ####
+#########  #########        #####       ####  ######  ###  #####    ####
+########################################################################
+
+Storage measurement starts at 2022/06/10 19:48:07.
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 19:48:07 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 19:48:07 2022
+
+Run 1 Start @ Fri Jun 10 19:49:07 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 19:49:08 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 19:49:48 2022
+GV10 (RV:Detection, CV:Close) is performed @ Fri Jun 10 19:49:50 2022
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 19:50:08 2022
+
+Run 2 Start @ Fri Jun 10 19:51:08 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 19:51:08 2022
+GV00 (RV:Filling, CV:Close) is performed @ Fri Jun 10 19:51:49 2022
+
+
+
+
+########################################################################
+####            ###  ######  #####      #####        ####    #####  ####
+#########  ########  ######  ###  #####  ###  ######  ###  #  ####  ####
+#########  ########  ######  ###  ##########  ######  ###  ##  ###  ####
+#########  ########  ######  ###  ##########          ###  ###  ##  ####
+#########  ########  ######  ###  #####  ###  ######  ###  ####  #  ####
+#########  #########        #####       ####  ######  ###  #####    ####
+########################################################################
+
+Storage measurement starts at 2022/06/10 19:55:05 (JST).
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 60.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 40.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  20.000000 s.
+#    Case 2:  40.000000 s.
+#    Case 3:  60.000000 s.
+#    Total case number of storage time: 3
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 60.000000 s.
+#   >> Duration of DAQ: 40.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 19:55:05 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 19:55:05 2022
+

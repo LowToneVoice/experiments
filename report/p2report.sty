@@ -1,4 +1,5 @@
-\usepackage{amsmath,amssymb}
+\usepackage{mathtools}
+\usepackage{amssymb}
 \usepackage{bm}
 \usepackage{docmute}
 \usepackage[dvipdfmx]{graphicx}
@@ -11,7 +12,43 @@
 
 \usetikzlibrary{arrows.meta, calc, intersections, math, shapes.geometric, shapes.misc}
 
+%画像を2枚並べて表示するマクロ。
+\newcommand{\picturetwo}[4]{\begin{figure}[h]
+\centering
+\begin{minipage}{0.45\columnwidth}
+\centering
+\includegraphics[width=0.7\columnwidth]{#1}%1枚目の画像名
+\caption{#2}%1枚目の画像のキャプション
+\end{minipage}
+\begin{minipage}{0.45\columnwidth}
+\centering
+\includegraphics[width=0.7\columnwidth]{#3}%2枚目の画像名
+\caption{#4}%2枚目の画像のキャプション
+\end{minipage}
+\end{figure}}
+
+%画像を挿入するマクロ。
+\newcommand{\pictureone}[3]{\begin{figure}[h]
+\centering
+\includegraphics[width=#3\columnwidth]{#1}
+\caption{#2}
+\end{figure}}
+
+%画像1枚を文章に挿入する。文章が画像を迂回したような仕上がりになる。pngしか出来ないので注意。
+\newcommand{\picturesingle}[3]{\begin{wrapfigure}{r}[0zw]{#3\columnwidth}\centering
+\includegraphics[width=#3\columnwidth]{#1.png}
+\caption{#2}
+\label{fig:#1}
+\end{wrapfigure}}
+
+%表を挿入するマクロ。
+\newcommand{\tableone}[3]{\begin{table}[h]
+\centering
+\caption{#2}
+\includegraphics[width=#3\columnwidth]{#1}
+\end{table}}
+
 % title, author, date
 \title{多層膜ミラーによるCOW効果の検出}
-\author{齊藤巧磨 \and 松井数尭}
+\author{齊藤巧磨 \and 松井一尭}
 \date{\today}

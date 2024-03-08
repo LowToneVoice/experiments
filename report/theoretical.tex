@@ -13,7 +13,7 @@
 \begin{equation*}
     H
     =
-    \frac{\bm{p}^2}{2m}+mgz
+    \frac{\bm{p}^2}{2m}+mgy
 \end{equation*}
 となる。
 $\bm{p}$は運動量、$m$は中性子質量、$g$は重力加速度でそれぞれ定数、$z$は基準面からの高さである。
@@ -24,13 +24,13 @@ $\bm{p}$は運動量、$m$は中性子質量、$g$は重力加速度でそれぞ
     \exp[
         \frac{1}{i\hbar}\int\dd{t}
         \qty(
-            \frac{\bm{p}^2}{2m}+mgz
+            \frac{\bm{p}^2}{2m}+mgy
         )
     ]
     =
     \exp[
         \frac{1}{i\hbar}\int_\gamma\frac{\dd{s}}{v}
-        \qty(\frac{\bm{p}^2}{2m}+mgz)
+        \qty(\frac{\bm{p}^2}{2m}+mgy)
     ]
 \end{equation*}
 の形で表される。
@@ -64,7 +64,7 @@ $\bm{p}$は運動量、$m$は中性子質量、$g$は重力加速度でそれぞ
         \draw(1.5,.5)--++(.5,.5)node[above left]{C};
         \draw(2,1)--++(.5,0);
         \draw[->, >=Stealth](2.5,1)--++(2,0)node[right]{O beam};
-        \draw[->, >=Stealth](.5,1.)--++(0,.5)node[above]{$z$};
+        \draw[->, >=Stealth](.5,1.)--++(0,.5)node[above]{$y$};
     \end{tikzpicture}
     \caption{
         中性子の経路。

@@ -1,0 +1,20 @@
+(Example)
+DAQStorageExperiment 100 50 40 80 120 160 30 70 100
+
+OpenGVTime         = 100000000; //GV1 and GV2 open
+ImportTime         = 50000000;  //GV1 closes and GV2 opens
+StorageTime1       = 4000000;   //GV1 and GV2 close for UCNStorage1
+StorageTime2       = 800000000; //GV1 and GV2 close for UCNStorage2
+StorageTime3       = 120000000; //GV1 and GV2 close for UCNStorage3
+StorageTime4       = 160000000; //GV1 and GV2 close for UCNStorage4
+DAQTime            = 30000000;  //GV1 opens and GV2 close for taking data by using Dunia-10
+CleaningTime       = 70000000;  //GV1 opens and GV2 close for cleaning
+FirstCleaningTime  = 100000000; //Before the begining of a run, GV1 opens and GV2 close for cleaning
+
+Cycle repeats a follwing procedure until run limit is over:
+
+FirstCleaning -> { OpenGV->Import->Storage1->DAQ->Cleaning
+	         ->OpenGV->Import->Storage2->DAQ->Cleaning
+		 ->OpenGV->Import->Storage3->DAQ->Cleaning
+		 ->OpenGV->Import->Storage4->DAQ->Cleaning }
+	     -> {...}->...

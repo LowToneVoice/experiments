@@ -1,0 +1,1099 @@
+
+
+
+
+########################################################################
+####            ###  ######  #####      #####        ####    #####  ####
+#########  ########  ######  ###  #####  ###  ######  ###  #  ####  ####
+#########  ########  ######  ###  ##########  ######  ###  ##  ###  ####
+#########  ########  ######  ###  ##########          ###  ###  ##  ####
+#########  ########  ######  ###  #####  ###  ######  ###  ####  #  ####
+#########  #########        #####       ####  ######  ###  #####    ####
+########################################################################
+
+Storage measurement starts at 2023/06/03 0:28:59 (JST).
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 80.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 60.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 1.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  15.000000 s.
+#    Case 2:  20.000000 s.
+#    Case 3:  30.000000 s.
+#    Case 4:  50.000000 s.
+#    Case 5:  65.000000 s.
+#    Case 6:  80.000000 s.
+#    Case 7:  100.000000 s.
+#    Case 8:  120.000000 s.
+#    Case 9:  150.000000 s.
+#    Case 10:  180.000000 s.
+#    Case 11:  250.000000 s.
+#    Case 12:  320.000000 s.
+#    Total case number of storage time: 12
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 80.000000 s.
+#   >> Duration of DAQ: 60.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Sat Jun  3 00:28:59 2023
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 00:28:59 2023
+
+Run 1 Start @ Sat Jun  3 00:30:19 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 00:30:19 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 00:31:20 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 00:31:21 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 00:31:35 2023
+
+Run 2 Start @ Sat Jun  3 00:32:55 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 00:32:55 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 00:33:56 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 00:33:57 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 00:34:16 2023
+
+Run 3 Start @ Sat Jun  3 00:35:36 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 00:35:36 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 00:36:37 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 00:36:38 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 00:37:07 2023
+
+Run 4 Start @ Sat Jun  3 00:38:27 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 00:38:28 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 00:39:28 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 00:39:29 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 00:40:18 2023
+
+Run 5 Start @ Sat Jun  3 00:41:38 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 00:41:39 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 00:42:39 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 00:42:40 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 00:43:44 2023
+
+Run 6 Start @ Sat Jun  3 00:45:04 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 00:45:04 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 00:46:05 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 00:46:06 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 00:47:25 2023
+
+Run 7 Start @ Sat Jun  3 00:48:45 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 00:48:45 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 00:49:46 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 00:49:47 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 00:51:26 2023
+
+Run 8 Start @ Sat Jun  3 00:52:46 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 00:52:46 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 00:53:47 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 00:53:48 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 00:55:47 2023
+
+Run 9 Start @ Sat Jun  3 00:57:07 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 00:57:07 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 00:58:08 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 00:58:09 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:00:38 2023
+
+Run 10 Start @ Sat Jun  3 01:01:58 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:01:58 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:02:59 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:03:00 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:05:59 2023
+
+Run 11 Start @ Sat Jun  3 01:07:19 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:07:19 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:08:20 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:08:21 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:12:30 2023
+
+Run 12 Start @ Sat Jun  3 01:13:50 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:13:51 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:14:51 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:14:52 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:20:11 2023
+
+Run 13 Start @ Sat Jun  3 01:21:32 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:21:32 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:22:32 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:22:33 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:22:47 2023
+
+Run 14 Start @ Sat Jun  3 01:24:07 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:24:08 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:25:08 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:25:09 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:25:28 2023
+
+Run 15 Start @ Sat Jun  3 01:26:48 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:26:48 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:27:49 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:27:50 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:28:19 2023
+
+Run 16 Start @ Sat Jun  3 01:29:39 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:29:39 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:30:40 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:30:41 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:31:30 2023
+
+Run 17 Start @ Sat Jun  3 01:32:50 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:32:50 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:33:51 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:33:52 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:34:56 2023
+
+Run 18 Start @ Sat Jun  3 01:36:16 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:36:16 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:37:16 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:37:18 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:38:37 2023
+
+Run 19 Start @ Sat Jun  3 01:39:57 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:39:57 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:40:57 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:40:59 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:42:38 2023
+
+Run 20 Start @ Sat Jun  3 01:43:58 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:43:58 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:44:58 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:44:59 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:46:59 2023
+
+Run 21 Start @ Sat Jun  3 01:48:19 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:48:19 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:49:19 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:49:20 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:51:50 2023
+
+Run 22 Start @ Sat Jun  3 01:53:10 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:53:10 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:54:10 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:54:12 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 01:57:11 2023
+
+Run 23 Start @ Sat Jun  3 01:58:31 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 01:58:31 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 01:59:31 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 01:59:33 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:03:42 2023
+
+Run 24 Start @ Sat Jun  3 02:05:02 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:05:02 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:06:03 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:06:04 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:11:23 2023
+
+Run 25 Start @ Sat Jun  3 02:12:43 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:12:44 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:13:44 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:13:45 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:13:59 2023
+
+Run 26 Start @ Sat Jun  3 02:15:19 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:15:19 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:16:20 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:16:21 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:16:40 2023
+
+Run 27 Start @ Sat Jun  3 02:18:00 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:18:00 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:19:01 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:19:02 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:19:31 2023
+
+Run 28 Start @ Sat Jun  3 02:20:51 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:20:51 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:21:51 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:21:53 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:22:42 2023
+
+Run 29 Start @ Sat Jun  3 02:24:02 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:24:02 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:25:02 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:25:04 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:26:08 2023
+
+Run 30 Start @ Sat Jun  3 02:27:28 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:27:28 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:28:28 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:28:30 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:29:49 2023
+
+Run 31 Start @ Sat Jun  3 02:31:09 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:31:09 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:32:09 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:32:10 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:33:50 2023
+
+Run 32 Start @ Sat Jun  3 02:35:10 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:35:10 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:36:10 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:36:11 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:38:11 2023
+
+Run 33 Start @ Sat Jun  3 02:39:31 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:39:31 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:40:31 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:40:32 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:43:02 2023
+
+Run 34 Start @ Sat Jun  3 02:44:22 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:44:22 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:45:22 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:45:23 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:48:23 2023
+
+Run 35 Start @ Sat Jun  3 02:49:43 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:49:43 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:50:43 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:50:45 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 02:54:54 2023
+
+Run 36 Start @ Sat Jun  3 02:56:14 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 02:56:14 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 02:57:14 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 02:57:16 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:02:35 2023
+
+Run 37 Start @ Sat Jun  3 03:03:55 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:03:56 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:04:56 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:04:57 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:05:11 2023
+
+Run 38 Start @ Sat Jun  3 03:06:31 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:06:32 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:07:32 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:07:33 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:07:52 2023
+
+Run 39 Start @ Sat Jun  3 03:09:12 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:09:13 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:10:13 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:10:14 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:10:43 2023
+
+Run 40 Start @ Sat Jun  3 03:12:04 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:12:04 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:13:04 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:13:05 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:13:55 2023
+
+Run 41 Start @ Sat Jun  3 03:15:15 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:15:15 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:16:15 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:16:16 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:17:21 2023
+
+Run 42 Start @ Sat Jun  3 03:18:41 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:18:41 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:19:41 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:19:43 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:21:02 2023
+
+Run 43 Start @ Sat Jun  3 03:22:22 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:22:22 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:23:23 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:23:24 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:25:03 2023
+
+Run 44 Start @ Sat Jun  3 03:26:23 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:26:24 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:27:24 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:27:25 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:29:24 2023
+
+Run 45 Start @ Sat Jun  3 03:30:45 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:30:45 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:31:45 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:31:46 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:34:16 2023
+
+Run 46 Start @ Sat Jun  3 03:35:36 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:35:36 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:36:37 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:36:38 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:39:37 2023
+
+Run 47 Start @ Sat Jun  3 03:40:57 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:40:58 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:41:58 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:41:59 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:46:09 2023
+
+Run 48 Start @ Sat Jun  3 03:47:29 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:47:29 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:48:30 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:48:31 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:53:51 2023
+
+Run 49 Start @ Sat Jun  3 03:55:11 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:55:11 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:56:11 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:56:12 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:56:27 2023
+
+Run 50 Start @ Sat Jun  3 03:57:47 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 03:57:47 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 03:58:47 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 03:58:48 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 03:59:08 2023
+
+Run 51 Start @ Sat Jun  3 04:00:28 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:00:28 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:01:28 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:01:29 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:01:59 2023
+
+Run 52 Start @ Sat Jun  3 04:03:19 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:03:19 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:04:19 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:04:21 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:05:10 2023
+
+Run 53 Start @ Sat Jun  3 04:06:30 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:06:30 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:07:31 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:07:32 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:08:36 2023
+
+Run 54 Start @ Sat Jun  3 04:09:56 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:09:56 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:10:57 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:10:58 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:12:17 2023
+
+Run 55 Start @ Sat Jun  3 04:13:38 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:13:38 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:14:38 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:14:39 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:16:19 2023
+
+Run 56 Start @ Sat Jun  3 04:17:39 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:17:39 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:18:39 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:18:40 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:20:40 2023
+
+Run 57 Start @ Sat Jun  3 04:22:00 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:22:00 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:23:01 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:23:02 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:25:31 2023
+
+Run 58 Start @ Sat Jun  3 04:26:51 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:26:52 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:27:52 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:27:53 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:30:53 2023
+
+Run 59 Start @ Sat Jun  3 04:32:13 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:32:13 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:33:13 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:33:15 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:37:24 2023
+
+Run 60 Start @ Sat Jun  3 04:38:45 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:38:45 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:39:45 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:39:46 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:45:06 2023
+
+Run 61 Start @ Sat Jun  3 04:46:26 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:46:26 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:47:27 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:47:28 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:47:42 2023
+
+Run 62 Start @ Sat Jun  3 04:49:02 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:49:03 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:50:03 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:50:04 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:50:23 2023
+
+Run 63 Start @ Sat Jun  3 04:51:43 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:51:44 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:52:44 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:52:45 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:53:14 2023
+
+Run 64 Start @ Sat Jun  3 04:54:35 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:54:35 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:55:35 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:55:36 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:56:25 2023
+
+Run 65 Start @ Sat Jun  3 04:57:46 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 04:57:46 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 04:58:46 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 04:58:47 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 04:59:52 2023
+
+Run 66 Start @ Sat Jun  3 05:01:12 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:01:12 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:02:12 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:02:14 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:03:33 2023
+
+Run 67 Start @ Sat Jun  3 05:04:53 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:04:53 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:05:54 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:05:55 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:07:34 2023
+
+Run 68 Start @ Sat Jun  3 05:08:54 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:08:55 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:09:55 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:09:56 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:11:55 2023
+
+Run 69 Start @ Sat Jun  3 05:13:16 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:13:16 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:14:16 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:14:17 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:16:47 2023
+
+Run 70 Start @ Sat Jun  3 05:18:07 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:18:07 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:19:08 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:19:09 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:22:08 2023
+
+Run 71 Start @ Sat Jun  3 05:23:28 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:23:29 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:24:29 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:24:30 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:28:39 2023
+
+Run 72 Start @ Sat Jun  3 05:29:59 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:30:00 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:31:00 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:31:01 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:36:21 2023
+
+Run 73 Start @ Sat Jun  3 05:37:41 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:37:41 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:38:41 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:38:42 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:38:57 2023
+
+Run 74 Start @ Sat Jun  3 05:40:17 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:40:17 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:41:17 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:41:18 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:41:37 2023
+
+Run 75 Start @ Sat Jun  3 05:42:57 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:42:58 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:43:58 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:43:59 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:44:28 2023
+
+Run 76 Start @ Sat Jun  3 05:45:49 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:45:49 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:46:49 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:46:50 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:47:40 2023
+
+Run 77 Start @ Sat Jun  3 05:49:00 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:49:00 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:50:00 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:50:01 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:51:06 2023
+
+Run 78 Start @ Sat Jun  3 05:52:26 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:52:26 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:53:26 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:53:28 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:54:47 2023
+
+Run 79 Start @ Sat Jun  3 05:56:07 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 05:56:07 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 05:57:08 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 05:57:09 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 05:58:48 2023
+
+Run 80 Start @ Sat Jun  3 06:00:08 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:00:09 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:01:09 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:01:10 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:03:09 2023
+
+Run 81 Start @ Sat Jun  3 06:04:30 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:04:30 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:05:30 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:05:31 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:08:01 2023
+
+Run 82 Start @ Sat Jun  3 06:09:21 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:09:21 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:10:21 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:10:23 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:13:22 2023
+
+Run 83 Start @ Sat Jun  3 06:14:42 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:14:43 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:15:43 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:15:44 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:19:54 2023
+
+Run 84 Start @ Sat Jun  3 06:21:14 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:21:14 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:22:14 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:22:16 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:27:36 2023
+
+Run 85 Start @ Sat Jun  3 06:28:56 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:28:56 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:29:56 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:29:57 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:30:12 2023
+
+Run 86 Start @ Sat Jun  3 06:31:32 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:31:32 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:32:32 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:32:34 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:32:53 2023
+
+Run 87 Start @ Sat Jun  3 06:34:13 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:34:13 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:35:13 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:35:15 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:35:44 2023
+
+Run 88 Start @ Sat Jun  3 06:37:04 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:37:04 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:38:05 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:38:06 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:38:55 2023
+
+Run 89 Start @ Sat Jun  3 06:40:15 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:40:15 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:41:16 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:41:17 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:42:21 2023
+
+Run 90 Start @ Sat Jun  3 06:43:41 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:43:42 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:44:42 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:44:43 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:46:03 2023
+
+Run 91 Start @ Sat Jun  3 06:47:23 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:47:23 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:48:23 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:48:24 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:50:04 2023
+
+Run 92 Start @ Sat Jun  3 06:51:24 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:51:24 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:52:25 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:52:26 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:54:25 2023
+
+Run 93 Start @ Sat Jun  3 06:55:45 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 06:55:46 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 06:56:46 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 06:56:47 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 06:59:17 2023
+
+Run 94 Start @ Sat Jun  3 07:00:37 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:00:37 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:01:37 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:01:39 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:04:38 2023
+
+Run 95 Start @ Sat Jun  3 07:05:58 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:05:58 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:06:58 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:07:00 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:11:09 2023
+
+Run 96 Start @ Sat Jun  3 07:12:29 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:12:29 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:13:30 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:13:31 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:18:50 2023
+
+Run 97 Start @ Sat Jun  3 07:20:10 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:20:11 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:21:11 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:21:12 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:21:26 2023
+
+Run 98 Start @ Sat Jun  3 07:22:46 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:22:46 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:23:47 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:23:48 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:24:07 2023
+
+Run 99 Start @ Sat Jun  3 07:25:27 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:25:27 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:26:28 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:26:29 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:26:58 2023
+
+Run 100 Start @ Sat Jun  3 07:28:18 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:28:18 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:29:19 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:29:20 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:30:09 2023
+
+Run 101 Start @ Sat Jun  3 07:31:29 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:31:29 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:32:29 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:32:31 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:33:35 2023
+
+Run 102 Start @ Sat Jun  3 07:34:55 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:34:55 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:35:55 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:35:57 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:37:16 2023
+
+Run 103 Start @ Sat Jun  3 07:38:36 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:38:36 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:39:36 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:39:38 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:41:17 2023
+
+Run 104 Start @ Sat Jun  3 07:42:37 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:42:37 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:43:37 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:43:39 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:45:38 2023
+
+Run 105 Start @ Sat Jun  3 07:46:58 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:46:58 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:47:58 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:48:00 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:50:29 2023
+
+Run 106 Start @ Sat Jun  3 07:51:49 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:51:49 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:52:49 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:52:51 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 07:55:50 2023
+
+Run 107 Start @ Sat Jun  3 07:57:10 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 07:57:11 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 07:58:11 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 07:58:12 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:02:22 2023
+
+Run 108 Start @ Sat Jun  3 08:03:42 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:03:42 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:04:43 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:04:44 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:10:04 2023
+
+Run 109 Start @ Sat Jun  3 08:11:24 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:11:24 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:12:24 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:12:26 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:12:40 2023
+
+Run 110 Start @ Sat Jun  3 08:14:00 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:14:00 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:15:01 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:15:02 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:15:21 2023
+
+Run 111 Start @ Sat Jun  3 08:16:41 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:16:41 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:17:42 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:17:43 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:18:12 2023
+
+Run 112 Start @ Sat Jun  3 08:19:32 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:19:32 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:20:33 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:20:34 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:21:23 2023
+
+Run 113 Start @ Sat Jun  3 08:22:43 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:22:43 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:23:44 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:23:45 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:24:49 2023
+
+Run 114 Start @ Sat Jun  3 08:26:09 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:26:09 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:27:10 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:27:11 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:28:30 2023
+
+Run 115 Start @ Sat Jun  3 08:29:50 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:29:50 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:30:50 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:30:52 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:32:31 2023
+
+Run 116 Start @ Sat Jun  3 08:33:51 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:33:51 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:34:52 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:34:53 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:36:53 2023
+
+Run 117 Start @ Sat Jun  3 08:38:13 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:38:13 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:39:13 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:39:14 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:41:44 2023
+
+Run 118 Start @ Sat Jun  3 08:43:04 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:43:04 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:44:05 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:44:06 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:47:05 2023
+
+Run 119 Start @ Sat Jun  3 08:48:25 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:48:25 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:49:26 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:49:27 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 08:53:36 2023
+
+Run 120 Start @ Sat Jun  3 08:54:56 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 08:54:57 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 08:55:57 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 08:55:58 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:01:17 2023
+
+Run 121 Start @ Sat Jun  3 09:02:38 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:02:38 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:03:38 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:03:39 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:03:53 2023
+
+Run 122 Start @ Sat Jun  3 09:05:13 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:05:14 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:06:14 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:06:15 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:06:34 2023
+
+Run 123 Start @ Sat Jun  3 09:07:54 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:07:55 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:08:55 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:08:56 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:09:25 2023
+
+Run 124 Start @ Sat Jun  3 09:10:45 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:10:45 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:11:46 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:11:47 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:12:36 2023
+
+Run 125 Start @ Sat Jun  3 09:13:56 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:13:56 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:14:57 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:14:58 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:16:02 2023
+
+Run 126 Start @ Sat Jun  3 09:17:22 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:17:22 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:18:23 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:18:24 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:19:43 2023
+
+Run 127 Start @ Sat Jun  3 09:21:03 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:21:03 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:22:04 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:22:05 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:23:44 2023
+
+Run 128 Start @ Sat Jun  3 09:25:04 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:25:04 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:26:05 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:26:06 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:28:05 2023
+
+Run 129 Start @ Sat Jun  3 09:29:25 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:29:25 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:30:25 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:30:27 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:32:56 2023
+
+Run 130 Start @ Sat Jun  3 09:34:16 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:34:16 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:35:17 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:35:18 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:38:17 2023
+
+Run 131 Start @ Sat Jun  3 09:39:37 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:39:37 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:40:38 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:40:39 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:44:48 2023
+
+Run 132 Start @ Sat Jun  3 09:46:08 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:46:08 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:47:09 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:47:10 2023
+Storage time is 320 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:52:29 2023
+
+Run 133 Start @ Sat Jun  3 09:53:49 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:53:50 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:54:50 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:54:51 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:55:05 2023
+
+Run 134 Start @ Sat Jun  3 09:56:25 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:56:26 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 09:57:26 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 09:57:27 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 09:57:46 2023
+
+Run 135 Start @ Sat Jun  3 09:59:06 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 09:59:06 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:00:07 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:00:08 2023
+Storage time is 30 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:00:37 2023
+
+Run 136 Start @ Sat Jun  3 10:01:57 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:01:57 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:02:58 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:02:59 2023
+Storage time is 50 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:03:48 2023
+
+Run 137 Start @ Sat Jun  3 10:05:08 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:05:08 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:06:09 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:06:10 2023
+Storage time is 65 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:07:14 2023
+
+Run 138 Start @ Sat Jun  3 10:08:34 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:08:34 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:09:34 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:09:36 2023
+Storage time is 80 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:10:55 2023
+
+Run 139 Start @ Sat Jun  3 10:12:15 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:12:15 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:13:16 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:13:17 2023
+Storage time is 100 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:14:56 2023
+
+Run 140 Start @ Sat Jun  3 10:16:17 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:16:17 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:17:17 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:17:18 2023
+Storage time is 120 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:19:18 2023
+
+Run 141 Start @ Sat Jun  3 10:20:38 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:20:38 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:21:38 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:21:39 2023
+Storage time is 150 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:24:09 2023
+
+Run 142 Start @ Sat Jun  3 10:25:29 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:25:29 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:26:29 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:26:30 2023
+Storage time is 180 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:29:30 2023
+
+Run 143 Start @ Sat Jun  3 10:30:50 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:30:50 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:31:50 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:31:52 2023
+Storage time is 250 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:36:01 2023
+
+Run 144 Start @ Sat Jun  3 10:37:22 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:37:22 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:38:22 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:38:23 2023
+Storage time is 320 sec.
+
+
+
+
+########################################################################
+####            ###  ######  #####      #####        ####    #####  ####
+#########  ########  ######  ###  #####  ###  ######  ###  #  ####  ####
+#########  ########  ######  ###  ##########  ######  ###  ##  ###  ####
+#########  ########  ######  ###  ##########          ###  ###  ##  ####
+#########  ########  ######  ###  #####  ###  ######  ###  ####  #  ####
+#########  #########        #####       ####  ######  ###  #####    ####
+########################################################################
+
+Storage measurement starts at 2023/06/03 10:45:21 (JST).
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 80.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 60.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 1.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  15.000000 s.
+#    Case 2:  20.000000 s.
+#    Total case number of storage time: 2
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 80.000000 s.
+#   >> Duration of DAQ: 60.000000 s.
+#   >> Duration of cleaning after DAQ: 20.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Sat Jun  3 10:45:21 2023
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:45:21 2023
+
+Run 1 Start @ Sat Jun  3 10:46:41 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:46:42 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:47:42 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:47:43 2023
+Storage time is 15 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:47:57 2023
+
+Run 2 Start @ Sat Jun  3 10:49:17 2023
+GV01 (RV:Filling, CV:Open) is performed @ Sat Jun  3 10:49:18 2023
+GV00 (RV:Filling, CV:Close) is performed @ Sat Jun  3 10:50:18 2023
+GV10 (RV:Detection, CV:Close) is performed @ Sat Jun  3 10:50:19 2023
+Storage time is 20 sec.
+GV11 (RV:Detection, CV:Open) is performed @ Sat Jun  3 10:50:38 2023

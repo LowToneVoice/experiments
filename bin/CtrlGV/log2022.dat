@@ -1,0 +1,28 @@
+
+========================== Start controll log ==========================
+#
+# RV = 'Rotary valve',  CV = 'Cell valve'
+# Preset parameters: 
+# Duration of the first cleaning: 6.000000 s.
+# Duration from (RV:Filling, CV:Open) to (RV:Filling, CV:Close): 4.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Close): 2.000000 s.
+# Duration from (RV:Filling, CV:Close) to (RV:Detection, CV:Open) is ...
+#    Case 1:  1.000000 s.
+#    Case 2:  3.000000 s.
+#    Case 3:  5.000000 s.
+#    Case 4:  7.000000 s.
+#    Case 5:  9.000000 s.
+#    Case 6:  11.000000 s.
+#    Total case number of storage time: 6
+# Duration from (RV:Detection, CV:Open) to (RV:Filling, CV:Open): 6.000000 s.
+#   >> Duration of DAQ: 4.000000 s.
+#   >> Duration of cleaning after DAQ: 2.000000 s.
+#
+
+========================== Start valve controll ==========================
+
+Cleaning Start @ Fri Jun 10 11:30:35 2022
+GV11 (RV:Detection, CV:Open) is performed @ Fri Jun 10 11:30:35 2022
+
+Run 1 Start @ Fri Jun 10 11:30:41 2022
+GV01 (RV:Filling, CV:Open) is performed @ Fri Jun 10 11:30:52 2022

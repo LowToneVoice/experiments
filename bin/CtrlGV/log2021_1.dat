@@ -1,0 +1,593 @@
+Cleaning Start @ Sat Feb 13 19:14:07 2021
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:14:08 2021
+
+Run 1 Start @ Sat Feb 13 19:15:08 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:15:08 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:15:48 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:15:50 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:16:13 2021
+
+Run 2 Start @ Sat Feb 13 19:17:13 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:17:14 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:17:54 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:17:56 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:18:39 2021
+
+Run 3 Start @ Sat Feb 13 19:19:39 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:19:39 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:20:20 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:20:22 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:21:25 2021
+
+Run 4 Start @ Sat Feb 13 19:22:25 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:22:25 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:23:06 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:23:08 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:24:31 2021
+
+Run 5 Start @ Sat Feb 13 19:25:31 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:25:31 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:26:11 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:26:14 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:27:57 2021
+
+Run 6 Start @ Sat Feb 13 19:28:57 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:28:57 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:29:37 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:29:39 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:31:43 2021
+
+Run 7 Start @ Sat Feb 13 19:32:43 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:32:43 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:33:23 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:33:25 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:33:49 2021
+
+Run 8 Start @ Sat Feb 13 19:34:49 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:34:49 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:35:29 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:35:31 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:36:14 2021
+
+Run 9 Start @ Sat Feb 13 19:37:15 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:37:15 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:37:55 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:37:57 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:39:00 2021
+
+Run 10 Start @ Sat Feb 13 19:40:00 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:40:01 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:40:41 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:40:43 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:42:06 2021
+
+Run 11 Start @ Sat Feb 13 19:43:06 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:43:06 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:43:47 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:43:49 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:45:32 2021
+
+Run 12 Start @ Sat Feb 13 19:46:32 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:46:32 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:47:13 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:47:15 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:49:18 2021
+
+Run 13 Start @ Sat Feb 13 19:50:18 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:50:18 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:50:58 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:51:01 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:51:24 2021
+
+Run 14 Start @ Sat Feb 13 19:52:24 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:52:24 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:53:04 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:53:06 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:53:50 2021
+
+Run 15 Start @ Sat Feb 13 19:54:50 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:54:50 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:55:30 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:55:32 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:56:35 2021
+
+Run 16 Start @ Sat Feb 13 19:57:36 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 19:57:36 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 19:58:16 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 19:58:18 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 19:59:41 2021
+
+Run 17 Start @ Sat Feb 13 20:00:41 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:00:42 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:01:22 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:01:24 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:03:07 2021
+
+Run 18 Start @ Sat Feb 13 20:04:07 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:04:08 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:04:48 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:04:50 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:06:53 2021
+
+Run 19 Start @ Sat Feb 13 20:07:53 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:07:53 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:08:34 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:08:36 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:08:59 2021
+
+Run 20 Start @ Sat Feb 13 20:09:59 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:09:59 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:10:39 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:10:42 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:11:25 2021
+
+Run 21 Start @ Sat Feb 13 20:12:25 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:12:25 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:13:05 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:13:07 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:14:11 2021
+
+Run 22 Start @ Sat Feb 13 20:15:11 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:15:11 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:15:51 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:15:53 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:17:17 2021
+
+Run 23 Start @ Sat Feb 13 20:18:17 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:18:17 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:18:57 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:18:59 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:20:42 2021
+
+Run 24 Start @ Sat Feb 13 20:21:42 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:21:43 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:22:23 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:22:25 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:24:28 2021
+
+Run 25 Start @ Sat Feb 13 20:25:28 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:25:29 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:26:09 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:26:11 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:26:34 2021
+
+Run 26 Start @ Sat Feb 13 20:27:34 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:27:34 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:28:15 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:28:17 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:29:00 2021
+
+Run 27 Start @ Sat Feb 13 20:30:00 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:30:00 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:30:40 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:30:43 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:31:46 2021
+
+Run 28 Start @ Sat Feb 13 20:32:46 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:32:46 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:33:26 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:33:29 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:34:52 2021
+
+Run 29 Start @ Sat Feb 13 20:35:52 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:35:52 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:36:32 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:36:34 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:38:18 2021
+
+Run 30 Start @ Sat Feb 13 20:39:18 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:39:18 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:39:58 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:40:00 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:42:04 2021
+
+Run 31 Start @ Sat Feb 13 20:43:04 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:43:04 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:43:44 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:43:46 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:44:09 2021
+
+Run 32 Start @ Sat Feb 13 20:45:09 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:45:10 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:45:50 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:45:52 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:46:35 2021
+
+Run 33 Start @ Sat Feb 13 20:47:35 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:47:35 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:48:16 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:48:18 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:49:21 2021
+
+Run 34 Start @ Sat Feb 13 20:50:21 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:50:21 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:51:02 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:51:04 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:52:27 2021
+
+Run 35 Start @ Sat Feb 13 20:53:27 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:53:27 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:54:07 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:54:10 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:55:53 2021
+
+Run 36 Start @ Sat Feb 13 20:56:53 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 20:56:53 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 20:57:33 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 20:57:35 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 20:59:39 2021
+
+Run 37 Start @ Sat Feb 13 21:00:39 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:00:39 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:01:19 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:01:21 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:01:45 2021
+
+Run 38 Start @ Sat Feb 13 21:02:45 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:02:45 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:03:25 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:03:27 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:04:10 2021
+
+Run 39 Start @ Sat Feb 13 21:05:10 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:05:11 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:05:51 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:05:53 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:06:56 2021
+
+Run 40 Start @ Sat Feb 13 21:07:56 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:07:57 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:08:37 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:08:39 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:10:02 2021
+
+Run 41 Start @ Sat Feb 13 21:11:02 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:11:03 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:11:43 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:11:45 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:13:28 2021
+
+Run 42 Start @ Sat Feb 13 21:14:28 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:14:28 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:15:09 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:15:11 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:17:14 2021
+
+Run 43 Start @ Sat Feb 13 21:18:14 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:18:14 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:18:55 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:18:57 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:19:20 2021
+
+Run 44 Start @ Sat Feb 13 21:20:20 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:20:20 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:21:00 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:21:03 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:21:46 2021
+
+Run 45 Start @ Sat Feb 13 21:22:46 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:22:46 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:23:26 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:23:28 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:24:32 2021
+
+Run 46 Start @ Sat Feb 13 21:25:32 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:25:32 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:26:12 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:26:14 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:27:38 2021
+
+Run 47 Start @ Sat Feb 13 21:28:38 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:28:38 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:29:18 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:29:20 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:31:03 2021
+
+Run 48 Start @ Sat Feb 13 21:32:04 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:32:04 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:32:44 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:32:46 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:34:49 2021
+
+Run 49 Start @ Sat Feb 13 21:35:49 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:35:50 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:36:30 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:36:32 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:36:55 2021
+
+Run 50 Start @ Sat Feb 13 21:37:55 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:37:55 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:38:36 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:38:38 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:39:21 2021
+
+Run 51 Start @ Sat Feb 13 21:40:21 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:40:21 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:41:02 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:41:04 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:42:07 2021
+
+Run 52 Start @ Sat Feb 13 21:43:07 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:43:07 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:43:47 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:43:50 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:45:13 2021
+
+Run 53 Start @ Sat Feb 13 21:46:13 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:46:13 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:46:53 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:46:55 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:48:39 2021
+
+Run 54 Start @ Sat Feb 13 21:49:39 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:49:39 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:50:19 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:50:21 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:52:25 2021
+
+Run 55 Start @ Sat Feb 13 21:53:25 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:53:25 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:54:05 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:54:07 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:54:30 2021
+
+Run 56 Start @ Sat Feb 13 21:55:31 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:55:31 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:56:11 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:56:13 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:56:56 2021
+
+Run 57 Start @ Sat Feb 13 21:57:56 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 21:57:57 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 21:58:37 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 21:58:39 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 21:59:42 2021
+
+Run 58 Start @ Sat Feb 13 22:00:42 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:00:42 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:01:23 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:01:25 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:02:48 2021
+
+Run 59 Start @ Sat Feb 13 22:03:48 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:03:48 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:04:29 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:04:31 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:06:14 2021
+
+Run 60 Start @ Sat Feb 13 22:07:14 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:07:14 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:07:54 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:07:57 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:10:00 2021
+
+Run 61 Start @ Sat Feb 13 22:11:00 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:11:00 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:11:40 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:11:43 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:12:06 2021
+
+Run 62 Start @ Sat Feb 13 22:13:06 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:13:06 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:13:46 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:13:48 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:14:32 2021
+
+Run 63 Start @ Sat Feb 13 22:15:32 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:15:32 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:16:12 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:16:14 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:17:17 2021
+
+Run 64 Start @ Sat Feb 13 22:18:17 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:18:18 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:18:58 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:19:00 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:20:23 2021
+
+Run 65 Start @ Sat Feb 13 22:21:23 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:21:24 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:22:04 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:22:06 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:23:49 2021
+
+Run 66 Start @ Sat Feb 13 22:24:49 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:24:49 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:25:30 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:25:32 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:27:35 2021
+
+Run 67 Start @ Sat Feb 13 22:28:35 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:28:35 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:29:16 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:29:18 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:29:41 2021
+
+Run 68 Start @ Sat Feb 13 22:30:41 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:30:41 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:31:21 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:31:24 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:32:07 2021
+
+Run 69 Start @ Sat Feb 13 22:33:07 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:33:07 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:33:47 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:33:49 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:34:53 2021
+
+Run 70 Start @ Sat Feb 13 22:35:53 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:35:53 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:36:33 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:36:35 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:37:59 2021
+
+Run 71 Start @ Sat Feb 13 22:38:59 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:38:59 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:39:39 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:39:41 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:41:24 2021
+
+Run 72 Start @ Sat Feb 13 22:42:25 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:42:25 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:43:05 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:43:07 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:45:10 2021
+
+Run 73 Start @ Sat Feb 13 22:46:10 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:46:11 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:46:51 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:46:53 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:47:16 2021
+
+Run 74 Start @ Sat Feb 13 22:48:16 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:48:16 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:48:57 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:48:59 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:49:42 2021
+
+Run 75 Start @ Sat Feb 13 22:50:42 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:50:42 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:51:22 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:51:25 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:52:28 2021
+
+Run 76 Start @ Sat Feb 13 22:53:28 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:53:28 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:54:08 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:54:11 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:55:34 2021
+
+Run 77 Start @ Sat Feb 13 22:56:34 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 22:56:34 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 22:57:14 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 22:57:16 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 22:59:00 2021
+
+Run 78 Start @ Sat Feb 13 23:00:00 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 23:00:00 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 23:00:40 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 23:00:42 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 23:02:46 2021
+
+Run 79 Start @ Sat Feb 13 23:03:46 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 23:03:46 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 23:04:26 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 23:04:28 2021
+Storage time is 25 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 23:04:51 2021
+
+Run 80 Start @ Sat Feb 13 23:05:51 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 23:05:52 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 23:06:32 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 23:06:34 2021
+Storage time is 45 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 23:07:17 2021
+
+Run 81 Start @ Sat Feb 13 23:08:17 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 23:08:18 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 23:08:58 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 23:09:00 2021
+Storage time is 65 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 23:10:03 2021
+
+Run 82 Start @ Sat Feb 13 23:11:03 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 23:11:03 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 23:11:44 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 23:11:46 2021
+Storage time is 85 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 23:13:09 2021
+
+Run 83 Start @ Sat Feb 13 23:14:09 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 23:14:09 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 23:14:50 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 23:14:52 2021
+Storage time is 105 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 23:16:35 2021
+
+Run 84 Start @ Sat Feb 13 23:17:35 2021
+GV01 (RV:Filling, GV:Open) is performed @ Sat Feb 13 23:17:35 2021
+GV00 (RV:Filling, GV:Close) is performed @ Sat Feb 13 23:18:15 2021
+GV10 (RV:Detection, GV:Close) is performed @ Sat Feb 13 23:18:18 2021
+Storage time is 125 sec.
+GV11 (RV:Detection, GV:Open) is performed @ Sat Feb 13 23:20:21 2021
+
+Run 85 Start @ Sat Feb 13 23:21:21 2021
+GV01 (RV:Filling, GV:Open
