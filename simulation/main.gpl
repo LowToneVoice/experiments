@@ -1,0 +1,17 @@
+set term "pdfcairo"
+
+phase_contrib_input="mix"
+main_sub_input="mix"
+time_min_input="10"
+angle_delta_deg="0"
+angle_from_parallel_deg="0"
+lmd_used_min="7e-10"
+lmd_used_max="10e-10"
+file_extension="pdf"
+
+title_format=phase_contrib_input."_".main_sub_input."_".angle_delta_deg."deg_".time_min_input."min_ALPHA".angle_from_parallel_deg."_lmd".lmd_used_min."to".lmd_used_max
+input_file="./dat/theoretical/".title_Format.".dat"
+output_beam_normal="./beam_count/theoretical/normal/".title_Format.".".file_extension
+output_beam_zoom="./beam_count/theoretical/zoom/".title_Format.".".file_extension
+output_oscil_normal="./oscil_graph/theoretical/normal/".title_Format.".".file_extension
+output_oscil_zoom="./oscil_graph/theoretical/zoom/".title_Format.".".file_extension

@@ -14,11 +14,11 @@ std::complex<double> I(0, 1.);
 constexpr double hbar = h / (2 * pi);
 constexpr double m = 1.675e-27;
 
-constexpr double V_sio2 = 90.9e-09 * J_per_eV;
+constexpr double V_sio2 = 90.5e-09 * J_per_eV;
 constexpr double V_ni = 224.e-09 * J_per_eV;
 constexpr double V_ti = -40.e-9 * J_per_eV;
 
-constexpr double delta_D = 1.;
+constexpr double delta_D = .93;
 constexpr double D_ni = 133.5e-10 / delta_D;
 constexpr double D_ti = 98.3e-10 / delta_D;
 

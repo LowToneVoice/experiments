@@ -11,7 +11,7 @@ a.out
 /pictures
 /trash
 /240228_Kyoto
-/240228_Kyoto/*
+/bin
 *.key
 *.synctex.gz
 *.aux
@@ -20,3 +20,10 @@ a.out
 *.out
 *.blg
 *.bbl
+20240303104704.pdf
+introduction/explain20240125.md
+introduction/presentation4JPARC.pptx
+introduction/Intro20240126.pdf
+introduction/やりたい実験.pdf
+analysis/data
+analysis/img

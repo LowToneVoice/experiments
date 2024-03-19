@@ -15,12 +15,12 @@ plot_range_wide = [0., 2*10**12]
 # data labels
 PHASE_CONTRIB = "mix"
 MAIN_SUB = "mix"
-ANGLE_DELTA_DEG = "0"
+ANGLE_DELTA_DEG = "30"
 TIME_MIN = "10"
-ANGLE_FROM_PARALLEL_DEG = "-5e-3"
-LMD_USED_MIN = "7e-10"
-LMD_USED_MAX = "10e-10"
-output_extension="png"
+ANGLE_FROM_PARALLEL_DEG = "0e-3"
+LMD_USED_MIN = "5.7e-10"
+LMD_USED_MAX = "7e-10"
+output_extension="pdf"
 
 
 # data files

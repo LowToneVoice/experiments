@@ -10,6 +10,7 @@
 #include <TH1D.h>
 #include <TH1F.h>
 #include <TF1.h>
+#include <TGraph.h>
 
 using namespace std;
 using namespace Eigen;
@@ -18,7 +19,7 @@ using namespace Eigen;
 // DO NOT CHANGE HERE!!!
 string PHASE_CONTRIB = "mix";
 string MAIN_SUB = "mix";
-string ANGLE_DELTA_DEG = "5";
+string ANGLE_DELTA_DEG = "0";
 string TIME_MIN = "10";
 string ANGLE_FROM_PARALLEL_DEG = "1e-3";
 string LMD_USED_MIN = "7e-10";
@@ -63,8 +64,8 @@ constexpr double bc_Ti = -3.36e-15;
 
 // ALIGNMENT CONSTANTS
 // beam
-constexpr double lambda_min = 2.0e-10;
-constexpr double lambda_max = 10e-10;
+constexpr double lambda_min = 3.0e-10;
+constexpr double lambda_max = 9e-10;
 constexpr int daq_freq = 62.5e6;
 constexpr double lambda_fade_width = .01 * (lambda_max - lambda_min);
 // constexpr double lambda_fade_width = 1e-12;
@@ -85,7 +86,7 @@ constexpr double slit_width = 0.2e-3;
 constexpr double theta = 1.05 * pi / 180;
 constexpr double mirror_distance = 150e-3;
 // TDC
-constexpr double total_length = 1.;
+constexpr double total_length = 1.835;
 constexpr int daq_downsizing = 256;
 constexpr double dt = 1. / daq_freq * daq_downsizing;
 
@@ -426,7 +427,7 @@ int theoretical_lambda(
     string title_format = TITLE_FORMAT(phase_contrib_input, main_sub_input, time_min_input, angle_delta_deg_input, angle_from_parallel_deg_input, lmd_used_min_input, lmd_used_max_input);
 
     fprintf(gpl_file, "input='%s'\n", input_file.c_str());
-    fprintf(gpl_file, "set term png\n");
+    fprintf(gpl_file, "set term pdf\n");
 
     // fittings
     fprintf(gpl_file, "f(x)=A*cos(k1*x+k2/x+c)+a*(x-C)**2+B+1e-2\n");
@@ -469,6 +470,7 @@ int theoretical_lambda(
     fprintf(gpl_file, "set xrange [%e:%e]\n", lambda_min_used, lambda_max_used);
     fprintf(gpl_file, "plot input u 1:(($2-$3)/($2+$3)) w l, f(x)\n");
 
+    // fflush(gpl_file);
     pclose(gpl_file);
 
     return 0;

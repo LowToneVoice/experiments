@@ -96,7 +96,6 @@ int read_lambda_perSec(
     return 0;
 }
 
-
 /*
     FROM oscillation_lambda.cpp
 */
@@ -127,7 +126,8 @@ int oscillation_lambda(
     const double angle_delta_deg = stod(angle_delta_deg_input);
     const double angle_from_parallel_deg = stod(angle_from_parallel_deg_input);
 
-    const int N_loop_lambda = (int)((lambda_max_used - lambda_min_used) / d_lambda);
+    const int N_loop_lambda = (int)((lambda_max - lambda_min) / d_lambda);
+    const int N_loop_lambda_used = (int)((lambda_max_used - lambda_min_used) / d_lambda);
 
     // open the data file
     TFile *file = TFile::Open(INPUT_TREE.c_str());
@@ -143,6 +143,22 @@ int oscillation_lambda(
         std::cerr << "There is no tree available." << std::endl;
         return 1;
     }
+    ifstream ifs("dat/theoretical/" + file_format + ".dat");
+    if(!ifs)
+    {
+        cerr << "Failed to open the ideal file" << endl;
+        return 1;
+    }
+
+    double lmd, H, O;
+    double x[1000] = {}, y[1000] = {};
+    int ideal_point = 0;
+    while (ifs >> lmd >> H >> O)
+    {
+        x[ideal_point] = lmd;
+        y[ideal_point] = (H - O) / (H + O);
+        ideal_point++;
+    }
 
     // conditions
     TCut CutH = ("channel==" + std::to_string(H_TDC)).c_str();
@@ -151,8 +167,8 @@ int oscillation_lambda(
     // make histogram
     TH1F *histO = new TH1F("histO", ";(I_H-I_O)/(I_H+I_O);lambda [m]", N_loop_lambda, lambda_min, lambda_max);
     TH1F *histH = new TH1F("histH", ";(I_H-I_O)/(I_H+I_O);lambda [m]", N_loop_lambda, lambda_min, lambda_max);
-    TH1F *histH_zoom = new TH1F("histH_zoom", ";(I_H-I_O)/(I_H+I_O);lambda [m]", N_loop_lambda, lambda_min_used, lambda_max_used);
-    TH1F *histO_zoom = new TH1F("histO_zoom", ";(I_H-I_O)/(I_H+I_O);lambda [m]", N_loop_lambda, lambda_min_used, lambda_max_used);
+    TH1F *histH_zoom = new TH1F("histH_zoom", ";(I_H-I_O)/(I_H+I_O);lambda [m]", N_loop_lambda_used, lambda_min_used, lambda_max_used);
+    TH1F *histO_zoom = new TH1F("histO_zoom", ";(I_H-I_O)/(I_H+I_O);lambda [m]", N_loop_lambda_used, lambda_min_used, lambda_max_used);
     tree->Draw("lambda>>histH", CutH);
     tree->Draw("lambda>>histO", CutO);
     tree->Draw("lambda>>histH_zoom", CutH);
@@ -163,11 +179,10 @@ int oscillation_lambda(
 
     // data calculations
     TH1F *h_oscil = (TH1F *)histO->Clone();
-    TH1F *h_oscil_zoom = (TH1F *)histO_zoom->Clone();
     for (int bin = 0; bin < histO->GetXaxis()->GetNbins() && bin < histH->GetXaxis()->GetNbins(); bin++)
     {
-        count[0] = histO->GetBinContent(bin);
-        count[1] = histH->GetBinContent(bin);
+        count[0] = histH->GetBinContent(bin);
+        count[1] = histO->GetBinContent(bin);
         if (count[0] + count[1] == 0)
         {
             std::cerr << "Warning: Division by zero in the loop. bin = " << bin << "of normal" << std::endl;
@@ -180,49 +195,53 @@ int oscillation_lambda(
             h_oscil->SetBinError(bin, 2 * sqrt(count[0] * count[1] / pow(count[0] + count[1], 3)));
         }
     }
-    for (int bin = 0; bin < histO_zoom->GetXaxis()->GetNbins() && bin < histH_zoom->GetXaxis()->GetNbins(); bin++)
-    {
-        count[0] = histO_zoom->GetBinContent(bin);
-        count[1] = histH_zoom->GetBinContent(bin);
-        if (count[0] + count[1] == 0)
-        {
-            std::cerr << "Warning: Division by zero in the loop. bin = " << bin << "of zoom" << std::endl;
-        }
-        else
-        {
-            h_oscil->SetBinContent(bin, (count[0] - count[1]) / (count[0] + count[1]));
-            h_oscil->SetBinError(bin, 2 * sqrt(count[0] * count[1] / pow(count[0] + count[1], 3)));
-        }
-    }
+    TH1F *h_oscil_zoom = (TH1F *)h_oscil->Clone();
+    h_oscil_zoom->GetXaxis()->SetRangeUser(lambda_min_used, lambda_max_used);
+    // for (int bin = 0; bin < histO_zoom->GetXaxis()->GetNbins() && bin < histH_zoom->GetXaxis()->GetNbins(); bin++)
+    // {
+    //     count[0] = histO_zoom->GetBinContent(bin);
+    //     count[1] = histH_zoom->GetBinContent(bin);
+    //     if (count[0] + count[1] == 0)
+    //     {
+    //         std::cerr << "Warning: Division by zero in the loop. bin = " << bin << "of zoom" << std::endl;
+    //     }
+    //     else
+    //     {
+    //         h_oscil->SetBinContent(bin, (count[0] - count[1]) / (count[0] + count[1]));
+    //         h_oscil->SetBinError(bin, 2 * sqrt(count[0] * count[1] / pow(count[0] + count[1], 3)));
+    //     }
+    // }
+
+    // ideal oscillation
 
     // transform FFT from n space to K space
     TH1 *hFourier_n = h_oscil_zoom->FFT(0, "MAG");
     int Nbins = hFourier_n->GetXaxis()->GetNbins();
     double k_max = Nbins * 2 * TMath::Pi() / (lambda_max_used - lambda_min_used);
-    TH1D *hFourier = new TH1D("hFourierK", "Fourier transformation of (I_H-I_O)/(I_H+I_O); wave number [/m]; amp", Nbins, 0, k_max);
+    TH1D *hFourier = new TH1D("hFourierK", "Fourier transform of (I_H-I_O)/(I_H+I_O); wave number [/m]; amp", Nbins, 0, k_max);
     for (int bin = 0; bin < Nbins; bin++)
     {
         hFourier->SetBinContent(bin, hFourier_n->GetBinContent(bin));
     }
 
     // fittings
-    const double peak_position = 2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * sin(std::stod(ANGLE_DELTA_DEG) * pi / 180);
-    // oscillation
-    const double fit_range_oscil[] = {6.9, 8.5}; // TODO: find a good value
-    TF1 *f_oscil = new TF1("oscil", "[0] * cos(x * [1] + x / [2] + [3]) + [4] * (x - [5])^2 + [6]", fit_range_oscil[0], fit_range_oscil[1]);
-    f_oscil->SetParameters(0.5, peak_position, 1e10, 0, 1e-10, 7.5e-10, 0);
-    h_oscil->Fit("oscil", "", "", fit_range_oscil[0], fit_range_oscil[1]);
-    Double_t k1oscil = f_oscil->GetParameter(1);
-    Double_t k2oscil = f_oscil->GetParameter(2);
-    // peak
-    const double fit_range_peak[] = {peak_position - fit_width_peak, peak_position + fit_width_peak};
-    TF1 *f_peak = new TF1("gaus", "[0] * exp(-0.5 * ((x-[1]) / [2])^2)", fit_range_peak[0], fit_range_peak[1]);
-    f_peak->SetParameters(fit_peak_height, peak_position, fit_width_peak);
-    hFourier->Fit("gaus", "", "", fit_range_peak[0], fit_range_peak[1]);
-    Double_t p0_peak = f_peak->GetParameter(1);
-    Double_t p0e_peak = f_peak->GetParError(1);
-    Double_t chi2 = f_peak->GetChisquare();
-    Int_t Ndof = f_peak->GetNDF();
+    // const double peak_position = 2 * pi * g * pow(m / h, 2) * 2 * gap * mirror_distance / tan(2 * theta) * sin(std::stod(ANGLE_DELTA_DEG) * pi / 180);
+    // // oscillation
+    // const double fit_range_oscil[] = {6.9, 8.5}; // TODO: find a good value
+    // TF1 *f_oscil = new TF1("oscil", "[0] * cos(x * [1] + x / [2] + [3]) + [4] * (x - [5])^2 + [6]", fit_range_oscil[0], fit_range_oscil[1]);
+    // f_oscil->SetParameters(0.5, peak_position, 1e10, 0, 1e-10, 7.5e-10, 0);
+    // h_oscil->Fit("oscil", "", "", fit_range_oscil[0], fit_range_oscil[1]);
+    // Double_t k1oscil = f_oscil->GetParameter(1);
+    // Double_t k2oscil = f_oscil->GetParameter(2);
+    // // peak
+    // const double fit_range_peak[] = {peak_position - fit_width_peak, peak_position + fit_width_peak};
+    // TF1 *f_peak = new TF1("gaus", "[0] * exp(-0.5 * ((x-[1]) / [2])^2)", fit_range_peak[0], fit_range_peak[1]);
+    // f_peak->SetParameters(fit_peak_height, peak_position, fit_width_peak);
+    // hFourier->Fit("gaus", "", "", fit_range_peak[0], fit_range_peak[1]);
+    // Double_t p0_peak = f_peak->GetParameter(1);
+    // Double_t p0e_peak = f_peak->GetParError(1);
+    // Double_t chi2 = f_peak->GetChisquare();
+    // Int_t Ndof = f_peak->GetNDF();
 
     TH1D *hFourier_wide = (TH1D *)hFourier->Clone();
     // hFourier->GetXaxis()->SetRangeUser(0, 1e12);
@@ -234,27 +253,36 @@ int oscillation_lambda(
     TCanvas *c4 = new TCanvas("c4", "Fourier wide", 700, 500);
     c1->cd();
     h_oscil->SetTitle(Form("%s; #lambda [m]; (I_H - I_O) / (I_H + I_O)", title_format.c_str()));
-    h_oscil->GetYaxis()->SetRangeUser(-2, 2);
+    h_oscil->SetStats(0);
+    h_oscil->GetYaxis()->SetRangeUser(-1.5, 1.5);
     h_oscil->Draw("eh");
+    auto g = new TGraph(ideal_point, x, y);
+    g->SetTitle("Ideal curve;lambda [m];(I_H-I_O)/(I_H+I_O)");
+    g->Draw("same c");
     c1->Print(OUTPUT_FILE.c_str());
     c2->cd();
     h_oscil_zoom->SetTitle(Form("%s; #lambda [m]; (I_H - I_O) / (I_H + I_O)", title_format.c_str()));
-    h_oscil->GetYaxis()->SetRangeUser(-2, 2);
+    h_oscil_zoom->SetStats(0);
+    h_oscil_zoom->GetYaxis()->SetRangeUser(-1.5, 1.5);
     h_oscil_zoom->Draw("eh");
+    g->Draw("same c");
     c2->Print(OUTPUT_FILE_ZOOM.c_str());
     c3->cd();
     hFourier->SetTitle(Form("%s; wave number [/m]; Fourier amp", title_format.c_str()));
-    hFourier->Draw("eh");
+    hFourier->SetStats(0);
+    hFourier->GetXaxis()->SetRangeUser(0, 5e12);
+    hFourier->Draw();
     c3->Print(OUTPUT_FILE_FOURIER.c_str());
     c4->cd();
     hFourier_wide->SetTitle(Form("%s; wave number [/m]; Fourier amp", title_format.c_str()));
-    hFourier_wide->Draw("eh");
+    hFourier_wide->SetStats(0);
+    hFourier_wide->Draw();
     c4->Print(OUTPUT_FILE_FOURIER_WIDE.c_str());
 
     // result of peak position
-    double resultK = -p0_peak * 2 * TMath::Pi() / (lambda_max_used - lambda_min_used);
-    double resultK_error = p0e_peak * 2 * TMath::Pi() / (lambda_max_used - lambda_min_used);
-    std::cout << "k = " << -p0_peak << " +- " << p0e_peak << std::endl;
+    // double resultK = -p0_peak * 2 * TMath::Pi() / (lambda_max_used - lambda_min_used);
+    // double resultK_error = p0e_peak * 2 * TMath::Pi() / (lambda_max_used - lambda_min_used);
+    // std::cout << "k = " << -p0_peak << " +- " << p0e_peak << std::endl;
 
     return 0;
 }

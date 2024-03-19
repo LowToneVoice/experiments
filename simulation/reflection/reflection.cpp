@@ -20,14 +20,14 @@ constexpr double V_sio2 = 90.9e-09 * J_per_eV;
 constexpr double V_ni = 224.e-09 * J_per_eV;
 constexpr double V_ti = -40.e-9 * J_per_eV;
 
-constexpr double delta_D = 1.;
+constexpr double delta_D = .93;
 constexpr double D_ni = 133.5e-10 / delta_D;
 constexpr double D_ti = 98.3e-10 / delta_D;
 
 constexpr int N_bilayer = 8;
 
-constexpr double lambda_min = 2.0e-10;
-constexpr double lambda_max = 12e-10;
+constexpr double lambda_min = 3.0e-10;
+constexpr double lambda_max = 9.e-10;
 constexpr double d_lambda = 0.01e-10;
 
 constexpr double theta = 1.05 * pi / 180;
