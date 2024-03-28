@@ -7,7 +7,7 @@ plot_range = [0, 1*10**12]
 plot_range_wide = [0., 2*10**12]
 
 # data labels
-ANGLE_DELTA_DEG = "10"
+ANGLE_DELTA_DEG = "0"
 TIME_MIN = "10"
 LMD_USED_MIN = "7e-10"
 LMD_USED_MAX = "8e-10"

@@ -22,14 +22,14 @@
 計算は
 \begin{enumerate}
     \item 波長を決定
-    \item \eqref{eq: theoretical: R and T}を用いてミラーの反射率・透過率を計算
+    \item \eqref{eq: theoretical: R and T}からミラーの反射率・透過率を計算
     \item 図\ref{fig: theoretical: alpha and paths}点EにおけるHビーム、Oビームの波動関数を計算
-    \item ビームの検出確率(強度に比例)を計算
+    \item ビームの検出確率を計算
     \item $\mathscr{O}(\lambda)$を計算
     \item $\mathscr{O}(\lambda)$を高速フーリエ変換
 \end{enumerate}
 の順に行った。
-図\ref{fig: simulate: reflectivity at theta 1.05}をもとに、$\mathscr{O}(\lambda)$のFourier変換は反射率が安定する$\SI{7e-10}{m}\leq\lambda\leq\SI{8e-10}{m}$の範囲で行う。
+図\ref{fig: simulate: reflectivity at theta 1.05}をもとに、$\mathscr{O}(\lambda)$のフーリエ変換は反射率が安定する$\SI{7e-10}{m}\leq\lambda\leq\SI{8e-10}{m}$の範囲で行う。
 シミュレーション結果は測定時間無限大に相当する。
 
 \begin{figure}
@@ -39,37 +39,37 @@
     \label{fig: simulate: reflectivity at theta 1.05}
 \end{figure}
 
-$\delta, \alpha$を変えて計算したところ、$\mathscr{O}(\lambda)$のFourier変換は図\ref{fig: simulate: theoretical FFTs}のようになった。
+$\delta, \alpha$を変えて計算したところ、$\mathscr{O}(\lambda)$のフーリエ変換は図\ref{fig: simulate: theoretical FFTs}のようになった。
 
 \begin{figure}
     \centering
     \begin{tabular}{cc}
-        \begin{minipage}{.5\linewidth}
+        \begin{minipage}{.47\linewidth}
             \centering
             \includegraphics[width=1.\linewidth]{img/delta10.pdf}
             \subcaption{$\delta=10^\circ$}
         \end{minipage}
         &
-        \begin{minipage}{.5\linewidth}
+        \begin{minipage}{.47\linewidth}
             \centering
             \includegraphics[width=1.0\linewidth]{img/delta30.pdf}
             \subcaption{$\delta=30^\circ$}
         \end{minipage}
         \\
-        \begin{minipage}{.5\linewidth}
+        \begin{minipage}{.47\linewidth}
             \centering
             \includegraphics[width=.95\linewidth]{img/delta60.pdf}
             \subcaption{$\delta=60^\circ$}
         \end{minipage}
         &
-        \begin{minipage}{.5\linewidth}
+        \begin{minipage}{.47\linewidth}
             \centering
             \includegraphics[width=1.\linewidth]{img/delta90.pdf}
             \subcaption{$\delta=90^\circ$}
         \end{minipage}
     \end{tabular}
     \caption{
-        $\mathscr{O}(\lambda)$のFourier変換。
+        $\mathscr{O}(\lambda)$のフーリエ変換。
         赤の縦線は\eqref{eq: theoretical: delta phi g ideal}から予想されるピーク位置を表す。
         青の実線が$\alpha=0$の場合であり、紫、黄、緑、茶の点線がそれぞれ$\alpha=\SI{-3}{\milli\deg}, \SI{-1}{\milli\deg}, \SI{1}{\milli\deg}, \SI{3}{\milli\deg}$に対応する。
     }
@@ -77,9 +77,12 @@ $\delta, \alpha$を変えて計算したところ、$\mathscr{O}(\lambda)$のFou
 \end{figure}
 
 $\delta$を変更しても$\SI{2e11}{\per\meter}$以下の低周波数領域がバックグラウンドとして残っている。
-$\delta$が小さい値のとき、ピークがバックグラウンドと重なるため重力の効果のみを分離することが難しい。
-一方で$\delta$を大きくするとピークが低くなるため、傾斜角度は小さい方が望ましい。
-加えて今回用いるビームの形状とアラインメントでは、$\delta>30^\circ$にてミラーの一部がビームから外れるため統計量を稼げなくなる。
+バックグラウンドは主にFFTを行なっている波長領域$\SI{7e-10}{\meter}\leq\lambda\leq\SI{8e-10}{\nano\meter}$におけるミラーの反射率
+% や\eqref{eq: theoretical: delta phi a}の$1/\lambda$の項
+から由来しているものと考えられる。
+$\delta<30^\circ$ではピークがバックグラウンドと重なるため重力の効果のみを分離することが難しい。
+一方で$\delta$を大きくすると特に大きい$\alpha$でピークが低く広がるため傾斜角度は小さい方が望ましい。
+加えて今回用いるビームの形状とアラインメントでは$\delta>30^\circ$にてミラーの一部がビームからはみ出るため統計量を稼げなくなる。
 以上を考慮して、本実験では$\delta=0$と$\delta=30^\circ$を比較することで重力の効果を検証する。
 
 
@@ -134,7 +137,17 @@ $\delta$が小さい値のとき、ピークがバックグラウンドと重な
 \end{figure}
 
 ビームの波長分布に応じた個数の試験粒子を用意し、\ref{sec: simulate: theoretical}で計算した検出確率に応じてランダムに分配した。
-10分に相当する粒子数で計算した結果、$\mathcal{O}(\lambda)$は図のようになった。
+10分に相当する粒子数で計算した結果、$\mathcal{O}(\lambda)$は図\ref{fig: simulate: oscillation of montecarlo and theoretical}のようになった。
 
+\begin{figure}
+    \centering
+    \includegraphics[width=8cm]{img/mix_mix_30deg_10min_ALPHA0e-3_lmd7e-10to8e-10.pdf}
+    \caption{
+        モンテカルロシミュレーションから求めた$\mathscr{O}(\lambda)$分布と理論曲線。
+    }
+    \label{fig: simulate: oscillation of montecarlo and theoretical}
+\end{figure}
+
+以上を踏まえて、本実験では$\delta=0$と$\delta=30^\circ$で10 min以上計測し、フーリエ成分を比較、重力加速度を逆算して$g=\SI{9.8}{m/s^2}$と照合する。
 
 \end{document}
